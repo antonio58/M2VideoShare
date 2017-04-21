@@ -13,8 +13,9 @@ public class Server {
     public static void main(String[] args) {
         final String TAG = "Class-Server";
         int clientNumber = 0;
-        MongoSide mMongo = new MongoSide();
-        System.out.println("Server Online "+ TAG);
+
+        QueriesVideoHub queries = new QueriesVideoHub();
+        System.out.println("\nServer Online "+ TAG);
         try {
             ServerSocket socketServer = new ServerSocket(3333);
             while (true) {
