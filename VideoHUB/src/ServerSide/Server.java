@@ -14,7 +14,7 @@ public class Server {
         final String TAG = "Class-Server";
         int clientNumber = 0;
 
-        QueriesVideoHub queries = new QueriesVideoHub();
+        UserQueriesVideoHub queries = new UserQueriesVideoHub();
         System.out.println("\nServer Online "+ TAG);
         try {
             ServerSocket socketServer = new ServerSocket(3333);
