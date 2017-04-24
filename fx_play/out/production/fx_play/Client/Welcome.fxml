@@ -1,0 +1,45 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.stage.Screen?>
+
+
+
+<GridPane fx:controller="Client.WelcomeController"
+          stylesheets="/Client/BaseStyle.css"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" styleClass="root"
+          prefHeight="500" prefWidth="750">
+    <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+
+    <Text id="welcome-text" text="Welcome"
+          GridPane.columnIndex="0" GridPane.rowIndex="0"
+          GridPane.columnSpan="2"/>
+
+    <HBox spacing="10" alignment="center"
+          GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <Button text="Log In" defaultButton="true"
+                onAction="#handleLogIn" />
+    </HBox>
+
+    <HBox spacing="10" alignment="center"
+          GridPane.columnIndex="1" GridPane.rowIndex="6">
+        <Button text="Sign Up"
+                onAction="#handleSignUp" />
+    </HBox>
+
+    <HBox spacing="10" alignment="center"
+          GridPane.columnIndex="1" GridPane.rowIndex="8">
+        <Button text="Exit"
+                onAction="#handleExit" />
+    </HBox>
+
+    <HBox fx:id="actiontargetBox"
+          spacing="10" alignment="center"
+          GridPane.columnIndex="1" GridPane.rowIndex="10" >
+    <Text fx:id="actiontarget"/>
+    </HBox>
+
+</GridPane>
