@@ -1,5 +1,6 @@
 package ServerSide;
 
+import Models.User;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
@@ -20,8 +21,8 @@ import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 public class UserQueriesVideoHub {
 
     private MongoSide mMongo = new MongoSide();
-
-    public UserQueriesVideoHub(){
+    private User user;
+    public UserQueriesVideoHub(User mUser){
         //deleteUser("name","fernando guima");
         //addUser("fernando guima", "lolol@loladamix.com", true);
         //addUserChannel("name","fernando guima", "space");
@@ -30,18 +31,19 @@ public class UserQueriesVideoHub {
         //createPlaylist("name","fernando guima", "minha Playlist 2");
         //addToPlaylist("name","fernando guima", "minha Playlist", "video1");
         //addToPlaylist("name","fernando guima", "video 69", "minha Playlist 2");
+    this.user = mUser;
     }
 
     /**
      * Queries -'users'
      * */
 
-    public void addUser(String name, String email, boolean premium){
+    public void addUser(){
         LOGGER.info("Query: User added");
         Document document = new Document()
-                .append("name", name)
-                .append("premium",premium)
-                .append("email",email)
+                .append("name", user.getName())
+                .append("premium",user.isPremium())
+                .append("email",user.getEmail())
                 .append("creationDate", new Date());
         mMongo.getCollection("users").insertOne(document);
     }
