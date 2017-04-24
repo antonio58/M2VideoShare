@@ -10,10 +10,12 @@ import java.net.Socket;
 
 
 public class Server {
-    private final String TAG = "Class-Server";
     public static void main(String[] args) {
+        final String TAG = "Class-Server";
         int clientNumber = 0;
-        System.out.println("Server Online");
+
+        UserQueriesVideoHub queries = new UserQueriesVideoHub();
+        System.out.println("\nServer Online "+ TAG);
         try {
             ServerSocket socketServer = new ServerSocket(3333);
             while (true) {
