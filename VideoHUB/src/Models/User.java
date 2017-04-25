@@ -11,7 +11,7 @@ public class User {
     String name = null;
     String email = null;
     ObjectId _id = null;
-    ArrayList<String> channels = null;
+    ArrayList<Channel> channels = null;
     boolean premium = false;
     String hashPassword = null;
     String avatar = null;
@@ -21,7 +21,7 @@ public class User {
 
     public User(){};
 
-    public User(String name, String email, ObjectId _id, ArrayList<String> channels, boolean premium, String hashPassword, String avatar, ArrayList<ObjectId> watchlist, ArrayList<ObjectId> watchedlist, ArrayList<Playlist> playlists) {
+    public User(String name, String email, ObjectId _id, ArrayList<Channel> channels, boolean premium, String hashPassword, String avatar, ArrayList<ObjectId> watchlist, ArrayList<ObjectId> watchedlist, ArrayList<Playlist> playlists) {
         this.name = name;
         this.email = email;
         this._id = _id;
@@ -59,11 +59,11 @@ public class User {
         this._id = _id;
     }
 
-    public ArrayList<String> getChannels() {
+    public ArrayList<Channel> getChannels() {
         return channels;
     }
 
-    public void setChannels(ArrayList<String> channels) {
+    public void setChannels(ArrayList<Channel> channels) {
         this.channels = channels;
     }
 

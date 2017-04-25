@@ -1,10 +1,13 @@
 package TESTS;
 
+import Models.Channel;
+import Models.Playlist;
 import Models.User;
 import ServerSide.UserTasks;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by fernando on 25-04-2017.
@@ -14,19 +17,51 @@ public class TEST_USERS {
     private static User user = new User();
     private static ArrayList<ObjectId> watchlist = new ArrayList<>();
     private static ArrayList<ObjectId> seenList = new ArrayList<>();
-    private static ArrayList<String> likes = new ArrayList<>();
+    private static ArrayList<Channel> channelList = new ArrayList<>();
+    private static ArrayList<Playlist> playList = new ArrayList<>();
 
     public static void main(String[] args){
-        watchlist = populateWatchlist();
-        seenList = populateSeenList();
-        user = populateUserModel(false, "Fernando Guimaraẽs", "etc/images/ava.png", "ze_foguetao@hotmil.com", "@2123ewqfff");
+
+        user = populateUserModel(false, "Zé Foguetão", "etc/images/ava.png", "foguetao@hotmil.com", "@2123ewqfff");
         UserTasks userTasks = new UserTasks(user);
         userTasks.addUser();
         user.set_id(userTasks.getUserID());
-        //videoTasks.getVideoID(video);
-        //videoTasks.addVideo();
-        for(int i=0; i <watchlist.size(); i++ ) {
-            userTasks.setWatchLater("_id", user.get_id(),watchlist.get(i));
+        watchlist = populateWatchlist();
+        seenList = populateSeenList();
+        channelList = populateUserChannels();
+        playList = createUserPlaylists();
+
+        user.setChannels(channelList);
+        user.setWatchedlist(seenList);
+        user.setWatchlist(watchlist);
+        user.setPlaylists(playList);
+
+        //populates DB with dummy arrays
+        for (ObjectId aWatchlist : watchlist) { //for each
+            userTasks.setWatchLater("_id", user.get_id(), aWatchlist);
+        }
+
+        for (ObjectId aSeenList : seenList) { //for each
+            userTasks.setWatchlist("_id", user.get_id(), aSeenList);
+        }
+
+        for (Channel aChannelList : channelList) { //for each
+            userTasks.createChannel("_id", aChannelList);
+        }
+
+
+        System.out.println("main() channellistsize: " + channelList.size());
+        for(int i = 0; i<channelList.size(); i++){
+            userTasks.addToChannel("_id", channelList.get(i));
+            }
+
+        //create new Playlists
+        for (Playlist aPlayList : playList) { //for each
+            userTasks.createPlaylist("_id", aPlayList);
+        }
+
+        for(int i = 0; i< playList.size(); i++){
+                userTasks.addToPlaylist("_id", playList.get(i));
         }
     }
 
@@ -56,4 +91,32 @@ public class TEST_USERS {
         return seenList;
     }
 
+    private static ArrayList<Channel> populateUserChannels(){
+        ArrayList<Channel> userChannels = new ArrayList<>();
+        ArrayList<ObjectId> objectIds = new ArrayList<>();
+
+        objectIds.add(new ObjectId("58dfaa9c779fe878e07abf63"));
+
+        userChannels.add(new Channel(user.get_id(), "Animais", new Date(), objectIds));
+        userChannels.add(new Channel(user.get_id(), "Informática", new Date(), objectIds));
+
+        return userChannels;
+    }
+
+    private static ArrayList<Playlist> createUserPlaylists(){
+        ArrayList<Playlist> playlists = new ArrayList<>();
+        ArrayList<ObjectId> objectIds = new ArrayList<>();
+
+        objectIds.add(new ObjectId("58fe880e1fb2bf084281200d"));
+
+        playlists.add(new Playlist(user.get_id(), "Animais", new Date(), objectIds, 0));
+        playlists.add(new Playlist(user.get_id(), "Lazer", new Date(), objectIds, 1));
+        return playlists;
+    }
+
+    private static ArrayList<ObjectId> populateObjectIDs(){
+        ArrayList<ObjectId> objectIds = new ArrayList<>();
+        objectIds.add(new ObjectId("58dfaa9c779fe878e07abf63"));
+        return objectIds;
+    }
 }

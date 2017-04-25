@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/Models/Playlist.java" description="        this.name = name;&#10;        this.data = data..." line="5" />
+    <bookmark url="file://$PROJECT_DIR$/src/Models/Playlist.java" description="        this.name = name;&#10;        this.data = data..." line="10" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e1c71ac-7cf6-4ac2-920e-d28e975834bf" name="Default" comment="" />
@@ -49,7 +49,7 @@
       <file leaf-file-name="DeliveryTasks.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ServerSide/DeliveryTasks.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
+            <state relative-caret-position="1242">
               <caret line="93" column="29" lean-forward="true" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -58,48 +58,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TEST_VIDEOS.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TESTS/TEST_VIDEOS.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#populateComments#0;class#TEST_VIDEOS#0" expanded="false" />
-                <element signature="method#populateTags#0;class#TEST_VIDEOS#0" expanded="false" />
-                <element signature="method#populateLikes#0;class#TEST_VIDEOS#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TEST_USERS.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TESTS/TEST_USERS.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+            <state relative-caret-position="380">
+              <caret line="63" column="64" lean-forward="false" selection-start-line="63" selection-start-column="64" selection-end-line="63" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserTasks.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ServerSide/UserTasks.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="111" column="42" lean-forward="true" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#addUser#0;class#UserTasks#0" expanded="false" />
-                <element signature="method#deleteUser#0;class#UserTasks#0" expanded="false" />
-                <element signature="method#updateUser#0;class#UserTasks#0" expanded="false" />
-                <element signature="method#addUserChannel#0;class#UserTasks#0" expanded="false" />
-                <element signature="method#createPlaylist#0;class#UserTasks#0" expanded="false" />
-                <element signature="method#addToPlaylist#0;class#UserTasks#0" expanded="false" />
-                <element signature="method#getPlaylistIndex#0;class#UserTasks#0" expanded="false" />
-                <marker date="1493081241945" expanded="false" signature="3282:3818" ph="{...}" />
+                <element signature="method#populateUserModel#0;class#TEST_USERS#0" expanded="false" />
+                <element signature="method#populateWatchlist#0;class#TEST_USERS#0" expanded="false" />
+                <element signature="method#populateSeenList#0;class#TEST_USERS#0" expanded="false" />
+                <element signature="method#populateUserChannels#0;class#TEST_USERS#0" expanded="false" />
+                <element signature="method#populateObjectIDs#0;class#TEST_USERS#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -112,33 +82,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Models/User.java">
+      <file leaf-file-name="UserTasks.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ServerSide/UserTasks.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+            <state relative-caret-position="1260">
+              <caret line="218" column="126" lean-forward="false" selection-start-line="218" selection-start-column="126" selection-end-line="218" selection-end-column="126" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1428#1429#0" expanded="true" />
-                <element signature="e#1458#1459#0" expanded="true" />
+                <element signature="e#696#697#0" expanded="true" />
+                <element signature="e#725#726#0" expanded="true" />
+                <element signature="method#deleteUser#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#updateUser#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#setWatchlist#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#setWatchLater#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#createPlaylist#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#getNextPlaylist#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#createChannel#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#getUserID#0;class#UserTasks#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MongoSide.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ServerSide/MongoSide.java">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Models/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="656">
-              <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+            <state relative-caret-position="255">
+              <caret line="91" column="5" lean-forward="true" selection-start-line="91" selection-start-column="5" selection-end-line="91" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#insertToCollection#0;class#MongoSide#0" expanded="false" />
-                <element signature="method#updateDocument#0;class#MongoSide#0" expanded="false" />
-                <element signature="method#findDocument#0;class#MongoSide#0" expanded="false" />
-                <element signature="method#deleteDocument#0;class#MongoSide#0" expanded="false" />
-                <element signature="method#displayAvailableDBs#0;class#MongoSide#0" expanded="false" />
-                <element signature="method#displayAvailableCollections#0;class#MongoSide#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -157,6 +129,17 @@
     <findStrings>
       <find>find</find>
       <find>iterable</find>
+      <find>number of c</find>
+      <find>getNextChannelIndex</find>
+      <find>username</find>
+      <find>number of</find>
+      <find>number of channels</find>
+      <find>getNextChannel</find>
+      <find>channel ind</find>
+      <find>playlist name:</find>
+      <find>number of play</find>
+      <find>channel in</find>
+      <find>channel index :</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -177,7 +160,6 @@
         <option value="$PROJECT_DIR$/src/ServerSide/VHqueries.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/queriesVideoHub.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/MongoSide.java" />
-        <option value="$PROJECT_DIR$/src/Models/Playlist.java" />
         <option value="$PROJECT_DIR$/src/Models/ListResult.java" />
         <option value="$PROJECT_DIR$/src/Models/VideoResult.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/QueriesVideoHub.java" />
@@ -195,9 +177,11 @@
         <option value="$PROJECT_DIR$/src/Models/Delivery.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/DeliveryTasks.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/UserQueriesVideoHub.java" />
-        <option value="$PROJECT_DIR$/src/Models/User.java" />
         <option value="$PROJECT_DIR$/src/TESTS/TEST_VIDEOS.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/VideoTasks.java" />
+        <option value="$PROJECT_DIR$/src/Models/User.java" />
+        <option value="$PROJECT_DIR$/src/Models/Channel.java" />
+        <option value="$PROJECT_DIR$/src/Models/Playlist.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/UserTasks.java" />
         <option value="$PROJECT_DIR$/src/TESTS/TEST_USERS.java" />
       </list>
@@ -359,7 +343,7 @@
       <recent name="$PROJECT_DIR$/src/ServerSide" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test-Video">
+  <component name="RunManager" selected="Application.Test-User">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -740,9 +724,9 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <configuration default="false" name="Test-Video" type="Application" factoryName="Application">
+    <configuration default="false" name="Test-User" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="TESTS.TEST_VIDEOS" />
+      <option name="MAIN_CLASS_NAME" value="TESTS.TEST_USERS" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -756,7 +740,7 @@
       <method />
     </configuration>
     <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Application.Test-Video" />
+      <item index="0" class="java.lang.String" itemvalue="Application.Test-User" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -782,12 +766,12 @@
       <workItem from="1492621964832" duration="1457000" />
       <workItem from="1492681302408" duration="5421000" />
       <workItem from="1492720845691" duration="18000" />
-      <workItem from="1492720873953" duration="56017000" />
+      <workItem from="1492720873953" duration="69918000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86156000" />
+    <option name="totallyTimeSpent" value="100057000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -833,38 +817,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.503876" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45783132" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858709" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="top" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32819384" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24229075" sideWeight="0.49612403" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32819384" sideWeight="0.49612403" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28039432" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -915,14 +867,16 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#addUser#0;class#UserTasks#0" expanded="false" />
+            <element signature="e#696#697#0" expanded="true" />
+            <element signature="e#725#726#0" expanded="true" />
             <element signature="method#deleteUser#0;class#UserTasks#0" expanded="false" />
             <element signature="method#updateUser#0;class#UserTasks#0" expanded="false" />
-            <element signature="method#addUserChannel#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#setWatchlist#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#setWatchLater#0;class#UserTasks#0" expanded="false" />
             <element signature="method#createPlaylist#0;class#UserTasks#0" expanded="false" />
-            <element signature="method#addToPlaylist#0;class#UserTasks#0" expanded="false" />
-            <element signature="method#getPlaylistIndex#0;class#UserTasks#0" expanded="false" />
-            <marker date="1493081241945" expanded="false" signature="3282:3818" ph="{...}" />
+            <element signature="method#getNextPlaylist#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#createChannel#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#getUserID#0;class#UserTasks#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1200,14 +1154,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/Playlist.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ServerSide/ServerClientHandler.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1238,22 +1184,6 @@
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerSide/MongoSide.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#insertToCollection#0;class#MongoSide#0" expanded="false" />
-            <element signature="method#updateDocument#0;class#MongoSide#0" expanded="false" />
-            <element signature="method#findDocument#0;class#MongoSide#0" expanded="false" />
-            <element signature="method#deleteDocument#0;class#MongoSide#0" expanded="false" />
-            <element signature="method#displayAvailableDBs#0;class#MongoSide#0" expanded="false" />
-            <element signature="method#displayAvailableCollections#0;class#MongoSide#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1297,28 +1227,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1428#1429#0" expanded="true" />
-            <element signature="e#1458#1459#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerSide/DeliveryTasks.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="93" column="29" lean-forward="true" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ServerSide/VideoTasks.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -1329,6 +1237,36 @@
             <element signature="e#727#728#0" expanded="true" />
             <element signature="method#addVideoComment#0;class#VideoTasks#0" expanded="false" />
             <element signature="method#getNextComment#0;class#VideoTasks#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerSide/MongoSide.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="656">
+          <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#insertToCollection#0;class#MongoSide#0" expanded="false" />
+            <element signature="method#updateDocument#0;class#MongoSide#0" expanded="false" />
+            <element signature="method#findDocument#0;class#MongoSide#0" expanded="false" />
+            <element signature="method#deleteDocument#0;class#MongoSide#0" expanded="false" />
+            <element signature="method#displayAvailableDBs#0;class#MongoSide#0" expanded="false" />
+            <element signature="method#displayAvailableCollections#0;class#MongoSide#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/Channel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#571#572#0" expanded="true" />
+            <element signature="e#601#602#0" expanded="true" />
+            <element signature="e#649#650#0" expanded="true" />
+            <element signature="e#687#688#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1346,30 +1284,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerSide/UserTasks.java">
+    <entry file="file://$PROJECT_DIR$/src/Models/Playlist.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="111" column="42" lean-forward="true" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
+        <state relative-caret-position="75">
+          <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#addUser#0;class#UserTasks#0" expanded="false" />
+            <element signature="e#1043#1044#0" expanded="true" />
+            <element signature="e#1070#1071#0" expanded="true" />
+            <element signature="e#1108#1109#0" expanded="true" />
+            <element signature="e#1140#1141#0" expanded="true" />
+            <element signature="e#1176#1177#0" expanded="true" />
+            <element signature="e#1206#1207#0" expanded="true" />
+            <element signature="e#1254#1255#0" expanded="true" />
+            <element signature="e#1292#1293#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="91" column="5" lean-forward="true" selection-start-line="91" selection-start-column="5" selection-end-line="91" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerSide/DeliveryTasks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1242">
+          <caret line="93" column="29" lean-forward="true" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerSide/UserTasks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="218" column="126" lean-forward="false" selection-start-line="218" selection-start-column="126" selection-end-line="218" selection-end-column="126" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#696#697#0" expanded="true" />
+            <element signature="e#725#726#0" expanded="true" />
             <element signature="method#deleteUser#0;class#UserTasks#0" expanded="false" />
             <element signature="method#updateUser#0;class#UserTasks#0" expanded="false" />
-            <element signature="method#addUserChannel#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#setWatchlist#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#setWatchLater#0;class#UserTasks#0" expanded="false" />
             <element signature="method#createPlaylist#0;class#UserTasks#0" expanded="false" />
-            <element signature="method#addToPlaylist#0;class#UserTasks#0" expanded="false" />
-            <element signature="method#getPlaylistIndex#0;class#UserTasks#0" expanded="false" />
-            <marker date="1493081241945" expanded="false" signature="3282:3818" ph="{...}" />
+            <element signature="method#getNextPlaylist#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#createChannel#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#getUserID#0;class#UserTasks#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TESTS/TEST_USERS.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+        <state relative-caret-position="380">
+          <caret line="63" column="64" lean-forward="false" selection-start-line="63" selection-start-column="64" selection-end-line="63" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#populateUserModel#0;class#TEST_USERS#0" expanded="false" />
+            <element signature="method#populateWatchlist#0;class#TEST_USERS#0" expanded="false" />
+            <element signature="method#populateSeenList#0;class#TEST_USERS#0" expanded="false" />
+            <element signature="method#populateUserChannels#0;class#TEST_USERS#0" expanded="false" />
+            <element signature="method#populateObjectIDs#0;class#TEST_USERS#0" expanded="false" />
           </folding>
         </state>
       </provider>
