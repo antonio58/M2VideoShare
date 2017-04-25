@@ -23,10 +23,10 @@ public class Server {
         List<String> chan = Arrays.asList("Cats", "Fails", "Funny");
         User u = new User(1, "esse","esse@email.com", "pass", chan);
 
-        List<String> chan2 = Arrays.asList("Video Games", "Sport", "Music");
-        User u2 = new User(2, "aquele","aquele@email.com", "pass", chan2);
+        List<String> chan2 = Arrays.asList("Video Games", "Music");
+        User u2 = new User(2, "q","q@email.com", "q", chan2);
         //--------------------------------------------------------
-        List<String> tag = Arrays.asList("Cats", "Music", "Funny");
+        List<String> tag = Arrays.asList("Cats", "Music");
         LocalDateTime d = LocalDateTime.of(1994,5,9,1,1);
         Video v = new Video(1, "1: Cats playing piano","phatguy", tag, d);
 
@@ -46,13 +46,16 @@ public class Server {
         ArrayList<User> users = new ArrayList<>();
         users.add(u); users.add(u2);
 
+        ArrayList<Video> videos = new ArrayList<>();
+        videos.add(v); videos.add(v2); videos.add(v3); videos.add(v4);
+
         System.out.println("Server Online");
         try {
             ServerSocket socketServer = new ServerSocket(3333);
             while (true) {
                 Socket socket = socketServer.accept();
 
-                ServerClientHandler query = new ServerClientHandler(socket, clientNumber, users);
+                ServerClientHandler query = new ServerClientHandler(socket, clientNumber, users, videos);
                 Thread client = new Thread(query);
                 client.start();
                 clientNumber++;

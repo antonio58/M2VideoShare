@@ -98,8 +98,9 @@ public class ServerComm {
         }
         String message = new String(packet);
 
-        System.out.println("message: " + message + "\ncenas: " + u + "(" + u.length() + ")/" + p + "(" + p.length() + ")");
 
+        message = message.concat("<!end!>");
+        System.out.println("!message: " + message + "\ncenas: " + u + "(" + u.length() + ")/" + p + "(" + p.length() + ")");
         String reply = talk(message);
 
         if (reply.equals("check_1")){
@@ -143,6 +144,7 @@ public class ServerComm {
 
         System.out.println("message: " + message + "\ncenas: " + user + "(" + user.length() + ")/" + password + "(" + password.length() + ")/"+ email+"("+email.length()+")");
 
+        message = message.concat("<!end!>");
         String reply = talk(message);
 
         if (reply.equals("check_2")){
@@ -157,6 +159,7 @@ public class ServerComm {
         byte[] header = {(byte)3};
         String str = new String(header);
 
+        str = str.concat("<!end!>");
         str = talk(str);
 
         if(str.equals("error: 404"))
@@ -233,6 +236,7 @@ public class ServerComm {
         }
         String message = new String(packet);
 
+        message = message.concat("<!end!>");
         String reply = talk(message);
 
         if (reply.equals("check_4")){
@@ -242,6 +246,89 @@ public class ServerComm {
         System.out.println("shiet");
         return false;
 
+    }
+
+    public String getFeed(int p, byte feedType){
+
+        byte[] type = {feedType};
+        byte[] page = ByteBuffer.allocate(4).putInt(p).array();
+        byte[] header = new byte[type.length + page.length];
+        System.arraycopy(type, 0, header, 0, type.length);
+        System.arraycopy(page, 0, header, type.length, page.length);
+        String str = new String(header);
+
+        str = str.concat("<!end!>");
+        System.out.println(str);
+        str = talk(str);
+
+        if(str.equals("error: 404"))
+            return str;
+
+        String data = new String();
+
+        System.out.println("Decode string");
+        byte[] r = str.getBytes(StandardCharsets.UTF_8);
+        int total = 5;
+        /*int nVid = r[0];
+        System.out.println("nVid: "+nVid);*/
+
+        byte[] bnVid = new byte[4];
+        for(int i = 0; i<4; i++){
+            bnVid[i] = r[i];
+        }
+
+        int nVid = ByteBuffer.wrap(bnVid).getInt();
+        System.out.println("nVid: "+nVid);
+
+        for(int j = 0; j<nVid; j++){
+
+            byte[] t = new byte[4];
+            for (int i = total; i < total+4; i++) {
+                t[i - total] = r[i];
+                System.out.println(i + "u" + r[i]);
+            }
+            total += 4;
+            byte[] a = new byte[4];
+            for (int i = total; i < total+4; i++) {
+                a[i - total] = r[i];
+                System.out.println(i + "p" + r[i]);
+            }
+
+            int tl = ByteBuffer.wrap(t).getInt();
+            int al = ByteBuffer.wrap(a).getInt();
+            total += 4;
+
+            System.out.println("n: " + tl + " / " + al);
+
+            System.out.print("title: ");
+            byte[] tb = new byte[tl];
+            for (int i = total; i < total + tl; i++) {
+                tb[i - total] = r[i];
+                System.out.print((char) r[i]);
+            }
+            total += tl;
+            System.out.println("\nauthor: ");
+            byte[] ab = new byte[al];
+            for (int i = total; i < total + al; i++) {
+                ab[i - (total)] = r[i];
+                System.out.print((char) r[i]);
+            }
+            total += al;
+
+
+            String title = new String(tb);
+            String author = new String(ab);
+
+            str = title+"<"+author;
+            System.out.println("String"+j+": "+str);
+
+            data = data.concat(str);
+            total++;
+        }
+
+
+        System.out.println("sc.data: "+data);
+        return data;
     }
 }
 

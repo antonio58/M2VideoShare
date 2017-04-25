@@ -37,8 +37,8 @@ public class LoginController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         actiontargetBox.setVisible(false);
-        userId.setPromptText("User");
-        password.setPromptText("Password");
+        userId.setPromptText("user");
+        password.setPromptText("password");
         password.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER){
                 signIn();
@@ -48,7 +48,7 @@ public class LoginController implements Initializable{
 
     void signIn(){
         try {
-            if(sc.checkLogin("1","1" /*userId.getText(), password.getText()*/)){
+            if(sc.checkLogin("q", "q"/*userId.getText(), password.getText()*/)){
                 System.out.println("User check!!!");
                 this.application.openMainMenu();
             }
