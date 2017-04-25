@@ -51,29 +51,6 @@ public class User {
         return false;
     }
 
-    public List<String> getChannels() {
-        return channels;
-    }
-
-    public void setChannels(List<String> channels) {
-        this.channels = channels;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", channels=" + channels +
-                '}';
-    }
-
     public void setID(int i){ this.id = i;}
     public void setName(String n){ this.name = n;}
     public void setEmail(String n){ this.email = n;}

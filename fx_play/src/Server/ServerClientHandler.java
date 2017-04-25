@@ -8,7 +8,6 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by fernando on 01-04-2017.
@@ -18,16 +17,12 @@ public class ServerClientHandler implements Runnable {
     private Socket socketClient;
     private int clientNumber;
     private String response;
-    private User self = new User();
     private ArrayList<User> users = new ArrayList<>();
-    ArrayList<Video> videos = new ArrayList<>();
 
-
-    public ServerClientHandler(Socket socketClient, int clientNumber, ArrayList<User> users, ArrayList<Video> videos) {
+    public ServerClientHandler(Socket socketClient, int clientNumber, ArrayList<User> users) {
         this.socketClient = socketClient;
         this.clientNumber = clientNumber;
         this.users = users;
-        this.videos = videos;
         System.out.println("\n New Client:\n"
                 + socketClient.getInetAddress() + " || " + socketClient.getPort()+"\n");
 
@@ -47,17 +42,8 @@ public class ServerClientHandler implements Runnable {
             while(true) {
                 //dos.writeUTF("\nWrite something");
                 dos.flush();
-
-                response = new String();
-                boolean flag = true;
-                while(flag) {
-                    String part = dis.readUTF();
-                    System.out.println("(Client " + clientNumber + ") Message Received: " + part);
-                    response = response.concat(part);
-                    if(part.indexOf("<!end!>") == part.length()-7){
-                        flag = false;
-                    }
-                }
+                response = dis.readUTF();
+                System.out.println("(Client "+clientNumber+") Message Received: " + response);
                 char b = response.charAt(0);
                 System.out.print("Frame type: "+b);
 
@@ -77,7 +63,7 @@ public class ServerClientHandler implements Runnable {
                             dos.writeUTF("ooooohhhh");
                         break;
 
-                    case (byte)3:
+                    case 3:
                         String str = getUserData(currentUserId);
                         dos.writeUTF(str);
                         break;
@@ -87,16 +73,6 @@ public class ServerClientHandler implements Runnable {
                             dos.writeUTF("check_4");
                         else
                             dos.writeUTF("ups...");
-                        break;
-
-                    case 5:
-                        String dataFA = getFeed(response, true);
-                        dos.writeUTF(dataFA);
-                        break;
-
-                    case 6:
-                        String dataFS = getFeed(response, false);
-                        dos.writeUTF(dataFS);
                         break;
 
                 }
@@ -149,7 +125,6 @@ public class ServerClientHandler implements Runnable {
             if(u.getName().equals(user))
                 if(u.checkPassword(password)){
                     id = u.getId();
-                    this.self = u;
                     System.out.println("checked");
                     return id;
                 }
@@ -341,72 +316,5 @@ public class ServerClientHandler implements Runnable {
         System.out.println("registered");
 
         return flag;
-    }
-
-    public String getFeed(String s, boolean all){
-        byte[] r = s.getBytes(StandardCharsets.UTF_8);
-
-        r[0] = (byte)4;
-        System.out.println("nVid: "+(char)r[0]);
-        byte[] page = new byte[4];
-        for(int i = 1; i<5; i++){
-            page[i-1] = r[i];
-            System.out.println(i+"u"+r[i]);
-        }
-
-        ArrayList<Video> temp = new ArrayList<>();
-        if(!all){
-            List<String> chan = self.getChannels();
-            for(Video v : videos){
-                List<String> tag = v.getTags();
-                for(String t : tag)
-                    for(String c : chan)
-                        if(t.equals(c)){
-                            temp.add(v);
-                        }
-            }
-        } else
-            temp = videos;
-
-        byte[] nv = ByteBuffer.allocate(4).putInt(temp.size()).array();
-
-        String message = new String(nv);
-        for(Video v : temp){
-            String title = v.getTitle();
-            String author = v.getAuthor();
-
-            byte[] tb = ByteBuffer.allocate(4).putInt(title.length()/*+"</split/>".getBytes().length*/).array();
-            byte[] ab = ByteBuffer.allocate(4).putInt(author.length()/*+"!:split:!".getBytes().length*/).array();
-
-            byte[] header = new byte[9];
-            header[0] = (byte) 1;
-            for (int i = 1; i < 9; i++) {
-                if (i < 5) {
-                    header[i] = tb[i - 1];
-                } else {
-                    System.out.println(i + "a" + r[i]);
-                    header[i] = ab[i - 5];
-                }
-            }
-            String aux = title/*+ "</split/>" */+ author;
-            byte[] payload = aux.getBytes();
-
-            byte[] packet = new byte[payload.length + header.length];
-
-
-            for (int i = 1; i < packet.length; i++) {
-                if (i < header.length) {
-                    packet[i] = header[i];
-                } else {
-                    packet[i] = payload[i - header.length];
-                }
-                System.out.println(i + "-" + packet[i]);
-            }
-            String part = new String(packet);
-
-            message = message.concat(part/*+"!:split:!"*/);
-        }
-
-        return message;
     }
 }

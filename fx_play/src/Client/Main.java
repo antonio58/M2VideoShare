@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -38,8 +39,8 @@ public class Main extends Application {
         }*/
         openErrorScreen(null);
         primaryStage.setResizable(false);
-        primaryStage.setTitle("VideoHub");
-        primaryStage.setScene(new Scene(root, 750, 500));
+        primaryStage.setTitle("M2VideoShare");
+        primaryStage.setScene(new Scene(root,500,500));
         primaryStage.show();
         reallyStart();
     }
@@ -115,10 +116,10 @@ public class Main extends Application {
         }
     }
 
-    public void openFeed(int p, String data, byte b){
+    public void openFeed(){
         try {
             FeedController feed = (FeedController) replaceSceneContent("Feed.fxml");
-            feed.setApp(this, this.sc, p, data, b);
+            feed.setApp(this, this.sc);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
