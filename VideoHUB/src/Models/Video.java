@@ -1,12 +1,14 @@
 package Models;
 
+import org.bson.types.ObjectId;
+
 import java.util.ArrayList;
 
 /**
  * Created by fernando on 21-04-2017.
  */
 public class Video {
-    String _id = null;
+    ObjectId _id = null;
     String name = null;
     String author = null;
     String category = null;
@@ -23,7 +25,7 @@ public class Video {
 
     public Video(){}
 
-    public Video(String _id, String name, String author, String category, String duration, String file, ArrayList<String> deliveries, int views, ArrayList<String> tags, ArrayList<String> likes, ArrayList<Comment> commentList, boolean premium, Double size, int n_blocks) {
+    public void Video(ObjectId _id, String name, String author, String category, String duration, String file, ArrayList<String> deliveries, int views, ArrayList<String> tags, ArrayList<String> likes, ArrayList<Comment> commentList, boolean premium, Double size, int n_blocks) {
         this._id = _id;
         this.name = name;
         this.author = author;
@@ -40,11 +42,11 @@ public class Video {
         this.n_blocks = n_blocks;
     }
 
-    public String get_id() {
+    public ObjectId get_id() {
         return _id;
     }
 
-    public void set_id(String _id) {
+    public void set_id(ObjectId _id) {
         this._id = _id;
     }
 
