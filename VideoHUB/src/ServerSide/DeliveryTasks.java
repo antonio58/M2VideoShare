@@ -1,15 +1,18 @@
 package ServerSide;
 
 import Models.Delivery;
+import Models.Hop;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
@@ -26,11 +29,8 @@ public class DeliveryTasks {
 
     }
 
-    public void DeliveryTasks(Delivery delivery){
+    public DeliveryTasks(Delivery delivery) {
         this.delivery = delivery;
-        //espera ativa pelo estado "completed" da delivery, assim que atinja esse estado a delivery é arquivada.
-
-
 
     }
 
@@ -54,15 +54,29 @@ public class DeliveryTasks {
         Document document = new Document()
                 .append("id_video", delivery.getId_video())
                 .append("id_user", delivery.getId_user())
-                .append("IP", delivery.getIp_adress())
+                .append("IP", delivery.getIPaddress())
                 .append("state", delivery.getState())
-                .append("creationDate", delivery.setDate())
-                .append("hops", delivery.getHops()) //piviasleague path, fazer exec de um traceroute ao IP cliente
+                .append("creationDate", new Date())
                 .append("idBlock", delivery.getId_block());
         mMongo.getCollection("delivery").insertOne(document);
     }
 
-    public void deleteDelivery(){
+    public void addHopTo(Hop hop){
+        BasicDBObject query = new BasicDBObject();
+        //First it fetches the wanted document by a parameter and its value e.g, (_id, deliveryID)
+        query.put("_id", delivery.get_id());
+
+        BasicDBObject mDelivery = new BasicDBObject();
+        mDelivery.put("nextHop", hop.getNext_hop());
+        mDelivery.put("IPaddress", hop.getIPaddress());
+
+        BasicDBObject updateObj = new BasicDBObject();
+        updateObj.put("$push", new BasicDBObject("hops", mDelivery));
+
+        mMongo.getCollection("delivery").updateOne(query, updateObj);
+    }
+
+    public void deleteDelivery(Delivery delivery){
         Document searchQuery = new Document();
         searchQuery.put("_id", delivery.get_id());
         mMongo.getCollection("delivery").deleteOne(searchQuery);
@@ -70,27 +84,29 @@ public class DeliveryTasks {
 
 
     // Searches by video name and author id to achieve unique final ID
-    public void getDeliveryID(){
+    public ObjectId getDeliveryID(){
         if(delivery == null || delivery.getId_user() == null | delivery.getId_video() == null){
             System.out.println("getDeliveryID() in DeliveryTasks.java --- delivery null");
+            return null;
         }
         else{
-            System.out.println("Delivery videoID: " + delivery.getId_video() +" userID: " + delivery.getId_user());
+            System.out.println("Delivery videoID: " + delivery.getId_video() +" userID: " + delivery.getId_user() + " creationDate: " + delivery.getDate());
             Bson filter = Filters.eq("id_video", delivery.getId_video());
             Bson filter2 = Filters.eq("id_user", delivery.getId_user());
-            Bson filter3 = Filters.eq("creationDate", delivery.getDate());
 
 
             //returns to Results list, playlist name
-            List<Document> results = mMongo.getCollection("delivery").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.match(filter2), Aggregates.match(filter3), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("_id", "$_id")))))).into(new ArrayList<>());
+            List<Document> results = mMongo.getCollection("delivery").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.match(filter2), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("_id", "$_id")))))).into(new ArrayList<>());
 
 
             //must return just 1 result
-            //System.out.println("\n number of video with matched name: "+ results.size());
-            //System.out.println("\n results "+ results.get(0).getObjectId("_id"));
-            delivery.set_id(results.get(0).getObjectId("_id"));
+            System.out.println("\n number of video with matched name: "+ results.size());
+            System.out.println("\n results "+ results.get((results.size()-1)).getObjectId("_id"));
+            delivery.set_id(results.get((results.size()-1)).getObjectId("_id"));
+            return results.get((results.size()-1)).getObjectId("_id");
         }
     }
+
     public void updateState(){
         switch (delivery.getState()){
             case "completed":

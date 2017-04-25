@@ -22,10 +22,11 @@ public class TEST_VIDEOS {
         likes = populateLikes();
         video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Animais","20:40", tags,"BBC Vida Selvagem episódio x.25", false, 404, comments, likes);
         VideoTasks videoTasks = new VideoTasks(video);
-        //videoTasks.addVideo();
-        //videoTasks.getVideoID();
-        for(int i=0; i <comments.size(); i++ ) {
-            //videoTasks.addVideoComment(comments.get(i));
+        videoTasks.addVideo();
+        videoTasks.getVideoID();
+
+        for (Comment comment : comments) { //for each
+            videoTasks.addVideoComment(comment);
         }
     }
 

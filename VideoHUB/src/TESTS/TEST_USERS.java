@@ -22,6 +22,7 @@ public class TEST_USERS {
 
     public static void main(String[] args){
 
+        //TODO avatar stuff and hashing the password / sign
         user = populateUserModel(false, "Zé Foguetão", "etc/images/ava.png", "foguetao@hotmil.com", "@2123ewqfff");
         UserTasks userTasks = new UserTasks(user);
         userTasks.addUser();
@@ -49,19 +50,17 @@ public class TEST_USERS {
             userTasks.createChannel("_id", aChannelList);
         }
 
-
-        System.out.println("main() channellistsize: " + channelList.size());
-        for(int i = 0; i<channelList.size(); i++){
-            userTasks.addToChannel("_id", channelList.get(i));
-            }
+        for (Channel aChannelList : channelList) {
+            userTasks.addToChannel("_id", aChannelList);
+        }
 
         //create new Playlists
         for (Playlist aPlayList : playList) { //for each
             userTasks.createPlaylist("_id", aPlayList);
         }
 
-        for(int i = 0; i< playList.size(); i++){
-                userTasks.addToPlaylist("_id", playList.get(i));
+        for (Playlist aPlayList : playList) {
+            userTasks.addToPlaylist("_id", aPlayList);
         }
     }
 

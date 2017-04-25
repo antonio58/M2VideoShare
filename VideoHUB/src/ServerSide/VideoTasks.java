@@ -60,7 +60,7 @@ public class VideoTasks{
         query.put("_id", video.get_id());
 
         BasicDBObject mComment = new BasicDBObject();
-        mComment.put("_idVideo", getNextComment(video.get_id()));
+        mComment.put("_idComment", getNextComment(video.get_id()));
         mComment.put("comment", comment.getText());
         mComment.put("creationDate", new Date());
 
@@ -77,9 +77,9 @@ public class VideoTasks{
         //returns to Results list, playlist name
         List<Document> results = mMongo.getCollection("videos").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.unwind("$comments"))).into(new ArrayList<>());
 
-        System.out.println("\n number of comments:"+ results.size());
+        System.out.println("\n number of comments:"+ (results.size()+1));
 
-        if ( results.size() > 0){
+        if ( (results.size()+1) > 0){
             return results.size();
         }
         else {
