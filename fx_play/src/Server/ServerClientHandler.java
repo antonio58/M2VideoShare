@@ -368,7 +368,9 @@ public class ServerClientHandler implements Runnable {
         } else
             temp = videos;
 
-        String message = new String();
+        byte[] nv = ByteBuffer.allocate(4).putInt(temp.size()).array();
+
+        String message = new String(nv);
         for(Video v : temp){
             String title = v.getTitle();
             String author = v.getAuthor();
@@ -386,7 +388,7 @@ public class ServerClientHandler implements Runnable {
                     header[i] = ab[i - 5];
                 }
             }
-            String aux = title+ "</split/>" + author;
+            String aux = title/*+ "</split/>" */+ author;
             byte[] payload = aux.getBytes();
 
             byte[] packet = new byte[payload.length + header.length];
@@ -402,7 +404,7 @@ public class ServerClientHandler implements Runnable {
             }
             String part = new String(packet);
 
-            message = message.concat(part+"!:split:!");
+            message = message.concat(part/*+"!:split:!"*/);
         }
 
         return message;

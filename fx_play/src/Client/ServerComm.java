@@ -268,18 +268,19 @@ public class ServerComm {
 
         System.out.println("Decode string");
         byte[] r = str.getBytes(StandardCharsets.UTF_8);
-        int total = 1;
-        int nVid = r[0];
+        int total = 5;
+        /*int nVid = r[0];
+        System.out.println("nVid: "+nVid);*/
+
+        byte[] bnVid = new byte[4];
+        for(int i = 0; i<4; i++){
+            bnVid[i] = r[i];
+        }
+
+        int nVid = ByteBuffer.wrap(bnVid).getInt();
         System.out.println("nVid: "+nVid);
 
-
-        int caralhopaisto = 0;
-        if(feedType==(byte)5)
-            caralhopaisto =4;
-        else
-            caralhopaisto =2;
-
-        for(int j = 0; j<caralhopaisto; j++){
+        for(int j = 0; j<nVid; j++){
 
             byte[] t = new byte[4];
             for (int i = total; i < total+4; i++) {
@@ -318,7 +319,7 @@ public class ServerComm {
             String title = new String(tb);
             String author = new String(ab);
 
-            str = title+author;
+            str = title+"<"+author;
             System.out.println("String"+j+": "+str);
 
             data = data.concat(str);
