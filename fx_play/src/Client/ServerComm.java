@@ -248,8 +248,9 @@ public class ServerComm {
 
     }
 
-    public String getFeedAll(int p){
-        byte[] type = {(byte)5};
+    public String getFeed(int p, byte feedType){
+
+        byte[] type = {feedType};
         byte[] page = ByteBuffer.allocate(4).putInt(p).array();
         byte[] header = new byte[type.length + page.length];
         System.arraycopy(type, 0, header, 0, type.length);
@@ -271,7 +272,14 @@ public class ServerComm {
         int nVid = r[0];
         System.out.println("nVid: "+nVid);
 
-        for(int j = 0; j<4; j++){
+
+        int caralhopaisto = 0;
+        if(feedType==(byte)5)
+            caralhopaisto =4;
+        else
+            caralhopaisto =2;
+
+        for(int j = 0; j<caralhopaisto; j++){
 
             byte[] t = new byte[4];
             for (int i = total; i < total+4; i++) {

@@ -115,10 +115,10 @@ public class Main extends Application {
         }
     }
 
-    public void openFeed(int p, String data){
+    public void openFeed(int p, String data, byte b){
         try {
             FeedController feed = (FeedController) replaceSceneContent("Feed.fxml");
-            feed.setApp(this, this.sc, p, data);
+            feed.setApp(this, this.sc, p, data, b);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

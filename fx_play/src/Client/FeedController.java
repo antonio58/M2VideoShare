@@ -3,9 +3,7 @@ package Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -67,14 +65,16 @@ public class FeedController implements Initializable{
     private Main application;
     private ServerComm sc;
     private int page;
+    private byte feedType;
 
 
-    public void setApp(Main application, ServerComm sc, int p, String data){
+    public void setApp(Main application, ServerComm sc, int p, String data, byte fT){
         this.application = application;
         this.sc = sc;
         this.page = p;
-        System.out.println("data: "+data);
+        this.feedType = fT;
         String[] aux = data.split("!:split:!");
+        System.out.println("data: "+data+"\nlength: "+aux.length);
 
         if(aux.length > 0){
             String[] aux2 = aux[0].split("</split/>");
@@ -176,21 +176,24 @@ public class FeedController implements Initializable{
     protected void handleSubmitFSub(ActionEvent event) {
         actiontarget.setText("Subscribed button pressed");
         actiontargetBox.setVisible(true);
-        //sc.getFeedAll()
+        String dataSub = sc.getFeed(1, (byte)6);
+        application.openFeed(1, dataSub, (byte)6);
     }
 
     @FXML
     protected void handleSubmitFAll(ActionEvent event) {
         actiontarget.setText("All button pressed");
         actiontargetBox.setVisible(true);
-        this.sc.getFeedAll(1);
+        String dataAll = this.sc.getFeed(1, (byte)5);
+        application.openFeed(1, dataAll, (byte)5);
     }
 
     @FXML
     protected void handleSubmitNext(ActionEvent event) {
         actiontarget.setText("Next button pressed");
         actiontargetBox.setVisible(true);
-        this.sc.getFeedAll(page+1);
+        String dataNext = this.sc.getFeed(page+1, feedType);
+        application.openFeed(1, dataNext, feedType);
     }
 
 }

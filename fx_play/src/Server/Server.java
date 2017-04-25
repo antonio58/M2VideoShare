@@ -23,10 +23,10 @@ public class Server {
         List<String> chan = Arrays.asList("Cats", "Fails", "Funny");
         User u = new User(1, "esse","esse@email.com", "pass", chan);
 
-        List<String> chan2 = Arrays.asList("Video Games", "Sport", "Music");
+        List<String> chan2 = Arrays.asList("Video Games", "Music");
         User u2 = new User(2, "q","q@email.com", "q", chan2);
         //--------------------------------------------------------
-        List<String> tag = Arrays.asList("Cats", "Music", "Funny");
+        List<String> tag = Arrays.asList("Cats", "Music");
         LocalDateTime d = LocalDateTime.of(1994,5,9,1,1);
         Video v = new Video(1, "1: Cats playing piano","phatguy", tag, d);
 

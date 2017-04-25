@@ -8,6 +8,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by fernando on 01-04-2017.
@@ -17,6 +18,7 @@ public class ServerClientHandler implements Runnable {
     private Socket socketClient;
     private int clientNumber;
     private String response;
+    private User self = new User();
     private ArrayList<User> users = new ArrayList<>();
     ArrayList<Video> videos = new ArrayList<>();
 
@@ -88,8 +90,13 @@ public class ServerClientHandler implements Runnable {
                         break;
 
                     case 5:
-                        String dataFA = getFeedAll(response);
+                        String dataFA = getFeed(response, true);
                         dos.writeUTF(dataFA);
+                        break;
+
+                    case 6:
+                        String dataFS = getFeed(response, false);
+                        dos.writeUTF(dataFS);
                         break;
 
                 }
@@ -142,6 +149,7 @@ public class ServerClientHandler implements Runnable {
             if(u.getName().equals(user))
                 if(u.checkPassword(password)){
                     id = u.getId();
+                    this.self = u;
                     System.out.println("checked");
                     return id;
                 }
@@ -335,23 +343,38 @@ public class ServerClientHandler implements Runnable {
         return flag;
     }
 
-    public String getFeedAll(String s){
+    public String getFeed(String s, boolean all){
         byte[] r = s.getBytes(StandardCharsets.UTF_8);
 
-        r[0] = (byte)videos.size();
+        r[0] = (byte)4;
+        System.out.println("nVid: "+(char)r[0]);
         byte[] page = new byte[4];
         for(int i = 1; i<5; i++){
             page[i-1] = r[i];
             System.out.println(i+"u"+r[i]);
         }
 
+        ArrayList<Video> temp = new ArrayList<>();
+        if(!all){
+            List<String> chan = self.getChannels();
+            for(Video v : videos){
+                List<String> tag = v.getTags();
+                for(String t : tag)
+                    for(String c : chan)
+                        if(t.equals(c)){
+                            temp.add(v);
+                        }
+            }
+        } else
+            temp = videos;
+
         String message = new String();
-        for(Video v : videos){
+        for(Video v : temp){
             String title = v.getTitle();
             String author = v.getAuthor();
 
-            byte[] tb = ByteBuffer.allocate(4).putInt(title.length()+"</split/>".getBytes().length).array();
-            byte[] ab = ByteBuffer.allocate(4).putInt(author.length()+"!:split:!".getBytes().length).array();
+            byte[] tb = ByteBuffer.allocate(4).putInt(title.length()/*+"</split/>".getBytes().length*/).array();
+            byte[] ab = ByteBuffer.allocate(4).putInt(author.length()/*+"!:split:!".getBytes().length*/).array();
 
             byte[] header = new byte[9];
             header[0] = (byte) 1;
@@ -368,7 +391,8 @@ public class ServerClientHandler implements Runnable {
 
             byte[] packet = new byte[payload.length + header.length];
 
-            for (int i = 0; i < packet.length; i++) {
+
+            for (int i = 1; i < packet.length; i++) {
                 if (i < header.length) {
                     packet[i] = header[i];
                 } else {
@@ -380,7 +404,6 @@ public class ServerClientHandler implements Runnable {
 
             message = message.concat(part+"!:split:!");
         }
-
 
         return message;
     }
