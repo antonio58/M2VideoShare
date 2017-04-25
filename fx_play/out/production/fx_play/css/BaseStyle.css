@@ -34,6 +34,14 @@
     -fx-cursor: hand;
 }
 
+.big{
+    -fx-min-width: 100px;
+    -fx-min-height: 40px;
+    -fx-background-color: #FB9E03;
+    -fx-border-color: #000000;
+    -fx-font-weight: bold;
+}
+
 .confirm {
     -fx-font-weight: bold;
     -fx-background-color: #FB9E03;
@@ -53,6 +61,13 @@
 
 .avatar {
     -fx-font-size: 10px;
+}
+
+.info {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-color: #ffffff;
 }
 
 #welcome-text {

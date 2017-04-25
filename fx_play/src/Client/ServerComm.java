@@ -319,10 +319,110 @@ public class ServerComm {
             String title = new String(tb);
             String author = new String(ab);
 
-            str = title+"<"+author;
+            str = title+"</split/>"+author;
             System.out.println("String"+j+": "+str);
 
-            data = data.concat(str);
+            data = data.concat(str+"!:split:!");
+            total++;
+        }
+
+
+        System.out.println("sc.data: "+data);
+        return data;
+    }
+
+    public String getSearchResults(String query){
+
+        System.out.println("query1: "+query);
+        byte[] header = new byte[5];
+        header[0] = (byte)7;
+        byte[] bq = ByteBuffer.allocate(4).putInt(query.length()).array();
+
+        for(int i = 0; i<4; i++){
+            header[i+1] = bq[i];
+        }
+
+        byte[] payload = query.getBytes();
+
+        System.out.println("phl: "+payload.length+", "+header.length);
+        byte[] packet = new byte[payload.length + header.length];
+
+        for (int i = 0; i < payload.length + header.length; i++) {
+            if (i < header.length) {
+                packet[i] = header[i];
+            } else {
+                packet[i] = payload[i - header.length];
+            }
+        }
+
+        String str = new String(packet);
+
+        str = str.concat("<!end!>");
+        System.out.println(str);
+        str = talk(str);
+
+        if(str.equals("error: 404"))
+            return str;
+
+        String data = new String();
+
+        System.out.println("Decode string");
+        byte[] r = str.getBytes(StandardCharsets.UTF_8);
+        int total = 5;
+        /*int nVid = r[0];
+        System.out.println("nVid: "+nVid);*/
+
+        byte[] bnVid = new byte[4];
+        for(int i = 0; i<4; i++){
+            bnVid[i] = r[i];
+        }
+
+        int nVid = ByteBuffer.wrap(bnVid).getInt();
+        System.out.println("nVid: "+nVid);
+
+        for(int j = 0; j<nVid; j++){
+
+            byte[] t = new byte[4];
+            for (int i = total; i < total+4; i++) {
+                t[i - total] = r[i];
+                System.out.println(i + "u" + r[i]);
+            }
+            total += 4;
+            byte[] a = new byte[4];
+            for (int i = total; i < total+4; i++) {
+                a[i - total] = r[i];
+                System.out.println(i + "p" + r[i]);
+            }
+
+            int tl = ByteBuffer.wrap(t).getInt();
+            int al = ByteBuffer.wrap(a).getInt();
+            total += 4;
+
+            System.out.println("n: " + tl + " / " + al);
+
+            System.out.print("title: ");
+            byte[] tb = new byte[tl];
+            for (int i = total; i < total + tl; i++) {
+                tb[i - total] = r[i];
+                System.out.print((char) r[i]);
+            }
+            total += tl;
+            System.out.println("\nauthor: ");
+            byte[] ab = new byte[al];
+            for (int i = total; i < total + al; i++) {
+                ab[i - (total)] = r[i];
+                System.out.print((char) r[i]);
+            }
+            total += al;
+
+
+            String title = new String(tb);
+            String author = new String(ab);
+
+            str = title+"</split/>"+author;
+            System.out.println("String"+j+": "+str);
+
+            data = data.concat(str+"!:split:!");
             total++;
         }
 

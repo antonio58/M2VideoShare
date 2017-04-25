@@ -50,7 +50,8 @@ public class LoginController implements Initializable{
         try {
             if(sc.checkLogin("q", "q"/*userId.getText(), password.getText()*/)){
                 System.out.println("User check!!!");
-                this.application.openMainMenu();
+                String data = sc.getFeed(1, (byte)5);
+                application.openMainMenu(1, data, (byte)5);
             }
             else {
                 actiontarget.setText("User or password wrong. Please try again.");

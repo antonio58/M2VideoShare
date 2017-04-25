@@ -69,6 +69,7 @@ public class ProfileController implements Initializable {
 
     @FXML
     protected void handleSubmitBack(ActionEvent event){
-        this.application.openMainMenu();
+        String data = sc.getFeed(1,(byte)5);
+        this.application.openMainMenu(1,data,(byte)5);
     }
 }

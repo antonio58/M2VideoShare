@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="center" gridLinesVisible="false" hgap="10.0" prefHeight="500" prefWidth="500" styleClass="root" stylesheets="@../css/BaseStyle.css" vgap="18.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.SignUpController">
+<GridPane alignment="center" gridLinesVisible="false" hgap="10.0" prefHeight="600" prefWidth="1000" styleClass="root" stylesheets="@../css/BaseStyle.css" vgap="18.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.SignUpController">
     <padding>
         <Insets bottom="10.0" left="25.0" right="25.0" top="25.0" />
     </padding>
@@ -63,7 +63,7 @@
         <Button fx:id="back" onAction="#handleSubmitBack" text="Back" />
     </HBox>
 
-    <ImageView fitHeight="50.0" fitWidth="100.0">
+    <ImageView fitHeight="50.0" fitWidth="100.0" translateX="-248.0" translateY="-59.0">
         <image>
             <Image url="@../img/logoVH.png" />
         </image>

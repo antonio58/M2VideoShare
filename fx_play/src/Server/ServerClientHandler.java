@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by fernando on 01-04-2017.
@@ -97,6 +95,11 @@ public class ServerClientHandler implements Runnable {
                     case 6:
                         String dataFS = getFeed(response, false);
                         dos.writeUTF(dataFS);
+                        break;
+
+                    case 7:
+                        String results = getSearchResults(response);
+                        dos.writeUTF(results);
                         break;
 
                 }
@@ -361,7 +364,7 @@ public class ServerClientHandler implements Runnable {
                 List<String> tag = v.getTags();
                 for(String t : tag)
                     for(String c : chan)
-                        if(t.equals(c)){
+                        if(t.equals(c)&&!temp.contains(v)){
                             temp.add(v);
                         }
             }
@@ -375,8 +378,8 @@ public class ServerClientHandler implements Runnable {
             String title = v.getTitle();
             String author = v.getAuthor();
 
-            byte[] tb = ByteBuffer.allocate(4).putInt(title.length()/*+"</split/>".getBytes().length*/).array();
-            byte[] ab = ByteBuffer.allocate(4).putInt(author.length()/*+"!:split:!".getBytes().length*/).array();
+            byte[] tb = ByteBuffer.allocate(4).putInt(title.length()).array();
+            byte[] ab = ByteBuffer.allocate(4).putInt(author.length()).array();
 
             byte[] header = new byte[9];
             header[0] = (byte) 1;
@@ -388,7 +391,7 @@ public class ServerClientHandler implements Runnable {
                     header[i] = ab[i - 5];
                 }
             }
-            String aux = title/*+ "</split/>" */+ author;
+            String aux = title+ author;
             byte[] payload = aux.getBytes();
 
             byte[] packet = new byte[payload.length + header.length];
@@ -404,7 +407,82 @@ public class ServerClientHandler implements Runnable {
             }
             String part = new String(packet);
 
-            message = message.concat(part/*+"!:split:!"*/);
+            message = message.concat(part);
+        }
+
+        return message;
+    }
+
+    private String getSearchResults(String query){
+
+        System.out.println("getSearchResults.query: "+query);
+        byte[] r = query.getBytes();
+
+        byte[] qlb = new byte[4];
+        for(int i= 1; i<5; i++ ){
+            qlb[i-1] = r[i];
+            System.out.println(i+"e"+r[i]);
+        }
+
+        int ql = ByteBuffer.wrap(qlb).getInt();
+
+        System.out.println("ql: "+ql);
+
+        System.out.print("query: ");
+        byte[] queryb = new byte[ql];
+        for(int i = 5; i<5+ql; i++){
+            queryb[i-5] = r[i];
+            System.out.print((char)r[i]);
+        }
+
+        String data = new String(queryb);
+
+        String[] keywords = data.split(" ");
+
+        ArrayList<Video> temp = new ArrayList<>();
+
+        for(Video v : videos){
+            for(String s :keywords)
+                if((v.getTitle().contains(s)||v.getTags().contains(s)||v.getAuthor().contains(s))&&!temp.contains(v))
+                    temp.add(v);
+        }
+        byte[] nv = ByteBuffer.allocate(4).putInt(temp.size()).array();
+
+        String message = new String(nv);
+        for(Video v : temp){
+            String title = v.getTitle();
+            String author = v.getAuthor();
+
+            byte[] tb = ByteBuffer.allocate(4).putInt(title.length()).array();
+            byte[] ab = ByteBuffer.allocate(4).putInt(author.length()).array();
+
+            byte[] header = new byte[9];
+            header[0] = (byte) 1;
+            for (int i = 1; i < 9; i++) {
+                if (i < 5) {
+                    header[i] = tb[i - 1];
+                } else {
+                    System.out.println(i + "a" + r[i]);
+                    header[i] = ab[i - 5];
+                }
+            }
+            String aux = title+ author;
+            byte[] payload = aux.getBytes();
+
+            byte[] packet = new byte[payload.length + header.length];
+
+
+            for (int i = 1; i < packet.length; i++) {
+                if (i < header.length) {
+                    packet[i] = header[i];
+                } else {
+                    packet[i] = payload[i - header.length];
+                }
+                System.out.println(i + "-" + packet[i]);
+            }
+            String part = new String(packet);
+
+            message = message.concat(part);
         }
 
         return message;
