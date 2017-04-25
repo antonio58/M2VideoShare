@@ -1,5 +1,7 @@
 package Models;
 
+import org.bson.types.ObjectId;
+
 import java.util.ArrayList;
 
 /**
@@ -8,18 +10,18 @@ import java.util.ArrayList;
 public class User {
     String name = null;
     String email = null;
-    String _id = null;
+    ObjectId _id = null;
     ArrayList<String> channels = null;
     boolean premium = false;
     String hashPassword = null;
     String avatar = null;
-    ArrayList<String> watchlist = null;
-    ArrayList<String> watchedlist = null;
+    ArrayList<ObjectId> watchlist = null;
+    ArrayList<ObjectId> watchedlist = null;
     ArrayList<Playlist> playlists = null;
 
     public User(){};
 
-    public User(String name, String email, String _id, ArrayList<String> channels, boolean premium, String hashPassword, String avatar, ArrayList<String> watchlist, ArrayList<String> watchedlist, ArrayList<Playlist> playlists) {
+    public User(String name, String email, ObjectId _id, ArrayList<String> channels, boolean premium, String hashPassword, String avatar, ArrayList<ObjectId> watchlist, ArrayList<ObjectId> watchedlist, ArrayList<Playlist> playlists) {
         this.name = name;
         this.email = email;
         this._id = _id;
@@ -49,11 +51,11 @@ public class User {
         this.email = email;
     }
 
-    public String get_id() {
+    public ObjectId get_id() {
         return _id;
     }
 
-    public void set_id(String _id) {
+    public void set_id(ObjectId _id) {
         this._id = _id;
     }
 
@@ -89,19 +91,19 @@ public class User {
         this.avatar = avatar;
     }
 
-    public ArrayList<String> getWatchlist() {
+    public ArrayList<ObjectId> getWatchlist() {
         return watchlist;
     }
 
-    public void setWatchlist(ArrayList<String> watchlist) {
+    public void setWatchlist(ArrayList<ObjectId> watchlist) {
         this.watchlist = watchlist;
     }
 
-    public ArrayList<String> getWatchedlist() {
+    public ArrayList<ObjectId> getWatchedlist() {
         return watchedlist;
     }
 
-    public void setWatchedlist(ArrayList<String> watchedlist) {
+    public void setWatchedlist(ArrayList<ObjectId> watchedlist) {
         this.watchedlist = watchedlist;
     }
 

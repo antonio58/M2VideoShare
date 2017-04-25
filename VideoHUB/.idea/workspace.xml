@@ -33,24 +33,94 @@
       <file leaf-file-name="VideoTasks.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ServerSide/VideoTasks.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="29" column="36" lean-forward="false" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+            <state relative-caret-position="243">
+              <caret line="100" column="34" lean-forward="false" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#388#389#0" expanded="true" />
-                <element signature="e#422#423#0" expanded="true" />
+                <element signature="e#693#694#0" expanded="true" />
+                <element signature="e#727#728#0" expanded="true" />
+                <element signature="method#addVideoComment#0;class#VideoTasks#0" expanded="false" />
+                <element signature="method#getNextComment#0;class#VideoTasks#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VideoTasksDigging.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TESTS/VideoTasksDigging.java">
+      <file leaf-file-name="DeliveryTasks.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ServerSide/DeliveryTasks.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="56" column="28" lean-forward="false" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
+            <state relative-caret-position="756">
+              <caret line="93" column="29" lean-forward="true" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TEST_VIDEOS.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TESTS/TEST_VIDEOS.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="295">
+              <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#populateComments#0;class#TEST_VIDEOS#0" expanded="false" />
+                <element signature="method#populateTags#0;class#TEST_VIDEOS#0" expanded="false" />
+                <element signature="method#populateLikes#0;class#TEST_VIDEOS#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TEST_USERS.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/TESTS/TEST_USERS.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserTasks.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ServerSide/UserTasks.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="111" column="42" lean-forward="true" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#addUser#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#deleteUser#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#updateUser#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#addUserChannel#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#createPlaylist#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#addToPlaylist#0;class#UserTasks#0" expanded="false" />
+                <element signature="method#getPlaylistIndex#0;class#UserTasks#0" expanded="false" />
+                <marker date="1493081241945" expanded="false" signature="3282:3818" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="localhost/VideoHub/users" pinned="false" current-in-tab="false">
+        <entry file="mongo://localhost/VideoHub/users">
+          <provider selected="true" editor-type-id="MongoData">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Models/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1428#1429#0" expanded="true" />
+                <element signature="e#1458#1459#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -70,88 +140,6 @@
                 <element signature="method#displayAvailableDBs#0;class#MongoSide#0" expanded="false" />
                 <element signature="method#displayAvailableCollections#0;class#MongoSide#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DeliveryTasks.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ServerSide/DeliveryTasks.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Models/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserQueriesVideoHub.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ServerSide/UserQueriesVideoHub.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1276">
-              <caret line="84" column="32" lean-forward="false" selection-start-line="84" selection-start-column="32" selection-end-line="84" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#toWatchlist#0;class#UserQueriesVideoHub#0" expanded="false" />
-                <element signature="method#toWatchLater#0;class#UserQueriesVideoHub#0" expanded="false" />
-                <element signature="method#createPlaylist#0;class#UserQueriesVideoHub#0" expanded="false" />
-                <element signature="method#addToPlaylist#0;class#UserQueriesVideoHub#0" expanded="false" />
-                <element signature="method#getPlaylistIndex#0;class#UserQueriesVideoHub#0" expanded="false" />
-                <element signature="method#getNextChannelIndex#0;class#UserQueriesVideoHub#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Comment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Models/Comment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-              <folding>
-                <element signature="e#210#211#0" expanded="true" />
-                <element signature="e#250#251#0" expanded="true" />
-                <element signature="e#282#283#0" expanded="true" />
-                <element signature="e#316#317#0" expanded="true" />
-                <element signature="e#346#347#0" expanded="true" />
-                <element signature="e#392#393#0" expanded="true" />
-                <element signature="e#430#431#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="localhost/VideoHub/videos" pinned="false" current-in-tab="false">
-        <entry file="mongo://localhost/VideoHub/videos">
-          <provider selected="true" editor-type-id="MongoData">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="localhost/VideoHub/users" pinned="false" current-in-tab="false">
-        <entry file="mongo://localhost/VideoHub/users">
-          <provider selected="true" editor-type-id="MongoData">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Video.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Models/Video.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -193,21 +181,25 @@
         <option value="$PROJECT_DIR$/src/Models/ListResult.java" />
         <option value="$PROJECT_DIR$/src/Models/VideoResult.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/QueriesVideoHub.java" />
-        <option value="$PROJECT_DIR$/src/ServerSide/Server.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/ObuQueriesVideosHub.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/DeliveryQueriesVideoHub.java" />
         <option value="$PROJECT_DIR$/src/Models/Hops.java" />
-        <option value="$PROJECT_DIR$/src/Models/Delivery.java" />
-        <option value="$PROJECT_DIR$/src/ServerSide/DeliveryTasks.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/VideoQueriesVideoHub.java" />
         <option value="$PROJECT_DIR$/src/Models/Videos.java" />
-        <option value="$PROJECT_DIR$/src/ServerSide/VideoTasks.java" />
         <option value="$PROJECT_DIR$/src/Models/Comments.java" />
-        <option value="$PROJECT_DIR$/src/Models/Comment.java" />
-        <option value="$PROJECT_DIR$/src/Models/Video.java" />
         <option value="$PROJECT_DIR$/src/Models/Users.java" />
+        <option value="$PROJECT_DIR$/src/ServerSide/Server.java" />
+        <option value="$PROJECT_DIR$/src/Models/Comment.java" />
         <option value="$PROJECT_DIR$/src/TESTS/VideoTasksDigging.java" />
+        <option value="$PROJECT_DIR$/src/Models/Video.java" />
+        <option value="$PROJECT_DIR$/src/Models/Delivery.java" />
+        <option value="$PROJECT_DIR$/src/ServerSide/DeliveryTasks.java" />
         <option value="$PROJECT_DIR$/src/ServerSide/UserQueriesVideoHub.java" />
+        <option value="$PROJECT_DIR$/src/Models/User.java" />
+        <option value="$PROJECT_DIR$/src/TESTS/TEST_VIDEOS.java" />
+        <option value="$PROJECT_DIR$/src/ServerSide/VideoTasks.java" />
+        <option value="$PROJECT_DIR$/src/ServerSide/UserTasks.java" />
+        <option value="$PROJECT_DIR$/src/TESTS/TEST_USERS.java" />
       </list>
     </option>
   </component>
@@ -367,7 +359,7 @@
       <recent name="$PROJECT_DIR$/src/ServerSide" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Application.Test-Video">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -748,9 +740,9 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <configuration default="false" name="Server" type="Application" factoryName="Application">
+    <configuration default="false" name="Test-Video" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="ServerSide.Server" />
+      <option name="MAIN_CLASS_NAME" value="TESTS.TEST_VIDEOS" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -764,7 +756,7 @@
       <method />
     </configuration>
     <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Application.Server" />
+      <item index="0" class="java.lang.String" itemvalue="Application.Test-Video" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -790,12 +782,12 @@
       <workItem from="1492621964832" duration="1457000" />
       <workItem from="1492681302408" duration="5421000" />
       <workItem from="1492720845691" duration="18000" />
-      <workItem from="1492720873953" duration="44588000" />
+      <workItem from="1492720873953" duration="56017000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74727000" />
+    <option name="totallyTimeSpent" value="86156000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -818,15 +810,15 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.503876" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24229075" sideWeight="0.49612403" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924226" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2420242" sideWeight="0.49612403" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11686233" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11686233" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32819384" sideWeight="0.49612403" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15101388" sideWeight="0.49614963" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16435432" sideWeight="0.49614963" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858709" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="top" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -882,7 +874,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -917,18 +909,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerSide/UserQueriesVideoHub.java">
+    <entry file="file://$PROJECT_DIR$/src/ServerSide/UserTasks.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#toWatchlist#0;class#UserQueriesVideoHub#0" expanded="false" />
-            <element signature="method#toWatchLater#0;class#UserQueriesVideoHub#0" expanded="false" />
-            <element signature="method#createPlaylist#0;class#UserQueriesVideoHub#0" expanded="false" />
-            <element signature="method#addToPlaylist#0;class#UserQueriesVideoHub#0" expanded="false" />
-            <element signature="method#getPlaylistIndex#0;class#UserQueriesVideoHub#0" expanded="false" />
-            <element signature="method#getNextChannelIndex#0;class#UserQueriesVideoHub#0" expanded="false" />
+            <element signature="method#addUser#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#deleteUser#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#updateUser#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#addUserChannel#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#createPlaylist#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#addToPlaylist#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#getPlaylistIndex#0;class#UserTasks#0" expanded="false" />
+            <marker date="1493081241945" expanded="false" signature="3282:3818" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1180,16 +1174,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerSide/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ServerSide/ObuQueriesVideosHub.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
@@ -1248,100 +1232,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/Delivery.java">
+    <entry file="file://$PROJECT_DIR$/src/ServerSide/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-252">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#906#907#0" expanded="true" />
-            <element signature="e#932#933#0" expanded="true" />
-            <element signature="e#970#971#0" expanded="true" />
-            <element signature="e#1000#1001#0" expanded="true" />
-            <element signature="e#1036#1037#0" expanded="true" />
-            <element signature="e#1067#1068#0" expanded="true" />
-            <element signature="e#1115#1116#0" expanded="true" />
-            <element signature="e#1155#1156#0" expanded="true" />
-            <element signature="e#1189#1190#0" expanded="true" />
-            <element signature="e#1219#1220#0" expanded="true" />
-            <element signature="e#1265#1266#0" expanded="true" />
-            <element signature="e#1303#1304#0" expanded="true" />
-            <element signature="e#1339#1340#0" expanded="true" />
-            <element signature="e#1371#1372#0" expanded="true" />
-            <element signature="e#1421#1422#0" expanded="true" />
-            <element signature="e#1463#1464#0" expanded="true" />
-            <element signature="e#1495#1496#0" expanded="true" />
-            <element signature="e#1523#1524#0" expanded="true" />
-            <element signature="e#1565#1566#0" expanded="true" />
-            <element signature="e#1599#1600#0" expanded="true" />
-            <element signature="e#1631#1632#0" expanded="true" />
-            <element signature="e#1662#1663#0" expanded="true" />
-            <element signature="e#1707#1708#0" expanded="true" />
-            <element signature="e#1747#1748#0" expanded="true" />
-            <element signature="e#1782#1783#0" expanded="true" />
-            <element signature="e#1816#1817#0" expanded="true" />
-            <element signature="e#1867#1868#0" expanded="true" />
-            <element signature="e#1913#1914#0" expanded="true" />
-            <element signature="e#1942#1943#0" expanded="true" />
-            <element signature="e#1969#1970#0" expanded="true" />
-            <element signature="e#1998#1999#0" expanded="true" />
-            <element signature="e#2031#2032#0" expanded="true" />
-            <element signature="e#2071#2072#0" expanded="true" />
-            <element signature="e#2098#2099#0" expanded="true" />
-            <element signature="e#2147#2148#0" expanded="true" />
-            <element signature="e#2179#2180#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/Video.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/Comment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-          <folding>
-            <element signature="e#210#211#0" expanded="true" />
-            <element signature="e#250#251#0" expanded="true" />
-            <element signature="e#282#283#0" expanded="true" />
-            <element signature="e#316#317#0" expanded="true" />
-            <element signature="e#346#347#0" expanded="true" />
-            <element signature="e#392#393#0" expanded="true" />
-            <element signature="e#430#431#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerSide/VideoTasks.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="29" column="36" lean-forward="false" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#388#389#0" expanded="true" />
-            <element signature="e#422#423#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Models/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerSide/DeliveryTasks.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        <state relative-caret-position="288">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1364,28 +1258,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TESTS/VideoTasksDigging.java">
+    <entry file="file://$PROJECT_DIR$/src/Models/Delivery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="56" column="28" lean-forward="false" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
+        <state relative-caret-position="169">
+          <caret line="37" column="19" lean-forward="false" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1003#1004#0" expanded="true" />
+            <element signature="e#1033#1034#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/Video.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-468">
+          <caret line="10" column="9" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerSide/UserQueriesVideoHub.java">
+    <entry file="file://$PROJECT_DIR$/src/Models/Comment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1276">
-          <caret line="84" column="32" lean-forward="false" selection-start-line="84" selection-start-column="32" selection-end-line="84" selection-end-column="32" />
+        <state relative-caret-position="144">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#183#184#0" expanded="true" />
+            <element signature="e#210#211#0" expanded="true" />
+            <element signature="e#250#251#0" expanded="true" />
+            <element signature="e#282#283#0" expanded="true" />
+            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#346#347#0" expanded="true" />
+            <element signature="e#392#393#0" expanded="true" />
+            <element signature="e#430#431#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Models/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="35" lean-forward="true" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#toWatchlist#0;class#UserQueriesVideoHub#0" expanded="false" />
-            <element signature="method#toWatchLater#0;class#UserQueriesVideoHub#0" expanded="false" />
-            <element signature="method#createPlaylist#0;class#UserQueriesVideoHub#0" expanded="false" />
-            <element signature="method#addToPlaylist#0;class#UserQueriesVideoHub#0" expanded="false" />
-            <element signature="method#getPlaylistIndex#0;class#UserQueriesVideoHub#0" expanded="false" />
-            <element signature="method#getNextChannelIndex#0;class#UserQueriesVideoHub#0" expanded="false" />
+            <element signature="e#1428#1429#0" expanded="true" />
+            <element signature="e#1458#1459#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerSide/DeliveryTasks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="93" column="29" lean-forward="true" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerSide/VideoTasks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="100" column="34" lean-forward="false" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#693#694#0" expanded="true" />
+            <element signature="e#727#728#0" expanded="true" />
+            <element signature="method#addVideoComment#0;class#VideoTasks#0" expanded="false" />
+            <element signature="method#getNextComment#0;class#VideoTasks#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TESTS/TEST_VIDEOS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#populateComments#0;class#TEST_VIDEOS#0" expanded="false" />
+            <element signature="method#populateTags#0;class#TEST_VIDEOS#0" expanded="false" />
+            <element signature="method#populateLikes#0;class#TEST_VIDEOS#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerSide/UserTasks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="111" column="42" lean-forward="true" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#addUser#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#deleteUser#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#updateUser#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#addUserChannel#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#createPlaylist#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#addToPlaylist#0;class#UserTasks#0" expanded="false" />
+            <element signature="method#getPlaylistIndex#0;class#UserTasks#0" expanded="false" />
+            <marker date="1493081241945" expanded="false" signature="3282:3818" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TESTS/TEST_USERS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

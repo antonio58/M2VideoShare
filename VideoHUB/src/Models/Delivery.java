@@ -1,5 +1,7 @@
 package Models;
 
+import org.bson.types.ObjectId;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,7 +11,7 @@ import java.util.Date;
 public class Delivery {
 
 
-    private String _id;
+    private ObjectId _id;
     private String id_video;
     private String id_user;
     private String ip_adress;
@@ -19,12 +21,9 @@ public class Delivery {
     private Date date;
     private ArrayList<Hops> hops;
 
-    public void Delivery(){
+    public Delivery(){}
 
-    }
-
-
-    public Delivery( String _id, String id_video, String id_user, String ip_adress, String state, int id_block, int totalBlocks, Date date, ArrayList<Hops> hops) {
+    public void Delivery(ObjectId _id, String id_video, String id_user, String ip_adress, String state, int id_block, int totalBlocks, Date date, ArrayList<Hops> hops) {
         this._id = _id;
         this.id_video = id_video;
         this.id_user = id_user;
@@ -36,11 +35,11 @@ public class Delivery {
         this.hops = hops;
     }
 
-    public String get_id() {
+    public ObjectId get_id() {
         return _id;
     }
 
-    public void set_id(String _id) {
+    public void set_id(ObjectId _id) {
         this._id = _id;
     }
 

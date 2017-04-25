@@ -5,8 +5,8 @@ package Models;
  */
 public class Comment {
     private String text = null;
-
     private String user_id = null;
+
 
     public String getText() {
         return text;
