@@ -1,45 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
 
-<?import javafx.stage.Screen?>
+<GridPane alignment="center" gridLinesVisible="false" hgap="10.0" prefHeight="500" prefWidth="500" styleClass="root" stylesheets="@../css/BaseStyle.css" vgap="18.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.WelcomeController">
+    <!--<padding><Insets bottom="10" left="10" right="25" top="10" /></padding>-->
 
+    <Text id="welcome-text" text="Welcome" wrappingWidth="170.25" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+      <GridPane.margin>
+         <Insets left="-65.0" top="30.0" />
+      </GridPane.margin></Text>
 
+    <ImageView fitHeight="125.0" fitWidth="250.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <image>
+            <Image url="@../img/logoVH.png" />
+        </image>
+      <GridPane.margin>
+         <Insets left="-112.0" />
+      </GridPane.margin>
+    </ImageView>
 
-<GridPane fx:controller="Client.WelcomeController"
-          stylesheets="/Client/BaseStyle.css"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" styleClass="root"
-          prefHeight="500" prefWidth="750">
-    <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
-
-    <Text id="welcome-text" text="Welcome"
-          GridPane.columnIndex="0" GridPane.rowIndex="0"
-          GridPane.columnSpan="2"/>
-
-    <HBox spacing="10" alignment="center"
-          GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <Button text="Log In" defaultButton="true"
-                onAction="#handleLogIn" />
+    <HBox alignment="center" prefHeight="26.0" prefWidth="63.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="7">
+        <Button defaultButton="true" onAction="#handleLogIn" prefHeight="26.0" prefWidth="87.0" text="Log In" />
+      <GridPane.margin>
+         <Insets left="-10.0" />
+      </GridPane.margin>
     </HBox>
 
-    <HBox spacing="10" alignment="center"
-          GridPane.columnIndex="1" GridPane.rowIndex="6">
-        <Button text="Sign Up"
-                onAction="#handleSignUp" />
+    <HBox alignment="center" prefHeight="26.0" prefWidth="108.0" spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="7">
+        <Button onAction="#handleSignUp" text="Sign Up" />
+      <GridPane.margin>
+         <Insets />
+      </GridPane.margin>
+      <padding>
+         <Insets right="-40.0" />
+      </padding>
     </HBox>
 
-    <HBox spacing="10" alignment="center"
-          GridPane.columnIndex="1" GridPane.rowIndex="8">
-        <Button text="Exit"
-                onAction="#handleExit" />
+    <HBox alignment="center" spacing="10" GridPane.columnIndex="4" GridPane.rowIndex="13">
+        <Button styleClass="confirm" onAction="#handleExit" text="Exit" />
+      <GridPane.margin>
+         <Insets right="-45.0" />
+      </GridPane.margin>
     </HBox>
 
-    <HBox fx:id="actiontargetBox"
-          spacing="10" alignment="center"
-          GridPane.columnIndex="1" GridPane.rowIndex="10" >
-    <Text fx:id="actiontarget"/>
+    <HBox fx:id="actiontargetBox" alignment="center" spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="9">
+        <Text fx:id="actiontarget" />
     </HBox>
+   <Text id="small-text" layoutX="186.0" style="-fx-font-weight: bold" layoutY="200.0" text="Taking streaming everywhere" wrappingWidth="452.25" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <GridPane.margin>
+         <Insets left="42.0" top="-15.0" />
+      </GridPane.margin></Text>
+
+   <columnConstraints>
+      <ColumnConstraints maxWidth="117.0" minWidth="10.0" prefWidth="95.0" />
+      <ColumnConstraints maxWidth="159.0" minWidth="10.0" prefWidth="99.0" />
+      <ColumnConstraints maxWidth="152.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints maxWidth="183.0" minWidth="92.0" prefWidth="118.0" />
+      <ColumnConstraints maxWidth="95.0" minWidth="0.0" prefWidth="95.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints maxHeight="38.0" minHeight="38.0" prefHeight="38.0" />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 
 </GridPane>

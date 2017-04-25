@@ -1,66 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="center" hgap="10" vgap="10"
-          styleClass="root"
-          prefHeight="500" prefWidth="500"
-          stylesheets="/Client/BaseStyle.css"
-          xmlns:fx="http://javafx.com/fxml/1"
-          xmlns="http://javafx.com/javafx/null"
-          fx:controller="Client.MainMenuController">
-
+<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="500" styleClass="root" stylesheets="@../css/BaseStyle.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.MainMenuController">
     <padding><Insets bottom="10" left="10" right="10" top="10" /></padding>
 
-    <Text id="welcome-text" text="Menu" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
 
-    <HBox alignment="center" spacing="10" GridPane.rowIndex="2">
-        <Button onAction="#handleSearch" text="Search Videos" />
+    <Text id="welcome-text" text="Menu" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+
+    <ImageView fitHeight="50.0" fitWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <image>
+            <Image url="@../img/logoVH.png" />
+        </image>
+        <GridPane.margin>
+            <Insets top="-50.0" />
+        </GridPane.margin>
+    </ImageView>
+
+    <HBox alignment="center" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+
+
+    <HBox alignment="center" prefHeight="40.0" prefWidth="175.0" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="5">
+        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleLogout" prefHeight="28.0" prefWidth="82.0" styleClass="confirm" text="Logout" translateX="125.0" translateY="45.0" GridPane.columnSpan="2">
+            <GridPane.margin>
+                <Insets />
+            </GridPane.margin>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor></Button>
     </HBox>
 
-    <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
-        <Button onAction="#handleFeed" text="Feed" />
-    </HBox>
-
-    <HBox alignment="center" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="2">
-        <Button onAction="#handleWatchList" text="Watchlist" />
-    </HBox>
-
-    <HBox alignment="center" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="4">
-        <Button onAction="#handlePlaylists" text="Playlists" />
-    </HBox>
-
-    <HBox alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <Button onAction="#handleProfile" text="Profile" />
-    </HBox>
-
-    <HBox alignment="center" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="4">
-        <Button onAction="#handleLogout" text="Logout" />
-    </HBox>
-
-    <HBox fx:id="actiontargetBox" alignment="center" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="6">
+    <HBox fx:id="actiontargetBox" alignment="center" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="5">
         <Text fx:id="actiontarget" />
     </HBox>
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+    <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <items>
+            <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="83.0" prefHeight="275.0" prefWidth="123.0" style="-fx-background-color: #525760;">
+                <children>
+                    <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleProfile" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Profile" translateY="-12.0" AnchorPane.leftAnchor="2.0"/>
+                    <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="185.0" mnemonicParsing="false" onAction="#handlePlaylists" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Playlists" translateY="-8.0"/>
+                    <TextField layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="121.0" />
+                    <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleWatchList" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Watchlist" translateY="-2.0"/>
+                    <ImageView onMousePressed="#handleSearch" fitHeight="24.0" fitWidth="24.0" layoutX="100.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../img/lupaL.png" />
+                        </image>
+                  <cursor>
+                     <Cursor fx:constant="OPEN_HAND" />
+                  </cursor>
+                    </ImageView>
+                    <Separator layoutX="2.0" layoutY="124.0" prefHeight="15.0" prefWidth="120.0" />
+                    <Button alignment="BASELINE_LEFT" layoutX="12.0" layoutY="75.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="118.0" styleClass="feeds" text="All" translateX="-10.0" />
+                    <Button alignment="BASELINE_LEFT" layoutX="12.0" layoutY="102.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="118.0" styleClass="feeds" text="Subscribed" translateX="-10.0" />
+               <Text id="text-feed" layoutX="2.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feed" translateX="5.0" />
+                </children>
+            </AnchorPane>
+        </items>
+    </SplitPane>
+   <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+     <content>
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="249.0" prefWidth="281.0" style="-fx-background-color: #525760;" />
+     </content>
+   </ScrollPane>
+
+
+
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints maxWidth="125.0" minWidth="0.0" prefWidth="125.0" />
+        <ColumnConstraints maxWidth="300.0" minWidth="300.0" prefWidth="34.0" />
+        <ColumnConstraints maxWidth="26.0" minWidth="0.0" prefWidth="0.0" />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints maxHeight="250.0" minHeight="250.0" prefHeight="250.0" />
+        <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="40.0" />
+    </rowConstraints>
 
 
 

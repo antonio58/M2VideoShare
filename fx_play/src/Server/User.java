@@ -51,17 +51,6 @@ public class User {
         return false;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", channels=" + channels +
-                '}';
-    }
-
     public void setID(int i){ this.id = i;}
     public void setName(String n){ this.name = n;}
     public void setEmail(String n){ this.email = n;}

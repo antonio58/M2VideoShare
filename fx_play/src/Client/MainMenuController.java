@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,7 +34,7 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    protected void handleSearch(ActionEvent event) {
+    protected void handleSearch(javafx.scene.input.MouseEvent event) {
         actiontarget.setText("Search button pressed");
         actiontargetBox.setVisible(true);
     }

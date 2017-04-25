@@ -36,11 +36,11 @@ public class SignUpController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         actiontargetBox.setVisible(false);
-        userId.setPromptText("user");
-        password.setPromptText("password");
-        email.setPromptText("email");
-        cemail.setPromptText("confirm email");
-        cpassword.setPromptText("confirm password");
+        userId.setPromptText("User");
+        password.setPromptText("Password");
+        email.setPromptText("Email");
+        cemail.setPromptText("Confirm email");
+        cpassword.setPromptText("Confirm password");
     }
 
     @FXML
