@@ -42,7 +42,8 @@ public class MainMenuController implements Initializable {
     protected void handleFeed(ActionEvent event) {
         actiontarget.setText("Feed button pressed");
         actiontargetBox.setVisible(true);
-        application.openFeed();
+        String data = sc.getFeedAll(1);
+        application.openFeed(1, data);
     }
 
     @FXML

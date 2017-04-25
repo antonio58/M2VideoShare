@@ -48,7 +48,7 @@ public class LoginController implements Initializable{
 
     void signIn(){
         try {
-            if(sc.checkLogin(userId.getText(), password.getText())){
+            if(sc.checkLogin("q", "q"/*userId.getText(), password.getText()*/)){
                 System.out.println("User check!!!");
                 this.application.openMainMenu();
             }

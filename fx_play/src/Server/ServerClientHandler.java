@@ -18,11 +18,14 @@ public class ServerClientHandler implements Runnable {
     private int clientNumber;
     private String response;
     private ArrayList<User> users = new ArrayList<>();
+    ArrayList<Video> videos = new ArrayList<>();
 
-    public ServerClientHandler(Socket socketClient, int clientNumber, ArrayList<User> users) {
+
+    public ServerClientHandler(Socket socketClient, int clientNumber, ArrayList<User> users, ArrayList<Video> videos) {
         this.socketClient = socketClient;
         this.clientNumber = clientNumber;
         this.users = users;
+        this.videos = videos;
         System.out.println("\n New Client:\n"
                 + socketClient.getInetAddress() + " || " + socketClient.getPort()+"\n");
 
@@ -42,8 +45,17 @@ public class ServerClientHandler implements Runnable {
             while(true) {
                 //dos.writeUTF("\nWrite something");
                 dos.flush();
-                response = dis.readUTF();
-                System.out.println("(Client "+clientNumber+") Message Received: " + response);
+
+                response = new String();
+                boolean flag = true;
+                while(flag) {
+                    String part = dis.readUTF();
+                    System.out.println("(Client " + clientNumber + ") Message Received: " + part);
+                    response = response.concat(part);
+                    if(part.indexOf("<!end!>") == part.length()-7){
+                        flag = false;
+                    }
+                }
                 char b = response.charAt(0);
                 System.out.print("Frame type: "+b);
 
@@ -63,7 +75,7 @@ public class ServerClientHandler implements Runnable {
                             dos.writeUTF("ooooohhhh");
                         break;
 
-                    case 3:
+                    case (byte)3:
                         String str = getUserData(currentUserId);
                         dos.writeUTF(str);
                         break;
@@ -73,6 +85,11 @@ public class ServerClientHandler implements Runnable {
                             dos.writeUTF("check_4");
                         else
                             dos.writeUTF("ups...");
+                        break;
+
+                    case 5:
+                        String dataFA = getFeedAll(response);
+                        dos.writeUTF(dataFA);
                         break;
 
                 }
@@ -316,5 +333,55 @@ public class ServerClientHandler implements Runnable {
         System.out.println("registered");
 
         return flag;
+    }
+
+    public String getFeedAll(String s){
+        byte[] r = s.getBytes(StandardCharsets.UTF_8);
+
+        r[0] = (byte)videos.size();
+        byte[] page = new byte[4];
+        for(int i = 1; i<5; i++){
+            page[i-1] = r[i];
+            System.out.println(i+"u"+r[i]);
+        }
+
+        String message = new String();
+        for(Video v : videos){
+            String title = v.getTitle();
+            String author = v.getAuthor();
+
+            byte[] tb = ByteBuffer.allocate(4).putInt(title.length()+"</split/>".getBytes().length).array();
+            byte[] ab = ByteBuffer.allocate(4).putInt(author.length()+"!:split:!".getBytes().length).array();
+
+            byte[] header = new byte[9];
+            header[0] = (byte) 1;
+            for (int i = 1; i < 9; i++) {
+                if (i < 5) {
+                    header[i] = tb[i - 1];
+                } else {
+                    System.out.println(i + "a" + r[i]);
+                    header[i] = ab[i - 5];
+                }
+            }
+            String aux = title+ "</split/>" + author;
+            byte[] payload = aux.getBytes();
+
+            byte[] packet = new byte[payload.length + header.length];
+
+            for (int i = 0; i < packet.length; i++) {
+                if (i < header.length) {
+                    packet[i] = header[i];
+                } else {
+                    packet[i] = payload[i - header.length];
+                }
+                System.out.println(i + "-" + packet[i]);
+            }
+            String part = new String(packet);
+
+            message = message.concat(part+"!:split:!");
+        }
+
+
+        return message;
     }
 }
