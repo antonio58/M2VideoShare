@@ -1,7 +1,9 @@
 package Models;
 
+import ClientSide.DataHandle;
 import org.bson.types.ObjectId;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 /**
@@ -21,13 +23,13 @@ public class User {
 
     public User(){};
 
-    public User(String name, String email, ObjectId _id, ArrayList<Channel> channels, boolean premium, String hashPassword, String avatar, ArrayList<ObjectId> watchlist, ArrayList<ObjectId> watchedlist, ArrayList<Playlist> playlists) {
+    public User(String name, String email, ObjectId _id, ArrayList<Channel> channels, boolean premium, String hashPassword, String avatar, ArrayList<ObjectId> watchlist, ArrayList<ObjectId> watchedlist, ArrayList<Playlist> playlists) throws NoSuchAlgorithmException {
         this.name = name;
         this.email = email;
         this._id = _id;
         this.channels = channels;
         this.premium = premium;
-        this.hashPassword = hashPassword;
+        this.hashPassword = DataHandle.getSHA1Hex(hashPassword);
         this.avatar = avatar;
         this.watchlist = watchlist;
         this.watchedlist = watchedlist;

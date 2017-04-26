@@ -1,6 +1,10 @@
 package ServerSide;
 
+import ClientSide.DataHandle;
+import Models.Channel;
+import Models.Playlist;
 import Models.User;
+import org.bson.types.ObjectId;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -8,6 +12,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 /**
  * Created by fernando on 01-04-2017.
@@ -17,6 +23,13 @@ public class ServerClientHandler implements Runnable {
     private Socket socketClient;
     private int clientNumber;
     private String response;
+    private User self = new User();
+    private static ArrayList<ObjectId> watchlist = new ArrayList<>();
+    private static ArrayList<ObjectId> seenList = new ArrayList<>();
+    private static ArrayList<Channel> channelList = new ArrayList<>();
+    private static ArrayList<Playlist> playList = new ArrayList<>();
+    UserTasks userTasks = new UserTasks();
+
 
     public ServerClientHandler(Socket socketClient, int clientNumber) {
         this.socketClient = socketClient;
@@ -62,14 +75,14 @@ public class ServerClientHandler implements Runnable {
                         else
                             dos.writeUTF("nonono");
                         break;
-/*
+
                     case 2:
                         if(registerUser(response))
                             dos.writeUTF("check_2");
                         else
                             dos.writeUTF("ooooohhhh");
                         break;
-
+/*
                     case (byte)3:
                         String str = getUserData(currentUserId);
                         dos.writeUTF(str);
@@ -105,12 +118,14 @@ public class ServerClientHandler implements Runnable {
                 dos.flush();
             }  } catch (IOException e) {
             e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
 
     }
 
 
-    public int checkUser(String s){
+    public int checkUser(String s) throws NoSuchAlgorithmException {
         //User Frame
         byte[] r = s.getBytes(StandardCharsets.UTF_8);
 
@@ -156,5 +171,76 @@ public class ServerClientHandler implements Runnable {
 
         System.out.println("404");
         return id;
+    }
+
+    private boolean registerUser(String s) throws NoSuchAlgorithmException {
+
+        byte[] r = s.getBytes(StandardCharsets.UTF_8);
+
+        byte[] ul = new byte[4];
+        for(int i = 1; i<5; i++){
+            ul[i-1] = r[i];
+            System.out.println(i+"u"+r[i]);
+        }
+
+        byte[] pl = new byte[4];
+        for(int i = 5; i<9; i++){
+            pl[i-5] = r[i];
+            System.out.println(i+"p"+r[i]);
+        }
+        byte[] el = new byte[4];
+        for(int i= 9; i<13; i++ ){
+            el[i-9] = r[i];
+            System.out.println(i+"e"+r[i]);
+        }
+
+        int ull = ByteBuffer.wrap(ul).getInt();
+        int pll = ByteBuffer.wrap(pl).getInt();
+        int ell = ByteBuffer.wrap(el).getInt();
+        System.out.println("n: "+ull+" / "+pll+" / " +ell);
+
+        System.out.print("user: ");
+        byte[] userb = new byte[ull];
+        for(int i = 13; i<13+ull; i++){
+            userb[i-13] = r[i];
+            System.out.print((char)r[i]);
+        }
+        System.out.print("\npass: ");
+        byte[] passb = new byte[pll];
+        for(int i = 13+ull; i<13+ull+pll; i++){
+            passb[i-(13+ull)]= r[i];
+            System.out.print((char)r[i]);
+        }
+        System.out.print("\nemail: ");
+        byte[] emailb = new byte[ell];
+        for(int i = 13+ull+pll; i<13+ull+pll+ell; i++){
+            byte aux = r[i];
+            emailb[i-(13+ull+pll)] = aux;
+            System.out.print((char)r[i]);
+        }
+
+
+        String username = new String(userb);
+        String hash = new String(passb);
+        String email = new String (emailb);
+
+        String pHash = DataHandle.getSHA1Hex(hash);
+
+        System.out.println("\nuser: "+username+" / "+pHash+" / "+email);
+
+
+        User user = new User();
+        user.setPremium(false);
+        user.setName(username);
+        user.setEmail(email);
+        user.setChannels(channelList);
+        user.setWatchedlist(seenList);
+        user.setWatchlist(watchlist);
+        user.setPlaylists(playList);
+        user.setHashPassword(pHash);
+        userTasks = new UserTasks(user);
+        userTasks.addUser();
+        user.set_id(userTasks.getUserID());
+        return true;
     }
 }

@@ -6,6 +6,7 @@ import Models.User;
 import ServerSide.UserTasks;
 import org.bson.types.ObjectId;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,7 +21,7 @@ public class TEST_USERS {
     private static ArrayList<Channel> channelList = new ArrayList<>();
     private static ArrayList<Playlist> playList = new ArrayList<>();
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws NoSuchAlgorithmException {
 
         //TODO avatar stuff and hashing the password / sign
         user = populateUserModel(false, "Zé Foguetão", "etc/images/ava.png", "foguetao@hotmil.com", "@2123ewqfff");

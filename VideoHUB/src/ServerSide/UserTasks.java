@@ -11,6 +11,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -32,14 +33,19 @@ public class UserTasks {
     /**
      * Queries -'users'
      * */
+    public UserTasks(){
 
-    public void addUser(){
+    }
+
+
+    public void addUser() throws NoSuchAlgorithmException {
         LOGGER.info("Query: User added");
         Document document = new Document()
                 .append("name", user.getName())
                 .append("premium",user.isPremium())
                 .append("email",user.getEmail())
-                .append("creationDate", new Date());
+                .append("creationDate", new Date())
+                .append("hash",user.getHashPassword());
         mMongo.getCollection("users").insertOne(document);
     }
 

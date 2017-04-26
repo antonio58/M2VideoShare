@@ -16,6 +16,7 @@ public class ServerComm {
     int port = 3333;
     Socket socket = null;
     String host = "::1";
+//    String host = "2001:690:2280:827:200:ff:feaa:e";
     String outp;
     DataOutputStream dos;
     DataInputStream dis;
@@ -23,6 +24,7 @@ public class ServerComm {
     public ServerComm(){
         int port = 3333;
         Socket socket = null;
+//        String host = "2001:690:2280:827:200:ff:feaa:e";
         String host = "::1";
         dos = new DataOutputStream(null);
         dis = new DataInputStream(null);
@@ -107,10 +109,10 @@ public class ServerComm {
         String reply = talk(message);
 
         if (reply.equals("check_1")){
-            System.out.println("true true");
+//            System.out.println("true true");
             return true;
         }
-        System.out.println("oh noooooo");
+//        System.out.println("oh noooooo");
         return false;
     }
 
@@ -151,10 +153,10 @@ public class ServerComm {
         String reply = talk(message);
 
         if (reply.equals("check_2")){
-            System.out.println("true dat");
+//            System.out.println("true dat");
             return true;
         }
-        System.out.println("shiet");
+//        System.out.println("shiet");
         return false;
     }
 
@@ -246,7 +248,7 @@ public class ServerComm {
             System.out.println("true dat");
             return true;
         }
-        System.out.println("shiet");
+//        System.out.println("shiet");
         return false;
 
     }
