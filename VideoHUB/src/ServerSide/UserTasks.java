@@ -26,6 +26,10 @@ public class UserTasks {
 
     private MongoSide mMongo = new MongoSide();
     private User user;
+
+    public UserTasks(){
+    }
+
     public UserTasks(User mUser){
     this.user = mUser;
     }
@@ -45,7 +49,11 @@ public class UserTasks {
                 .append("premium",user.isPremium())
                 .append("email",user.getEmail())
                 .append("creationDate", new Date())
+<<<<<<< HEAD
                 .append("hash",user.getHashPassword());
+=======
+                .append("hash", user.getHashPassword());
+>>>>>>> 4103b2e878aaca6131ee7a2b1050dead1f4abf11
         mMongo.getCollection("users").insertOne(document);
     }
 
@@ -69,8 +77,6 @@ public class UserTasks {
 
         mMongo.getCollection("users").updateOne(query, updateObj);
     }
-
-
 
     //Adds new object to seen videos list
     public void setWatchlist(String parameter, ObjectId value, ObjectId video_id){

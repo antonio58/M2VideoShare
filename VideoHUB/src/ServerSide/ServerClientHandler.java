@@ -1,6 +1,9 @@
 package ServerSide;
 
+<<<<<<< HEAD
 import ClientSide.DataHandle;
+=======
+>>>>>>> 4103b2e878aaca6131ee7a2b1050dead1f4abf11
 import Models.Channel;
 import Models.Playlist;
 import Models.User;
@@ -12,7 +15,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+<<<<<<< HEAD
 import java.security.NoSuchAlgorithmException;
+=======
+>>>>>>> 4103b2e878aaca6131ee7a2b1050dead1f4abf11
 import java.util.ArrayList;
 
 /**
@@ -23,13 +29,19 @@ public class ServerClientHandler implements Runnable {
     private Socket socketClient;
     private int clientNumber;
     private String response;
+<<<<<<< HEAD
     private User self = new User();
+=======
+>>>>>>> 4103b2e878aaca6131ee7a2b1050dead1f4abf11
     private static ArrayList<ObjectId> watchlist = new ArrayList<>();
     private static ArrayList<ObjectId> seenList = new ArrayList<>();
     private static ArrayList<Channel> channelList = new ArrayList<>();
     private static ArrayList<Playlist> playList = new ArrayList<>();
     UserTasks userTasks = new UserTasks();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4103b2e878aaca6131ee7a2b1050dead1f4abf11
 
     public ServerClientHandler(Socket socketClient, int clientNumber) {
         this.socketClient = socketClient;
@@ -75,7 +87,10 @@ public class ServerClientHandler implements Runnable {
                         else
                             dos.writeUTF("nonono");
                         break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4103b2e878aaca6131ee7a2b1050dead1f4abf11
                     case 2:
                         if(registerUser(response))
                             dos.writeUTF("check_2");
@@ -166,14 +181,19 @@ public class ServerClientHandler implements Runnable {
         User user = new User();
         user.setName(username);
         user.setHashPassword(password);
+        /*
         UserTasks userTasks = new UserTasks(user);
         userTasks.addUser();
-
+*       */
         System.out.println("404");
         return id;
     }
 
+<<<<<<< HEAD
     private boolean registerUser(String s) throws NoSuchAlgorithmException {
+=======
+    private boolean registerUser(String s){
+>>>>>>> 4103b2e878aaca6131ee7a2b1050dead1f4abf11
 
         byte[] r = s.getBytes(StandardCharsets.UTF_8);
 
@@ -224,9 +244,13 @@ public class ServerClientHandler implements Runnable {
         String hash = new String(passb);
         String email = new String (emailb);
 
+<<<<<<< HEAD
         String pHash = DataHandle.getSHA1Hex(hash);
 
         System.out.println("\nuser: "+username+" / "+pHash+" / "+email);
+=======
+        System.out.println("\nuser: "+username+" / "+hash+" / "+email);
+>>>>>>> 4103b2e878aaca6131ee7a2b1050dead1f4abf11
 
 
         User user = new User();
@@ -237,7 +261,11 @@ public class ServerClientHandler implements Runnable {
         user.setWatchedlist(seenList);
         user.setWatchlist(watchlist);
         user.setPlaylists(playList);
+<<<<<<< HEAD
         user.setHashPassword(pHash);
+=======
+        user.setHashPassword(hash);
+>>>>>>> 4103b2e878aaca6131ee7a2b1050dead1f4abf11
         userTasks = new UserTasks(user);
         userTasks.addUser();
         user.set_id(userTasks.getUserID());
