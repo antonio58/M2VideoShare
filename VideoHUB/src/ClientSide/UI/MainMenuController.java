@@ -70,6 +70,7 @@ public class MainMenuController implements Initializable {
     private byte feedType;
     private Main application;
     private ServerComm sc;
+    String[] Videos;
 
     public void setApp(Main application, ServerComm sc, int p, String data, byte fT){
         this.application = application;
@@ -78,6 +79,7 @@ public class MainMenuController implements Initializable {
         this.feedType = fT;
         String[] aux = data.split("!:split:!");
         System.out.println("data: "+data+"\nlength: "+aux.length);
+        Videos = aux;
 
 
 
@@ -206,14 +208,6 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    protected void handleFeed(ActionEvent event) {
-        actiontarget.setText("Feed button pressed");
-        actiontargetBox.setVisible(true);
-        String data = sc.getFeed(1, (byte)5);
-        application.openMainMenu(1, data, (byte)5);
-    }
-
-    @FXML
     protected void handleWatchList(ActionEvent event) {
         actiontarget.setText("Watchlist button pressed");
         actiontargetBox.setVisible(true);
@@ -245,6 +239,8 @@ public class MainMenuController implements Initializable {
     protected void handleStream(MouseEvent event) {
         actiontarget.setText("Stream button pressed");
         actiontargetBox.setVisible(true);
-        application.openStream();
+        String id = ((ImageView)event.getSource()).getId();
+        int i = Integer.parseInt(id);
+        application.openStream(Videos[i-1]);
     }
 }

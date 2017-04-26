@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<GridPane alignment="center" hgap="10" prefHeight="600" prefWidth="1000" styleClass="root" stylesheets="@../css/BaseStyle.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.ProfileController">
+<GridPane alignment="center" hgap="10" prefHeight="600" prefWidth="1000" styleClass="root" stylesheets="@../css/BaseStyle.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientSide.UI.ProfileController">
     <padding>
         <Insets bottom="10" left="25" right="25" top="25" />
     </padding>

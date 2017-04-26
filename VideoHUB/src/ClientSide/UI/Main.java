@@ -117,10 +117,22 @@ public class Main extends Application {
         }
     }
 
-    public void openStream(){
+    public void openStream(String data){
         try {
             StreamController stream = (StreamController) replaceSceneContent("../UI/fxml/Stream.fxml");
-            stream.setApp(this, this.sc);
+            stream.setApp(this, this.sc, data);
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void openPlayer(GridPane grid){
+        try {
+            VideoPlayer video = new VideoPlayer();
+            Stage stage = new Stage();
+            video.start(stage, grid);
+            grid.setDisable(true);
+            stage.setAlwaysOnTop(true);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
