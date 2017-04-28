@@ -1,0 +1,104 @@
+.root {
+    -fx-background-image: url("/img/fundo.jpg");
+    /*-fx-background-color: linear-gradient(to bottom right, lightgray, gray);*/
+}
+
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Medium.ttf');
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    /*-fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );*/
+}
+
+
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: 200;
+    /*-fx-background-color: linear-gradient(lightgray, gray);*/
+    -fx-background-color: #82abed;
+    /*-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );*/
+}
+
+.button:hover {
+    -fx-background-color: #336ecc;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.big{
+    -fx-min-width: 100px;
+    -fx-min-height: 40px;
+    -fx-background-color: #FB9E03;
+    -fx-border-color: #000000;
+    -fx-font-weight: bold;
+}
+
+.confirm {
+    -fx-font-weight: bold;
+    -fx-background-color: #FB9E03;
+    -fx-border-color: #000000;
+}
+
+.feeds {
+    -fx-font-size: 10px;
+    -fx-text-fill: #FB9E03;
+    -fx-background-color: #525760;
+}
+
+.menu {
+    -fx-text-fill: #FB9E03;
+    -fx-background-color: #525760;
+}
+
+.avatar {
+    -fx-font-size: 10px;
+}
+
+.info {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-color: #ffffff;
+}
+
+#welcome-text {
+   -fx-font-size: 32px;
+   -fx-font-family: "Roboto";
+   -fx-fill: #ffffff;
+   /*-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
+}
+
+#small-text {
+    -fx-font-size: 10px;
+    -fx-font-style: italic;
+    -fx-font-family: "Roboto";
+    -fx-fill: #ffffff;
+    /*-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
+}
+
+#text-feed {
+    -fx-font-size: 15px;
+    -fx-font-family: "Roboto";
+    -fx-fill: #ffffff;
+    /*-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
+}
+
+
+#actiontarget {
+   -fx-fill: FIREBRICK;
+   -fx-font-weight: bold;
+   -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+ }
+
+ /*#actiontargetBox {
+   -fx-background-color : FIREBRICK;
+ }*/

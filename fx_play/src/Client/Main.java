@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 public class Main extends Application {
 
@@ -39,7 +40,7 @@ public class Main extends Application {
         openErrorScreen(null);
         primaryStage.setResizable(false);
         primaryStage.setTitle("VideoHub");
-        primaryStage.setScene(new Scene(root, 750, 500));
+        primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.show();
         reallyStart();
     }
@@ -97,10 +98,10 @@ public class Main extends Application {
         }
     }
 
-    public void openMainMenu(){
+    public void openMainMenu(int p, String data, byte b){
         try {
             MainMenuController mainMenu = (MainMenuController) replaceSceneContent("MainMenu.fxml");
-            mainMenu.setApp(this, this.sc);
+            mainMenu.setApp(this, this.sc, p, data, b);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -115,15 +116,15 @@ public class Main extends Application {
         }
     }
 
-    public void openFeed(int p, String data, byte b){
+    public void openStream(){
         try {
-            FeedController feed = (FeedController) replaceSceneContent("Feed.fxml");
-            feed.setApp(this, this.sc, p, data, b);
+            StreamController stream = (StreamController) replaceSceneContent("Stream.fxml");
+            stream.setApp(this, this.sc);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
+
 
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
