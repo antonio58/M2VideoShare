@@ -10,25 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e1c71ac-7cf6-4ac2-920e-d28e975834bf" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/Client.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/Client.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/Profile.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/dataHandle.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ServerSide/Server.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ServerSide/ServerClientHandler.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/ServerComm.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/ServerComm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/LoginController.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/LoginController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/Main.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/MainMenuController.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/MainMenuController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/StreamController.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/StreamController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/Models/User.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/Models/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ServerSide/ServerClientHandler.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ServerSide/ServerClientHandler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ServerSide/UserTasks.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ServerSide/UserTasks.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/TESTS/TEST_USERS.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/TESTS/TEST_USERS.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mongoSettings.xml" afterPath="$PROJECT_DIR$/.idea/mongoSettings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/fxml/MainMenu.fxml" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/fxml/MainMenu.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/fxml/Stream.fxml" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/fxml/Stream.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,8 +40,8 @@
       <file leaf-file-name="ServerClientHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ServerSide/ServerClientHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="52" lean-forward="true" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+            <state relative-caret-position="195">
+              <caret line="26" column="52" lean-forward="false" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,8 +55,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+            <state relative-caret-position="270">
+              <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -97,6 +79,32 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/.." source="origin/rafa" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/.." source="origin/master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -178,7 +186,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -309,7 +317,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -324,7 +332,7 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="SearchEverywhereHistoryKey" value="mongo&#9;ACTION&#9;ActivateMongoExplorerToolWindow" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/MIETI/4º ano/TSM/Projeto" />
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
@@ -623,12 +631,21 @@
       <workItem from="1493176803794" duration="7201000" />
       <workItem from="1493204184406" duration="18000" />
       <workItem from="1493210913837" duration="213000" />
-      <workItem from="1493282570622" duration="443000" />
+      <workItem from="1493282570622" duration="878000" />
+      <workItem from="1493369775285" duration="93000" />
     </task>
+    <task id="LOCAL-00001" summary="Versão mais atual do projeto:&#10;-&gt; Ficheiros .fxml atualizados;&#10;-&gt; Ficheiros desnecessários (.class) eliminados;&#10;-&gt; Hash da password.">
+      <created>1493283181740</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1493283181740</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82602000" />
+    <option name="totallyTimeSpent" value="83130000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -713,6 +730,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Versão mais atual do projeto:&#10;-&gt; Ficheiros .fxml atualizados;&#10;-&gt; Ficheiros desnecessários (.class) eliminados;&#10;-&gt; Hash da password." />
+    <option name="LAST_COMMIT_MESSAGE" value="Versão mais atual do projeto:&#10;-&gt; Ficheiros .fxml atualizados;&#10;-&gt; Ficheiros desnecessários (.class) eliminados;&#10;-&gt; Hash da password." />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="8" />
@@ -728,9 +749,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -738,9 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="16" column="42" lean-forward="false" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -765,9 +780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -775,9 +787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -785,9 +794,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="27" column="36" lean-forward="false" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -806,9 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="27" column="36" lean-forward="false" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -827,9 +830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="25" column="36" lean-forward="false" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -848,9 +848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -888,9 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -916,13 +910,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerSide/ServerClientHandler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerSide/ServerClientHandler.class" />
     <entry file="file://$PROJECT_DIR$/src/ClientSide/Client.java" />
     <entry file="file://$PROJECT_DIR$/src/Models/Delivery.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -994,7 +982,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1002,7 +989,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="39" column="43" lean-forward="false" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1010,7 +996,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1665">
           <caret line="126" column="5" lean-forward="false" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1018,10 +1003,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="825">
           <caret line="80" column="27" lean-forward="false" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
-          <folding>
-            <element signature="e#1958#1959#0" expanded="true" />
-            <element signature="e#1993#1994#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1029,20 +1010,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="43" column="43" lean-forward="false" selection-start-line="43" selection-start-column="43" selection-end-line="43" selection-end-column="43" />
-          <folding>
-            <marker date="1493203452066" expanded="true" signature="2269:2805" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="2931:3468" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="3537:4103" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="4213:5032" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="5175:6815" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="6923:8317" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="8386:8968" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="9033:9919" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="10007:10959" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="11071:11657" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="11756:12863" ph="{...}" />
-            <marker date="1493203452066" expanded="true" signature="12478:12711" ph="//..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1050,7 +1017,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
           <caret line="64" column="9" lean-forward="false" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,9 +1024,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="27" column="10" lean-forward="false" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1068,9 +1031,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
           <caret line="56" column="28" lean-forward="false" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1078,9 +1038,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1088,9 +1045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
           <caret line="42" column="5" lean-forward="false" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1098,7 +1052,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1106,14 +1059,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-108">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ServerSide/ServerClientHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="52" lean-forward="true" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+        <state relative-caret-position="195">
+          <caret line="26" column="52" lean-forward="false" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1125,8 +1077,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+        <state relative-caret-position="270">
+          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
           <folding />
         </state>
       </provider>
