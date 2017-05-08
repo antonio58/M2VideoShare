@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
 <GridPane alignment="center" hgap="10" prefHeight="600.0" prefWidth="1000" styleClass="root" stylesheets="@../css/BaseStyle.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientSide.UI.MainMenuController">
     <padding><Insets bottom="10" left="10" right="10" top="10" /></padding>
 
     <ImageView fitHeight="65.0" fitWidth="123.0" translateY="35.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <image>
-            <Image url="../img/logoVH.png" />
+            <Image url="@../img/logoVH.png" />
         </image>
         <GridPane.margin>
             <Insets top="-50.0" />
@@ -51,8 +61,8 @@
                   </cursor>
                     </ImageView>
                     <Separator layoutX="2.0" layoutY="124.0" prefHeight="15.0" prefWidth="120.0" />
-                    <Button alignment="BASELINE_LEFT" layoutX="12.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleSubmitFAll" prefHeight="22.0" prefWidth="118.0" styleClass="feeds" text="All" translateX="-10.0" />
-                    <Button alignment="BASELINE_LEFT" layoutX="12.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleSubmitFSub" prefHeight="22.0" prefWidth="118.0" styleClass="feeds" text="Subscribed" translateX="-10.0" />
+                    <Button alignment="BASELINE_LEFT" layoutX="12.0" layoutY="75.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="118.0" styleClass="feeds" onAction="#handleSubmitFAll" text="All" translateX="-10.0" />
+                    <Button alignment="BASELINE_LEFT" layoutX="12.0" layoutY="102.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="118.0" styleClass="feeds" onAction="#handleSubmitFSub" text="Subscribed" translateX="-10.0" />
                <Text id="text-feed" layoutX="2.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feed" translateX="5.0" />
                 </children>
             </AnchorPane>
@@ -93,7 +103,7 @@
                      <padding>
                          <Insets bottom="2" top="15" />
                      </padding>
-                     <ImageView fx:id="img1" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="1" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                          <image>
                              <Image url="@../img/pepe" />
                          </image>
@@ -115,7 +125,7 @@
                      <padding>
                          <Insets bottom="2" top="20" />
                      </padding>
-                     <ImageView fx:id="img2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="3.0">
+                     <ImageView fx:id="2" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="3.0">
                          <image>
                              <Image url="@../img/frank" />
                          </image>
@@ -136,7 +146,7 @@
                      <padding>
                          <Insets bottom="2" top="20" />
                      </padding>
-                     <ImageView fx:id="img3" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="3" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                          <image>
                              <Image url="@../img/spongebob" />
                          </image>
@@ -157,7 +167,7 @@
                      <padding>
                          <Insets bottom="2" top="2" />
                      </padding>
-                     <ImageView fx:id="img4" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="15.0">
+                     <ImageView fx:id="4" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="15.0">
                          <image>
                              <Image url="@../img/pepe" />
                          </image>
@@ -178,7 +188,7 @@
                      <padding>
                          <Insets bottom="2" top="2" />
                      </padding>
-                     <ImageView fx:id="img5" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="15.0">
+                     <ImageView fx:id="5" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="15.0">
                          <image>
                              <Image url="@../img/spongebob" />
                          </image>
@@ -199,7 +209,7 @@
                      <padding>
                          <Insets bottom="2" top="2" />
                      </padding>
-                     <ImageView fx:id="img6" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="15.0">
+                     <ImageView fx:id="6" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="15.0">
                          <image>
                              <Image url="@../img/spongebob" />
                          </image>
@@ -220,7 +230,7 @@
                      <padding>
                          <Insets bottom="2" top="2" />
                      </padding>
-                     <ImageView fx:id="img7" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="13.0">
+                     <ImageView fx:id="7" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="13.0">
                          <image>
                              <Image url="@../img/spongebob" />
                          </image>
@@ -241,7 +251,7 @@
                      <padding>
                          <Insets bottom="2" top="2" />
                      </padding>
-                     <ImageView fx:id="img8" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="8" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                          <image>
                              <Image url="@../img/spongebob" />
                          </image>
@@ -262,7 +272,7 @@
                      <padding>
                          <Insets bottom="2" top="2" />
                      </padding>
-                     <ImageView fx:id="img9" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="9" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                          <image>
                              <Image url="@../img/spongebob" />
                          </image>
@@ -283,7 +293,7 @@
                      <padding>
                          <Insets bottom="2" top="2" />
                      </padding>
-                     <ImageView fx:id="img10" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="10" onMouseClicked="#handleStream" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                          <image>
                              <Image url="@../img/spongebob" />
                          </image>
