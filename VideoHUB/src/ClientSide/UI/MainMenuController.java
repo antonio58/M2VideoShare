@@ -239,7 +239,7 @@ public class MainMenuController implements Initializable {
     protected void handleStream(MouseEvent event) {
         actiontarget.setText("Stream button pressed");
         actiontargetBox.setVisible(true);
-        String id = ((ImageView)event.getSource()).getId();
+        String id = ((GridPane)event.getSource()).getId();
         int i = Integer.parseInt(id);
         application.openStream(Videos[i-1]);
     }
