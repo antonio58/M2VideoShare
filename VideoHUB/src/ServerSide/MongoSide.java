@@ -21,6 +21,7 @@ public class MongoSide {
     private MongoDatabase database = null;
     private MongoCollection<Document> collection = null;
 
+
     public MongoSide(){
         mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
         database = connectDB();
@@ -45,6 +46,10 @@ public class MongoSide {
 
         MongoCollection<Document> collection = database.getCollection(str);
         return collection;
+    }
+
+    public MongoDatabase getDB(){
+        return this.database;
     }
 
     //Set collection first!
