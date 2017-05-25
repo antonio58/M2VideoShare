@@ -24,12 +24,14 @@ public class ServerClientHandler implements Runnable {
     private Socket socketClient;
     private int clientNumber;
     private String response;
-    private User self = new User();
     private static ArrayList<ObjectId> watchlist = new ArrayList<>();
     private static ArrayList<ObjectId> seenList = new ArrayList<>();
     private static ArrayList<Channel> channelList = new ArrayList<>();
     private static ArrayList<Playlist> playList = new ArrayList<>();
-    UserTasks userTasks = new UserTasks();
+    private ArrayList<ObjectId> tempIDs = new ArrayList<>();
+    private UserTasks userTasks = new UserTasks();
+    private VideoTasks videoTasks = new VideoTasks();
+    private User self = new User();
 
 
     public ServerClientHandler(Socket socketClient, int clientNumber) {
@@ -50,7 +52,6 @@ public class ServerClientHandler implements Runnable {
                     socketClient.getInputStream());
 
             dos.writeUTF("Welcome Client number " + clientNumber);
-            int currentUserId = 0;
             dos.flush();
             while (true) {
                 //dos.writeUTF("\nWrite something");
@@ -70,8 +71,6 @@ public class ServerClientHandler implements Runnable {
 
                 switch (b) {
                     case 1:
-                        ;
-                        //readFrame(response);
                         if (checkUser(response))
                             dos.writeUTF("check_1");
                         else
@@ -89,31 +88,31 @@ public class ServerClientHandler implements Runnable {
                         }
                         break;
 
-                    case (byte) 3:
-                        String str = getUserData(currentUserId);
+                    case 3:
+                        String str = getUserData();
                         dos.writeUTF(str);
                         break;
 
                     case 4:
-                        if (updateProfile(response, currentUserId))
+                        if (updateProfile(response, userTasks.getUserID()))
                             dos.writeUTF("check_4");
                         else
                             dos.writeUTF("ups...");
                         break;
 
                     case 5:
-                        String dataFA = getFeed(response, true);
+                        String dataFA = getFeed(response);
                         dos.writeUTF(dataFA);
                         break;
 
                     case 6:
-                        String dataFS = getFeed(response, false);
+                        String dataFS = getFeed(response);
                         dos.writeUTF(dataFS);
                         break;
 
                     case 7:
-                        //String results = getSearchResults(response);
-                        //dos.writeUTF(results);
+                        String results = getSearchResults(response);
+                        dos.writeUTF(results);
                         break;
 
                 }
@@ -228,8 +227,6 @@ public class ServerClientHandler implements Runnable {
         String username = fields.get(0);
         String password = fields.get(1);
         int id = 0;
-
-        /********************/
         //Pesquisar em por utilizador utilizando o nome e verificar se a pass é igual
         //retorna o id
         System.out.println("user: " + username + " / " + password);
@@ -238,9 +235,10 @@ public class ServerClientHandler implements Runnable {
         user.setEmail(username);
         user.setHashPassword(password);
 
-        UserTasks userTasks = new UserTasks(user);
+        userTasks = new UserTasks(user);
 
         if(userTasks.checkUser()){
+            self = userTasks.user;
             return true;
 
         }
@@ -282,14 +280,16 @@ public class ServerClientHandler implements Runnable {
     }
 
     //Obter informações para página de profile
-    private String getUserData(int id) {
-        User user = new User();
+    private String getUserData() {
+        userTasks.getUserID();
+        userTasks.getUserInfo();
 
-
+        System.out.println("getUserData(): self: " + self.toString());
         //Obter nome e email do user
-        String userN = user.getName();
-        String email = user.getEmail();
+        String userN = self.getName();
+        String email = self.getEmail();
 
+        System.out.println("getUserData(): self: " + self.toString());
         String[] fields = {userN, email};
         String message = buildFrame((byte) 0, fields);
 
@@ -297,9 +297,7 @@ public class ServerClientHandler implements Runnable {
     }
 
     //Actualizar Perfil
-    private boolean updateProfile(String s, int id) {
-        User user = new User();
-
+    private boolean updateProfile(String s, ObjectId id) {
         List<String> fields = readFrame(s);
 
         //Valores para actualizar no perfil em que verifica se têm conteúdo ou vieram vazios
@@ -309,38 +307,43 @@ public class ServerClientHandler implements Runnable {
         String email = fields.get(2);
 
         if (!userN.equals(""))
-            user.setName(userN);
+            self.setName(userN);
+            userTasks.updateUser("_id", self.get_id(), "name", self.getName());
+
 
         if (!password.equals(""))
-            user.setHashPassword(password);
+            self.setHashPassword(password);
+            userTasks.updateUser("_id", self.get_id(), "hash", self.getHashPassword());
+
 
         if (!email.equals(""))
-            user.setEmail(email);
+            self.setEmail(email);
+            userTasks.updateUser("_id", self.get_id(), "email", self.getEmail());
+
 
         System.out.println("\nuser: " + userN + " / " + password + " / " + email);
 
-        System.out.println("registered");
 
         return true;
     }
 
     //Obter informação para fazer o feed. Boolean all identifica o tipo de feed
-    public String getFeed(String s, boolean all) {
-        VideoTasks videoTasks = new VideoTasks();
+    public String getFeed(String s) {
         List<String> auxList = readFrame(s);
 
         int VideoIndexStart = (Integer.parseInt(auxList.get(0)) - 1) * 10;
 
         //substituir videos por numero de videos na base de dados
         int nVideos = videoTasks.getNumberOfVideos();
+        //System.out.println("getFeed() nVideos size: " + nVideos);
 
         if (nVideos < 1 || nVideos < VideoIndexStart) {
             String[] auxArray = {"No videos"};
             return buildFrame((byte) 0, auxArray);
         }
 
-        ArrayList<ObjectId> tempIDs = new ArrayList<>();
         tempIDs = videoTasks.getIds();
+        //System.out.println("getFeed() tempID size: " + tempIDs.size() + " " + videoTasks.getIds().size());
 
         List<String> fieldList = new ArrayList<>();
 
@@ -351,6 +354,7 @@ public class ServerClientHandler implements Runnable {
             Video v = videoTasks.getVideoByIndex(tempIDs.get(i));
             fieldList.add(v.getName());
             fieldList.add(v.getAuthor());
+            System.out.println("Name/Author: "+v.getName()+"/"+v.getAuthor());
         }
 
         String[] fieldArray = new String[fieldList.size()];
@@ -359,32 +363,33 @@ public class ServerClientHandler implements Runnable {
         return buildFrame((byte) 0, fieldArray);
     }
 
-    /*
     //Pesquisa
     private String getSearchResults(String query) {
 
         System.out.println("getSearchResults.query: " + query);
-
         List<String> auxList = readFrame(query);
         String data = auxList.get(0);
-
-        System.out.println("(449)data: " + data);
-
-
+        //System.out.println("(449)data: " + data);
         String[] keywords = data.split(" ");
+        tempIDs = videoTasks.getIds();
+        ArrayList<Video> allVideos = new ArrayList<>();
 
-
+        for (int i = 0 ; i < tempIDs.size(); i++) {
+            //System.out.println("getSearchResults() tempID size: " + tempIDs.size());
+            allVideos.add(videoTasks.getVideoByIndex(tempIDs.get(i)));
+        }
         //Pesquisa na base de dados videos com a ocorrência das keywords no titulo, autor e tags
         //No fim há uma lista de videos
         ArrayList<Video> temp = new ArrayList<>();
 
-        for (Video v : videos) {
-            String title = v.getTitle().toLowerCase();
+        for (Video v : allVideos) {
+            String title = v.getName().toLowerCase();
             String author = v.getAuthor().toLowerCase();
-            String tags = v.getTags().toString().toLowerCase();
+            //String tags = v.getTags().toString().toLowerCase();
+            //System.out.println("getSearchResults() : " + v.toString());
             for (String s : keywords) {
                 s = s.toLowerCase();
-                if (!temp.contains(v) && (title.contains(s) || tags.contains(s) || author.contains(s)))
+                if (!temp.contains(v) && (title.contains(s) || author.contains(s)))
                     temp.add(v);
             }
         }
@@ -395,7 +400,7 @@ public class ServerClientHandler implements Runnable {
         //Adiciona a uma List<String> os parametros dos videos
         auxList = new ArrayList<>();
         for (Video v : temp) {
-            auxList.add(v.getTitle());
+            auxList.add(v.getName());
             auxList.add(v.getAuthor());
         }
 
@@ -404,5 +409,5 @@ public class ServerClientHandler implements Runnable {
 
         return buildFrame((byte) 0, fieldArray);
 
-    }*/
+    }
 }

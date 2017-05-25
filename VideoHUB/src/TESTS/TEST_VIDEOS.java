@@ -23,7 +23,7 @@ public class TEST_VIDEOS {
         comments = populateComments();
         likes = populateLikes();
 /*
-        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Animais","20:40", tags,"BBC Vida Selvagem episódio x.25", false, 404, comments, likes);
+        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Animais","20:40", tags,"BBC Vida Selvagem episodio x.25", false, 404, comments, likes);
         VideoTasks videoTasks = new VideoTasks(video);
         videoTasks.addVideo();
         video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Viagens","4:20", tags,"Amazing trip to Panoias", false, 123, comments, likes);
@@ -36,7 +36,7 @@ public class TEST_VIDEOS {
         }
 */
         VideoTasks videotasks = new VideoTasks();
-        videotasks.getVideoByIndex(new ObjectId("592616d51fb2bf7b4b697b9a"));
+        videotasks.getVideoByIndex(new ObjectId("5926b8aa1fb2bf1950db0f84"));
     }
 
     private static Video populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags, String name, boolean bool, int views, ArrayList<Comment> comments, ArrayList<String> likes){

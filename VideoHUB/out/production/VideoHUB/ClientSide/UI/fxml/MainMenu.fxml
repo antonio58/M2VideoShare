@@ -94,7 +94,7 @@
                    <RowConstraints />
                </rowConstraints>-->
 
-                 <GridPane fx:id="1" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="0">
+                 <GridPane fx:id="grid1" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="0">
                      <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -116,7 +116,7 @@
                      </columnConstraints>
                  </GridPane>
 
-                 <GridPane fx:id="2" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="1">
+                 <GridPane fx:id="grid2" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="1">
                      <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -138,7 +138,7 @@
                      </columnConstraints>
                  </GridPane>
 
-                 <GridPane fx:id="3" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0"  GridPane.rowIndex="2">
+                 <GridPane fx:id="grid3" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0"  GridPane.rowIndex="2">
                      <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -159,7 +159,7 @@
                      </columnConstraints>
                  </GridPane>
 
-                 <GridPane fx:id="4" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0"  GridPane.rowIndex="3">
+                 <GridPane fx:id="grid4" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0"  GridPane.rowIndex="3">
                      <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -180,7 +180,7 @@
                      </columnConstraints>
                  </GridPane>
 
-                 <GridPane fx:id="5" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="4">
+                 <GridPane fx:id="grid5" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="4">
                      <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -201,7 +201,7 @@
                      </columnConstraints>
                  </GridPane>
 
-                 <GridPane fx:id="6" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="5">
+                 <GridPane fx:id="grid6" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="5">
                      <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -222,7 +222,7 @@
                      </columnConstraints>
                  </GridPane>
 
-                 <GridPane fx:id="7" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="6">
+                 <GridPane fx:id="grid7" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="6">
                      <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -243,7 +243,7 @@
                      </columnConstraints>
                  </GridPane>
 
-                 <GridPane fx:id="8" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="7">
+                 <GridPane fx:id="grid8" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="7">
                      <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -264,7 +264,7 @@
                      </columnConstraints>
                  </GridPane>
 
-                 <GridPane fx:id="9" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="8">
+                 <GridPane fx:id="grid9" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="8">
                      <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -285,7 +285,7 @@
                      </columnConstraints>
                  </GridPane>
 
-                 <GridPane fx:id="10" onMouseClicked="#handleStream" maxHeight="60"  maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="9">
+                 <GridPane fx:id="grid10" onMouseClicked="#handleStream" maxHeight="60"  maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="9">
                      <rowConstraints>
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

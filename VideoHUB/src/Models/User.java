@@ -1,10 +1,9 @@
 package Models;
 
-import ClientSide.DataHandle;
 import org.bson.types.ObjectId;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by fernando on 21-04-2017.
@@ -13,6 +12,7 @@ public class User {
     String name = null;
     String email = null;
     ObjectId _id = null;
+    Date date = null;
     ArrayList<Channel> channels = null;
     boolean premium = false;
     String hashPassword = null;
@@ -23,13 +23,14 @@ public class User {
 
     public User(){};
 
-    public User(String name, String email, ObjectId _id, ArrayList<Channel> channels, boolean premium, String hashPassword, String avatar, ArrayList<ObjectId> watchlist, ArrayList<ObjectId> watchedlist, ArrayList<Playlist> playlists) throws NoSuchAlgorithmException {
+    public User(String name, String email, ObjectId _id, Date date, ArrayList<Channel> channels, boolean premium, String hashPassword, String avatar, ArrayList<ObjectId> watchlist, ArrayList<ObjectId> watchedlist, ArrayList<Playlist> playlists) {
         this.name = name;
         this.email = email;
         this._id = _id;
+        this.date = date;
         this.channels = channels;
         this.premium = premium;
-        this.hashPassword = DataHandle.getSHA1Hex(hashPassword);
+        this.hashPassword = hashPassword;
         this.avatar = avatar;
         this.watchlist = watchlist;
         this.watchedlist = watchedlist;
@@ -117,4 +118,28 @@ public class User {
         this.playlists = playlists;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", _id=" + _id +
+                ", date=" + date +
+                ", channels=" + channels +
+                ", premium=" + premium +
+                ", hashPassword='" + hashPassword + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", watchlist=" + watchlist +
+                ", watchedlist=" + watchedlist +
+                ", playlists=" + playlists +
+                '}';
+    }
 }

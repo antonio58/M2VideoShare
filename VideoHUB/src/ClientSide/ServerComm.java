@@ -269,6 +269,7 @@ public class ServerComm {
         String info = "";
         int c = 0;
         for(String s : fieldList){
+            System.out.println("field: "+s);
             info = info.concat(s);
             if(c%2 == 0)
                 info = info.concat("</split/>");

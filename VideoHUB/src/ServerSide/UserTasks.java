@@ -25,7 +25,7 @@ import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 public class UserTasks {
 
     private MongoSide mMongo = new MongoSide();
-    private User user;
+    public User user;
     public UserTasks(User mUser){
     this.user = mUser;
     }
@@ -55,7 +55,7 @@ public class UserTasks {
         mMongo.getCollection("users").deleteOne(searchQuery);
     }
 
-    public void updateUser(String parameter, String value, String parameter2, String updateValue){
+    public void updateUser(String parameter, ObjectId value, String parameter2, String updateValue){
         LOGGER.info("updateDocument");
         BasicDBObject query = new BasicDBObject();
         //First it fetches the wanted document by a parameter and its value e.g, (name, Fernando)
@@ -247,7 +247,6 @@ public class UserTasks {
         }
         return -1;
     }
-
     //returns next available channel ID
     private int getNextChannelIndex(String parameter, ObjectId value) {
         // filter by user name or user id e.g, parameter: "name" , value: "fernando guima"
@@ -265,7 +264,6 @@ public class UserTasks {
             return 0;
         }
     }
-
     // email is a unique id, ideal for search in users collection
     public ObjectId getUserID(){
         if(user == null || user.getEmail() == null){
@@ -273,12 +271,11 @@ public class UserTasks {
         }
         else{
             System.out.println("userName: " + user.getName() +" email: " + user.getEmail());
-            Bson filter = Filters.eq("name", user.getName());
             Bson filter2 = Filters.eq("email", user.getEmail());
 
 
             //output is desired _id of "name" and "email" queries
-            List<Document> results = mMongo.getCollection("users").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.match(filter2), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("_id", "$_id")))))).into(new ArrayList<>());
+            List<Document> results = mMongo.getCollection("users").aggregate(Arrays.asList(Aggregates.match(filter2), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("_id", "$_id")))))).into(new ArrayList<>());
 
             //must return just one element, unique email a user name.
             //System.out.println("\n number of video with matched name: "+ results.size());
@@ -290,6 +287,27 @@ public class UserTasks {
         return null;
     }
 
+    public User getUserInfo(){
+
+        System.out.println("userStuff: " + user.toString());
+        Bson filter = Filters.eq("_id", user.get_id());
+
+
+        //output is desired _id of "name" and "email" queries
+        List<Document> results = mMongo.getCollection("users").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("date", "$creationDate"),Projections.computed("name", "$name"),Projections.computed("email", "$email"), Projections.computed("premium", "$premium")))))).into(new ArrayList<>());
+
+        //must return just one element, unique email a user name.
+        System.out.println("\n getUserInfo() results: "+ results);
+        user.set_id(results.get(0).getObjectId("_id"));
+        user.setName(results.get(0).getString("name"));
+        user.setEmail(results.get(0).getString("email"));
+        user.setDate(results.get(0).getDate("creationDate"));
+        System.out.println("\n getUserInfo(): "+ user.toString());
+        return user;
+
+    }
+
+    //login form checking
     public boolean checkUser(){
         if(user == null || user.getEmail() == null){
             System.out.println("mail: " + user.getEmail() +" HashPassword: " + user.getHashPassword());

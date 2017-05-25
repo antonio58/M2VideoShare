@@ -137,13 +137,13 @@ public class VideoTasks{
     // Get IDs from all videos that are stored in database
     public int getNumberOfVideos(){
         int i = 0;
+        ids.clear();
         //returns to Results list, playlist name
         List<Document> results = mMongo.getCollection("videos").aggregate(Arrays.asList(Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("name", "$name")))))).into(new ArrayList<>());
         System.out.println("\ngetNumberOfVideos() number of videos: "+ results.size());
         for(i=0; i<results.size(); i++){
             ids.add(results.get(i).getObjectId("_id"));
         }
-
         return results.size();
     }
 

@@ -9,21 +9,21 @@ import java.util.Date;
  * Created by fernando on 21-04-2017.
  */
 public class Video {
-    ObjectId _id = null;
-    String name = null;
-    String author = null;
-    String category = null;
-    String duration = null;
-    String file = null;
-    Date creationDate = null;
-    ArrayList<String> deliveries = null;
-    int views = 0;
-    ArrayList<String> tags = null;
-    ArrayList<String> likes = null;
-    ArrayList<Comment> commentList = null;
-    boolean premium = false;
-    Double size = null;
-    int n_blocks = 0;
+    private ObjectId _id = null;
+    private String name = null;
+    private String author = null;
+    private String category = null;
+    private String duration = null;
+    private String file = null;
+    private Date creationDate = null;
+    private ArrayList<String> deliveries = null;
+    private int views = 0;
+    private ArrayList<String> tags = null;
+    private ArrayList<String> likes = null;
+    private ArrayList<Comment> commentList = null;
+    private boolean premium = false;
+    private Double size = null;
+    private int n_blocks = 0;
 
     public Video(){}
 
