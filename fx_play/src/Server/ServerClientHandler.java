@@ -27,11 +27,12 @@ public class ServerClientHandler implements Runnable {
         this.users = users;
         this.videos = videos;
         System.out.println("\n New Client:\n"
-                + socketClient.getInetAddress() + " || " + socketClient.getPort()+"\n");
+                + socketClient.getInetAddress() + " || " + socketClient.getPort() + "\n");
 
     }
 
     // @Override
+    //Inicia a comunicação com a trama
     public void run() {
         try {
             DataOutputStream dos = new DataOutputStream(
@@ -42,46 +43,47 @@ public class ServerClientHandler implements Runnable {
             dos.writeUTF("Welcome Client number " + clientNumber);
             int currentUserId = 0;
             dos.flush();
-            while(true) {
+            while (true) {
                 //dos.writeUTF("\nWrite something");
                 dos.flush();
 
                 response = new String();
                 boolean flag = true;
-                while(flag) {
+                while (flag) {
                     String part = dis.readUTF();
                     System.out.println("(Client " + clientNumber + ") Message Received: " + part);
                     response = response.concat(part);
-                    if(part.indexOf("<!end!>") == part.length()-7){
+                    if (part.indexOf("<!end!>") == part.length() - 7) {
                         flag = false;
                     }
                 }
                 char b = response.charAt(0);
-                System.out.print("Frame type: "+b);
+                System.out.print("Frame type: " + b);
 
-                switch (b){
+                switch (b) {
                     case 1:
                         currentUserId = checkUser(response);
-                        if(currentUserId != 0)
+                        //readFrame(response);
+                        if (currentUserId != 0)
                             dos.writeUTF("check_1");
                         else
                             dos.writeUTF("nonono");
                         break;
 
                     case 2:
-                        if(registerUser(response))
+                        if (registerUser(response))
                             dos.writeUTF("check_2");
                         else
                             dos.writeUTF("ooooohhhh");
                         break;
 
-                    case (byte)3:
+                    case (byte) 3:
                         String str = getUserData(currentUserId);
                         dos.writeUTF(str);
                         break;
 
                     case 4:
-                        if(updateProfile(response, currentUserId))
+                        if (updateProfile(response, currentUserId))
                             dos.writeUTF("check_4");
                         else
                             dos.writeUTF("ups...");
@@ -102,55 +104,131 @@ public class ServerClientHandler implements Runnable {
                         dos.writeUTF(results);
                         break;
 
-                }
+                    /*case 8:
+                        String info = getVideoInfo(response);
+                        dos.writeUTF(info);
+                        break;*/
 
+                }
 
 
                 //dos.writeUTF("Message Received");
                 dos.flush();
-            }  } catch (IOException e) {
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public int checkUser(String s){
+    //Leitura e construção de frames
+    public List<String> readFrame(String s) {
 
-        byte[] r = s.getBytes(StandardCharsets.UTF_8);
+        List<String> fields = new ArrayList<>();
+        List<Integer> sizeFields = new ArrayList<>();
 
-        byte[] ul = new byte[4];
-        for(int i = 1; i<5; i++){
-            ul[i-1] = r[i];
-            System.out.println(i+"_"+r[i]);
+        //Transforma a trama num array de bytes
+        byte[] frameB = s.getBytes(StandardCharsets.UTF_8);
+        int framePointer = 1;
+
+        //Obtém o número de campos na trama
+        byte[] numFieldsB = new byte[4];
+        for (int i = 0; i < 4; i++) {
+            numFieldsB[i] = frameB[framePointer];
+            framePointer++;
+        }
+        int numFields = ByteBuffer.wrap(numFieldsB).getInt();
+        System.out.println("readFreame133: " + numFields);
+
+        //Obtém o tamanho de cada campo
+        for (int i = 0; i < numFields; i++) {
+            byte[] aux = new byte[4];
+            for (int k = 0; k < 4; k++) {
+                aux[k] = frameB[framePointer];
+                framePointer++;
+            }
+            int esse = ByteBuffer.wrap(aux).getInt();
+            System.out.println("Fields Size " + i + ": " + esse);
+            sizeFields.add(esse);
+
         }
 
-        byte[] pl = new byte[4];
-        for(int i = 5; i<9; i++){
-            pl[i-5] = r[i];
-            System.out.println(i+"_"+r[i]);
+
+        //Obtém os campos
+        for (int i : sizeFields) {
+            byte[] aux = new byte[i];
+            for (int j = 0; j < i; j++) {
+                aux[j] = frameB[framePointer];
+                framePointer++;
+            }
+            String temp = new String(aux);
+            fields.add(temp);
         }
 
-        int ull = ByteBuffer.wrap(ul).getInt();
-        int pll = ByteBuffer.wrap(pl).getInt();
-        System.out.println("n: "+ull+" / "+pll);
+        System.out.println("(readFrame)Fields: ");
+        for (String str : fields)
+            System.out.println(str);
 
-        byte[] userb = new byte[ull];
-        for(int i = 9; i<9+ull; i++){
-            userb[i-9] = r[i];
-        }
-        byte[] passb = new byte[pll];
-        for(int i = 9+ull; i<9+ull+pll; i++){
-            passb[i-(9+ull)]= r[i];
+        return fields;
+    }
+
+    private String buildFrame(byte type, String[] fields) {
+
+
+        int nFields = fields.length;
+        int headerPointer = 1;
+        byte[] header = new byte[(nFields * 4) + 5];
+
+        header[0] = type;
+
+        //Coloca o numero de campos
+        byte[] nFb = ByteBuffer.allocate(4).putInt(nFields).array();
+        for (int i = 0; i < 4; i++) {
+            header[headerPointer] = nFb[i];
+            headerPointer++;
         }
 
-        String user = new String(userb);
-        String password = new String(passb);
+        //Coloca o tamanho de cada campo
+        for (int i = 0; i < nFields; i++) {
+            String str_aux = fields[i];
+            byte[] fieldLength = ByteBuffer.allocate(4).putInt(str_aux.length()).array();
+            for (int j = 0; j < 4; j++) {
+                header[headerPointer] = fieldLength[j];
+                headerPointer++;
+            }
+        }
+
+        //Coloca os campos
+        String frame = new String(header);
+        for (int i = 0; i < nFields; i++) {
+            frame = frame.concat(fields[i]);
+        }
+
+        //Termina a trama com um palavra de controlo
+        frame = frame.concat("<!end!>");
+
+        return frame;
+    }
+
+
+    //Funções de tratamento de dados de comunicação
+
+    //Login
+    public int checkUser(String s) {
+
+        List<String> fields = readFrame(s);
+
+        String user = fields.get(0);
+        String password = fields.get(1);
         int id = 0;
 
-        System.out.println("user: "+user+" / "+password);
-        for(User u : users){
-            if(u.getName().equals(user))
-                if(u.checkPassword(password)){
+        /********************/
+        //Pesquisar em por utilizador utilizando o nome e verificar se a pass é igual
+        //retorna o id
+        System.out.println("user: " + user + " / " + password);
+        for (User u : users) {
+            if (u.getName().equals(user))
+                if (u.checkPassword(password)) {
                     id = u.getId();
                     this.self = u;
                     System.out.println("checked");
@@ -162,60 +240,21 @@ public class ServerClientHandler implements Runnable {
         return id;
     }
 
-    private boolean registerUser(String s){
+    //Registar utilizador
+    private boolean registerUser(String s) {
 
-        byte[] r = s.getBytes(StandardCharsets.UTF_8);
+        List<String> fields = readFrame(s);
 
-        byte[] ul = new byte[4];
-        for(int i = 1; i<5; i++){
-            ul[i-1] = r[i];
-            System.out.println(i+"u"+r[i]);
-        }
+        /**************/
+        //Strings com os valores minimos para criar um novo utilizador
+        String user = fields.get(0);
+        String password = fields.get(1);
+        String email = fields.get(2);
 
-        byte[] pl = new byte[4];
-        for(int i = 5; i<9; i++){
-            pl[i-5] = r[i];
-            System.out.println(i+"p"+r[i]);
-        }
-        byte[] el = new byte[4];
-        for(int i= 9; i<13; i++ ){
-            el[i-9] = r[i];
-            System.out.println(i+"e"+r[i]);
-        }
+        System.out.println("\nuser: " + user + " / " + password + " / " + email);
 
-        int ull = ByteBuffer.wrap(ul).getInt();
-        int pll = ByteBuffer.wrap(pl).getInt();
-        int ell = ByteBuffer.wrap(el).getInt();
-        System.out.println("n: "+ull+" / "+pll+" / " +ell);
-
-        System.out.print("user: ");
-        byte[] userb = new byte[ull];
-        for(int i = 13; i<13+ull; i++){
-            userb[i-13] = r[i];
-            System.out.print((char)r[i]);
-        }
-        System.out.print("\npass: ");
-        byte[] passb = new byte[pll];
-        for(int i = 13+ull; i<13+ull+pll; i++){
-            passb[i-(13+ull)]= r[i];
-            System.out.print((char)r[i]);
-        }
-        System.out.print("\nemail: ");
-        byte[] emailb = new byte[ell];
-        for(int i = 13+ull+pll; i<13+ull+pll+ell; i++){
-            byte aux = r[i];
-            emailb[i-(13+ull+pll)] = aux;
-            System.out.print((char)r[i]);
-        }
-
-
-        String user = new String(userb);
-        String password = new String(passb);
-        String email = new String (emailb);
-
-        System.out.println("\nuser: "+user+" / "+password+" / "+email);
-
-        User u = new User(users.size()+1, user, email, password, Collections.emptyList());
+        //Adiciona o novo utilizador
+        User u = new User(users.size() + 1, user, email, password, Collections.emptyList());
         users.add(u);
 
         System.out.println("updated");
@@ -223,21 +262,30 @@ public class ServerClientHandler implements Runnable {
 
     }
 
-    private String getUserData(int id){
+    //Obter informações para página de profile
+    private String getUserData(int id) {
         User user = new User();
+
+        //Verifica se o utilizador existe
         boolean flag = false;
-        System.out.println("id: "+id);
-        for(User u : this.users){
-            if(u.getId()==id) {
+        System.out.println("id: " + id);
+        for (User u : this.users) {
+            if (u.getId() == id) {
                 user = u;
                 flag = true;
             }
         }
 
-        if(!flag)   return "error: 404";
+        if (!flag) return "error: 404";
 
+
+        //Obter nome e email do user
         String userN = user.getName();
         String email = user.getEmail();
+
+        String[] fields = {userN, email};
+        String message = buildFrame((byte) 0, fields);
+        /*
 
         byte[] ubl = ByteBuffer.allocate(4).putInt(userN.length()).array();
         byte[] ebl = ByteBuffer.allocate(4).putInt(email.length()).array();
@@ -263,228 +311,158 @@ public class ServerClientHandler implements Runnable {
             }
             System.out.println(i + "-" + packet[i]);
         }
-        String message = new String(packet);
+        String message = new String(packet);*/
 
         return message;
     }
 
-    private boolean updateProfile(String s, int id){
+    //Actualizar Perfil
+    private boolean updateProfile(String s, int id) {
         User user = new User();
         boolean flag = false;
-
-        for(User u : this.users){
-            if(u.getId()==id) {
+        //Verifica se o utilizador existe
+        for (User u : this.users) {
+            if (u.getId() == id) {
                 user = u;
                 flag = true;
             }
         }
 
-        if(!flag)   return flag;
+        if (!flag) return flag;
 
-        byte[] r = s.getBytes(StandardCharsets.UTF_8);
+        List<String> fields = readFrame(s);
 
-        byte[] ul = new byte[4];
-        for(int i = 1; i<5; i++){
-            ul[i-1] = r[i];
-            System.out.println(i+"u"+r[i]);
-        }
+        //Valores para actualizar no perfil em que verifica se têm conteúdo ou vieram vazios
+        String userN = fields.get(0);
+        String password = fields.get(1);
+        String email = fields.get(2);
 
-        byte[] pl = new byte[4];
-        for(int i = 5; i<9; i++){
-            pl[i-5] = r[i];
-            System.out.println(i+"p"+r[i]);
-        }
-        byte[] el = new byte[4];
-        for(int i= 9; i<13; i++ ){
-            el[i-9] = r[i];
-            System.out.println(i+"e"+r[i]);
-        }
-
-        int ull = ByteBuffer.wrap(ul).getInt();
-        int pll = ByteBuffer.wrap(pl).getInt();
-        int ell = ByteBuffer.wrap(el).getInt();
-        System.out.println("n: "+ull+" / "+pll+" / " +ell);
-
-        System.out.print("user: ");
-        byte[] userb = new byte[ull];
-        for(int i = 13; i<13+ull; i++){
-            userb[i-13] = r[i];
-            System.out.print((char)r[i]);
-        }
-        System.out.print("\npass: ");
-        byte[] passb = new byte[pll];
-        for(int i = 13+ull; i<13+ull+pll; i++){
-            passb[i-(13+ull)]= r[i];
-            System.out.print((char)r[i]);
-        }
-        System.out.print("\nemail: ");
-        byte[] emailb = new byte[ell];
-        for(int i = 13+ull+pll; i<13+ull+pll+ell; i++){
-            byte aux = r[i];
-            emailb[i-(13+ull+pll)] = aux;
-            System.out.print((char)r[i]);
-        }
-
-
-        String userN = new String(userb);
-        String password = new String(passb);
-        String email = new String (emailb);
-
-        if(!userN.equals(""))
+        if (!userN.equals(""))
             user.setName(userN);
 
-        if(!password.equals(""))
+        if (!password.equals(""))
             user.setPassword(password);
 
-        if(!email.equals(""))
+        if (!email.equals(""))
             user.setEmail(email);
 
-        System.out.println("\nuser: "+userN+" / "+password+" / "+email);
+        System.out.println("\nuser: " + userN + " / " + password + " / " + email);
 
         System.out.println("registered");
 
         return flag;
     }
 
-    public String getFeed(String s, boolean all){
-        byte[] r = s.getBytes(StandardCharsets.UTF_8);
 
-        r[0] = (byte)4;
-        System.out.println("nVid: "+(char)r[0]);
-        byte[] page = new byte[4];
-        for(int i = 1; i<5; i++){
-            page[i-1] = r[i];
-            System.out.println(i+"u"+r[i]);
+    //Obter informação para fazer o feed. Boolean all identifica o tipo de feed
+    public String getFeed(String s, boolean all) {
+
+        List<String> auxList = readFrame(s);
+
+        int VideoIndexStart = (Integer.parseInt(auxList.get(0)) - 1) * 10;
+        if (videos.size() < 1 || videos.size() < VideoIndexStart) {
+            String[] auxArray = {"No videos"};
+            return buildFrame((byte) 0, auxArray);
         }
 
+        //Se for do tipo Subscribed vai buscar uma lista dos videos nos canais do utilizador
         ArrayList<Video> temp = new ArrayList<>();
-        if(!all){
+        if (!all) {
             List<String> chan = self.getChannels();
-            for(Video v : videos){
+            for (Video v : videos) {
                 List<String> tag = v.getTags();
-                for(String t : tag)
-                    for(String c : chan)
-                        if(t.equals(c)&&!temp.contains(v)){
+                for (String t : tag)
+                    for (String c : chan)
+                        if (t.equals(c) && !temp.contains(v)) {
                             temp.add(v);
                         }
             }
         } else
+            //Se for all vai uma lista com todos os videos
             temp = videos;
 
-        byte[] nv = ByteBuffer.allocate(4).putInt(temp.size()).array();
+        List<String> fieldList = new ArrayList<>();
 
-        String message = new String(nv);
-        for(Video v : temp){
-            String title = v.getTitle();
-            String author = v.getAuthor();
-
-            byte[] tb = ByteBuffer.allocate(4).putInt(title.length()).array();
-            byte[] ab = ByteBuffer.allocate(4).putInt(author.length()).array();
-
-            byte[] header = new byte[9];
-            header[0] = (byte) 1;
-            for (int i = 1; i < 9; i++) {
-                if (i < 5) {
-                    header[i] = tb[i - 1];
-                } else {
-                    System.out.println(i + "a" + r[i]);
-                    header[i] = ab[i - 5];
-                }
+        int i= 0 , j = 0;
+        for (Video v : temp) {
+            if(i<VideoIndexStart)
+                i++;
+            else if(j<10){
+                fieldList.add(v.getTitle());
+                fieldList.add(v.getAuthor());
+                fieldList.add(String.valueOf(v.getId()));
+                j++;
             }
-            String aux = title+ author;
-            byte[] payload = aux.getBytes();
-
-            byte[] packet = new byte[payload.length + header.length];
-
-
-            for (int i = 1; i < packet.length; i++) {
-                if (i < header.length) {
-                    packet[i] = header[i];
-                } else {
-                    packet[i] = payload[i - header.length];
-                }
-                System.out.println(i + "-" + packet[i]);
-            }
-            String part = new String(packet);
-
-            message = message.concat(part);
         }
 
-        return message;
+        String[] fieldArray = new String[fieldList.size()];
+        fieldList.toArray(fieldArray);
+
+        return buildFrame((byte) 0, fieldArray);
+
     }
 
-    private String getSearchResults(String query){
+    //Pesquisa
+    private String getSearchResults(String query) {
 
-        System.out.println("getSearchResults.query: "+query);
-        byte[] r = query.getBytes();
+        System.out.println("getSearchResults.query: " + query);
 
-        byte[] qlb = new byte[4];
-        for(int i= 1; i<5; i++ ){
-            qlb[i-1] = r[i];
-            System.out.println(i+"e"+r[i]);
-        }
+        List<String> auxList = readFrame(query);
+        String data = auxList.get(0);
 
-        int ql = ByteBuffer.wrap(qlb).getInt();
-
-        System.out.println("ql: "+ql);
-
-        System.out.print("query: ");
-        byte[] queryb = new byte[ql];
-        for(int i = 5; i<5+ql; i++){
-            queryb[i-5] = r[i];
-            System.out.print((char)r[i]);
-        }
-
-        String data = new String(queryb);
+        System.out.println("(449)data: "+data);
 
         String[] keywords = data.split(" ");
 
+
+        //Pesquisa na base de dados videos com a ocorrência das keywords no titulo, autor e tags
+        //No fim há uma lista de videos
         ArrayList<Video> temp = new ArrayList<>();
 
-        for(Video v : videos){
-            for(String s :keywords)
-                if((v.getTitle().contains(s)||v.getTags().contains(s)||v.getAuthor().contains(s))&&!temp.contains(v))
+        for (Video v : videos) {
+            String title = v.getTitle().toLowerCase();
+            String author = v.getAuthor().toLowerCase();
+            String tags = v.getTags().toString().toLowerCase();
+            for (String s : keywords) {
+                s = s.toLowerCase();
+                if (!temp.contains(v) && (title.contains(s) || tags.contains(s) || author.contains(s)))
                     temp.add(v);
+            }
         }
-        byte[] nv = ByteBuffer.allocate(4).putInt(temp.size()).array();
 
-        String message = new String(nv);
+        if(temp.isEmpty())
+            return "No videos";
+
+        auxList = new ArrayList<>();
         for(Video v : temp){
-            String title = v.getTitle();
-            String author = v.getAuthor();
+            auxList.add(v.getTitle());
+            auxList.add(v.getAuthor());
+            auxList.add(String.valueOf(v.getId()));
 
-            byte[] tb = ByteBuffer.allocate(4).putInt(title.length()).array();
-            byte[] ab = ByteBuffer.allocate(4).putInt(author.length()).array();
-
-            byte[] header = new byte[9];
-            header[0] = (byte) 1;
-            for (int i = 1; i < 9; i++) {
-                if (i < 5) {
-                    header[i] = tb[i - 1];
-                } else {
-                    System.out.println(i + "a" + r[i]);
-                    header[i] = ab[i - 5];
-                }
-            }
-            String aux = title+ author;
-            byte[] payload = aux.getBytes();
-
-            byte[] packet = new byte[payload.length + header.length];
-
-
-            for (int i = 1; i < packet.length; i++) {
-                if (i < header.length) {
-                    packet[i] = header[i];
-                } else {
-                    packet[i] = payload[i - header.length];
-                }
-                System.out.println(i + "-" + packet[i]);
-            }
-            String part = new String(packet);
-
-            message = message.concat(part);
         }
 
-        return message;
+        String[] fieldArray = new String[auxList.size()];
+        auxList.toArray(fieldArray);
+
+        return buildFrame((byte) 0, fieldArray);
+
     }
+
+    /*private String getVideoInfo(String data){
+
+        List<String> aux = readFrame(data);
+
+        int id = Integer.parseInt(aux.get(0));
+        Video vid = new Video();
+        for(Video v : videos){
+            if(v.getId()==id){
+                vid = v;
+                break;
+            }
+        }
+        String[] fields = {vid.getAuthor(),vid.getTitle(),vid.getTags().toString()};
+
+
+        return buildFrame((byte)0, fields);
+    }*/
 }

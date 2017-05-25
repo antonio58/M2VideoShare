@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Utilizador on 20/04/2017.
@@ -16,6 +18,14 @@ public class ServerComm {
     String outp;
     DataOutputStream dos;
     DataInputStream dis;
+
+    public DataOutputStream getDos() {
+        return dos;
+    }
+
+    public DataInputStream getDis() {
+        return dis;
+    }
 
     public ServerComm(){
         int port = 3333;
@@ -34,7 +44,7 @@ public class ServerComm {
         this.dis = dis;
     }
 
-    private String talk(String message){
+    public String talk(String message){
         String reply = "";
         try {
             dos.writeUTF(message);
@@ -48,6 +58,90 @@ public class ServerComm {
         System.out.println("reply: "+reply);
 
         return reply;
+    }
+
+    public String buildFrame(byte type, String[] fields){
+
+        int nFields = fields.length;
+        int headerPointer = 1;
+        byte[] header = new byte[(nFields*4)+5];
+
+        header[0] = type;
+
+
+        byte[] nFb = ByteBuffer.allocate(4).putInt(nFields).array();
+        for(int i = 0; i<4; i++){
+            header[headerPointer] = nFb[i];
+            headerPointer++;
+        }
+
+        for(int i = 0; i < nFields; i++){
+            String str_aux = fields[i];
+            byte[] fieldLength = ByteBuffer.allocate(4).putInt(str_aux.length()).array();
+            for(int j = 0; j < 4; j++){
+                header[headerPointer] = fieldLength[j];
+                headerPointer++;
+            }
+        }
+
+        String frame = new String(header);
+
+        for(int i = 0; i < nFields; i++){
+            frame = frame.concat(fields[i]);
+        }
+
+        frame = frame.concat("<!end!>");
+
+        return frame;
+    }
+
+    public List<String> readFrame(String s){
+        List<String> fields = new ArrayList<>();
+        List<Integer> sizeFields = new ArrayList<>();
+
+        //Turns frame into byte array
+        byte[] frameB = s.getBytes(StandardCharsets.UTF_8);
+        int framePointer = 1;
+
+        //Gets integer representing the number of fields in the frame
+        byte[] numFieldsB = new byte[4];
+        for(int i = 0; i<4; i++){
+            numFieldsB[i] = frameB[framePointer];
+            framePointer++;
+        }
+        int numFields = ByteBuffer.wrap(numFieldsB).getInt();
+        System.out.println("readFreame133: "+numFields);
+
+        //Gets the size of each field in the frame
+        for(int i=0; i < numFields; i++){
+            byte[] aux = new byte[4];
+            for(int k = 0; k < 4; k++){
+                aux[k] = frameB[framePointer];
+                framePointer++;
+            }
+            int esse = ByteBuffer.wrap(aux).getInt();
+            System.out.println("Fields Size "+i+": "+esse);
+            sizeFields.add(esse);
+
+        }
+
+
+        //Gets frame fields
+        for(int i : sizeFields){
+            byte[] aux = new byte[i];
+            for(int j = 0; j<i; j++){
+                aux[j] = frameB[framePointer];
+                framePointer++;
+            }
+            String temp = new String(aux);
+            fields.add(temp);
+        }
+
+        System.out.println("(readFrame)Fields: ");
+        for(String str : fields)
+            System.out.println(str);
+
+        return fields;
     }
 
     public boolean connectToServer() throws IOException {
@@ -70,37 +164,11 @@ public class ServerComm {
 
     public boolean checkLogin(String u, String p) throws UnsupportedEncodingException {
 
-        byte[] ubl = ByteBuffer.allocate(4).putInt(u.length()).array();
-        byte[] pbl = ByteBuffer.allocate(4).putInt(p.length()).array();
+        String[] fields = {u,p};
+        String message = buildFrame((byte)1, fields);
 
-        byte[] header = new byte[9];
-        header[0] = (byte) 1;
-        for (int i = 1; i < 9; i++) {
-            if (i < 5) {
-                header[i] = ubl[i - 1];
-            } else {
-                header[i] = pbl[i - 5];
-            }
-        }
+        System.out.println("Frame: "+message);
 
-        String aux = u + p;
-        byte[] payload = aux.getBytes();
-
-        byte[] packet = new byte[payload.length + header.length];
-
-        for (int i = 0; i < payload.length + header.length; i++) {
-            if (i < header.length) {
-                packet[i] = header[i];
-            } else {
-                packet[i] = payload[i - header.length];
-            }
-            System.out.println(i + "-" + packet[i]);
-        }
-        String message = new String(packet);
-
-
-        message = message.concat("<!end!>");
-        System.out.println("!message: " + message + "\ncenas: " + u + "(" + u.length() + ")/" + p + "(" + p.length() + ")");
         String reply = talk(message);
 
         if (reply.equals("check_1")){
@@ -113,38 +181,9 @@ public class ServerComm {
 
     public boolean registerUSer(String user, String password, String email){
 
-        byte[] ubl = ByteBuffer.allocate(4).putInt(user.length()).array();
-        byte[] pbl = ByteBuffer.allocate(4).putInt(password.length()).array();
-        byte[] ebl = ByteBuffer.allocate(4).putInt(email.length()).array();
+        String[] fields = {user,password,email};
+        String message = buildFrame((byte)2, fields);
 
-        byte[] header = new byte[13];
-        header[0] = (byte) 2;
-        for (int i = 1; i < 13; i++) {
-            if (i < 5) {
-                header[i] = ubl[i - 1];
-            } else if(i < 9){
-                header[i] = pbl[i - 5];
-            } else
-                header[i] = ebl[i-9];
-        }
-        String aux = user + password + email;
-        byte[] payload = aux.getBytes();
-
-        byte[] packet = new byte[payload.length + header.length];
-
-        for (int i = 0; i < payload.length + header.length; i++) {
-            if (i < header.length) {
-                packet[i] = header[i];
-            } else {
-                packet[i] = payload[i - header.length];
-            }
-            System.out.println(i + "-" + packet[i]);
-        }
-        String message = new String(packet);
-
-        System.out.println("message: " + message + "\ncenas: " + user + "(" + user.length() + ")/" + password + "(" + password.length() + ")/"+ email+"("+email.length()+")");
-
-        message = message.concat("<!end!>");
         String reply = talk(message);
 
         if (reply.equals("check_2")){
@@ -156,51 +195,20 @@ public class ServerComm {
     }
 
     public String getUserData(){
-        byte[] header = {(byte)3};
-        String str = new String(header);
 
-        str = str.concat("<!end!>");
+        String[] aux = new String[0];
+        String str = buildFrame((byte)3, aux);
         str = talk(str);
 
         if(str.equals("error: 404"))
             return str;
 
-        System.out.println(str);
+        System.out.println("getUserData201: "+str);
 
-        byte[] r = str.getBytes(StandardCharsets.UTF_8);
+        List<String> fields = readFrame(str);
 
-        byte[] ul = new byte[4];
-        for(int i = 1; i<5; i++){
-            ul[i-1] = r[i];
-            System.out.println(i+"u"+r[i]);
-        }
-
-        byte[] el = new byte[4];
-        for(int i = 5; i<9; i++){
-            el[i-5] = r[i];
-            System.out.println(i+"p"+r[i]);
-        }
-
-        int ull = ByteBuffer.wrap(ul).getInt();
-        int ell = ByteBuffer.wrap(el).getInt();
-        System.out.println("n: "+ull+" / " +ell);
-
-        System.out.print("user: ");
-        byte[] userb = new byte[ull];
-        for(int i = 9; i<9+ull; i++){
-            userb[i-9] = r[i];
-            System.out.print((char)r[i]);
-        }
-        System.out.print("\npass: ");
-        byte[] emailb = new byte[ell];
-        for(int i = 9+ull; i<9+ull+ell; i++){
-            emailb[i-(9+ull)]= r[i];
-            System.out.print((char)r[i]);
-        }
-
-
-        String user = new String(userb);
-        String email = new String (emailb);
+        String user = fields.get(0);//new String(userb);
+        String email = fields.get(1);//new String (emailb);
 
         str = user+"--"+email;
 
@@ -208,36 +216,12 @@ public class ServerComm {
     }
 
     public boolean updateProfile(String user, String email, String pass){
-        byte[] ubl = ByteBuffer.allocate(4).putInt(user.length()).array();
-        byte[] pbl = ByteBuffer.allocate(4).putInt(pass.length()).array();
-        byte[] ebl = ByteBuffer.allocate(4).putInt(email.length()).array();
 
-        byte[] header = new byte[13];
-        header[0] = (byte) 4;
-        for (int i = 1; i < 13; i++) {
-            if (i < 5) {
-                header[i] = ubl[i - 1];
-            } else if(i < 9){
-                header[i] = pbl[i - 5];
-            } else
-                header[i] = ebl[i-9];
-        }
-        String aux = user + pass + email;
-        byte[] payload = aux.getBytes();
+        System.out.println("SC 211(uep): "+user+email+pass);
+        String[] fields = {user,pass,email};
+        String frame = buildFrame((byte)4, fields);
 
-        byte[] packet = new byte[payload.length + header.length];
-
-        for (int i = 0; i < payload.length + header.length; i++) {
-            if (i < header.length) {
-                packet[i] = header[i];
-            } else {
-                packet[i] = payload[i - header.length];
-            }
-        }
-        String message = new String(packet);
-
-        message = message.concat("<!end!>");
-        String reply = talk(message);
+        String reply = talk(frame);
 
         if (reply.equals("check_4")){
             System.out.println("true dat");
@@ -250,20 +234,30 @@ public class ServerComm {
 
     public String getFeed(int p, byte feedType){
 
-        byte[] type = {feedType};
-        byte[] page = ByteBuffer.allocate(4).putInt(p).array();
-        byte[] header = new byte[type.length + page.length];
-        System.arraycopy(type, 0, header, 0, type.length);
-        System.arraycopy(page, 0, header, type.length, page.length);
-        String str = new String(header);
+        String[] fields = {String.valueOf(p)};
+        String str = buildFrame(feedType, fields);
 
-        str = str.concat("<!end!>");
-        System.out.println(str);
         str = talk(str);
 
         if(str.equals("error: 404"))
             return str;
+        if(str.equals("No videos"))
+            return str;
 
+        List<String> fieldList = readFrame(str);
+        String info = "";
+        int c = 0;
+        for(String s : fieldList){
+            info = info.concat(s);
+            if(c%2 == 0)
+                info = info.concat("</split/>");
+            else
+                info = info.concat("!:split:!");
+            c++;
+        }
+
+        return info;
+        /*
         String data = new String();
 
         System.out.println("Decode string");
@@ -271,7 +265,7 @@ public class ServerComm {
         int total = 5;
         /*int nVid = r[0];
         System.out.println("nVid: "+nVid);*/
-
+/*
         byte[] bnVid = new byte[4];
         for(int i = 0; i<4; i++){
             bnVid[i] = r[i];
@@ -285,13 +279,13 @@ public class ServerComm {
             byte[] t = new byte[4];
             for (int i = total; i < total+4; i++) {
                 t[i - total] = r[i];
-                System.out.println(i + "u" + r[i]);
+                //System.out.println(i + "u" + r[i]);
             }
             total += 4;
             byte[] a = new byte[4];
             for (int i = total; i < total+4; i++) {
                 a[i - total] = r[i];
-                System.out.println(i + "p" + r[i]);
+                //System.out.println(i + "p" + r[i]);
             }
 
             int tl = ByteBuffer.wrap(t).getInt();
@@ -328,107 +322,48 @@ public class ServerComm {
 
 
         System.out.println("sc.data: "+data);
-        return data;
+        return data;*/
     }
 
     public String getSearchResults(String query){
 
         System.out.println("query1: "+query);
-        byte[] header = new byte[5];
-        header[0] = (byte)7;
-        byte[] bq = ByteBuffer.allocate(4).putInt(query.length()).array();
 
-        for(int i = 0; i<4; i++){
-            header[i+1] = bq[i];
-        }
-
-        byte[] payload = query.getBytes();
-
-        System.out.println("phl: "+payload.length+", "+header.length);
-        byte[] packet = new byte[payload.length + header.length];
-
-        for (int i = 0; i < payload.length + header.length; i++) {
-            if (i < header.length) {
-                packet[i] = header[i];
-            } else {
-                packet[i] = payload[i - header.length];
-            }
-        }
-
-        String str = new String(packet);
-
-        str = str.concat("<!end!>");
-        System.out.println(str);
+        String[] engodo = {query};
+        String str = buildFrame((byte)7, engodo);
         str = talk(str);
 
         if(str.equals("error: 404"))
             return str;
+        if(str.equals("No videos"))
+            return str;
 
-        String data = new String();
-
-        System.out.println("Decode string");
-        byte[] r = str.getBytes(StandardCharsets.UTF_8);
-        int total = 5;
-        /*int nVid = r[0];
-        System.out.println("nVid: "+nVid);*/
-
-        byte[] bnVid = new byte[4];
-        for(int i = 0; i<4; i++){
-            bnVid[i] = r[i];
+        List<String> fieldList = readFrame(str);
+        String info = "";
+        int c = 0;
+        for(String s : fieldList){
+            info = info.concat(s);
+            if(c%2 == 0)
+                info = info.concat("</split/>");
+            else
+                info = info.concat("!:split:!");
+            c++;
         }
 
-        int nVid = ByteBuffer.wrap(bnVid).getInt();
-        System.out.println("nVid: "+nVid);
+        return info;
+    }
 
-        for(int j = 0; j<nVid; j++){
+    public String getVideo(int id){
+        String aux = String.valueOf(id);
+        String[] aux2 = {aux};
 
-            byte[] t = new byte[4];
-            for (int i = total; i < total+4; i++) {
-                t[i - total] = r[i];
-                System.out.println(i + "u" + r[i]);
-            }
-            total += 4;
-            byte[] a = new byte[4];
-            for (int i = total; i < total+4; i++) {
-                a[i - total] = r[i];
-                System.out.println(i + "p" + r[i]);
-            }
+        aux = buildFrame((byte)8, aux2);
 
-            int tl = ByteBuffer.wrap(t).getInt();
-            int al = ByteBuffer.wrap(a).getInt();
-            total += 4;
+        aux = talk(aux);
 
-            System.out.println("n: " + tl + " / " + al);
+        List<String> aux3 = readFrame(aux);
 
-            System.out.print("title: ");
-            byte[] tb = new byte[tl];
-            for (int i = total; i < total + tl; i++) {
-                tb[i - total] = r[i];
-                System.out.print((char) r[i]);
-            }
-            total += tl;
-            System.out.println("\nauthor: ");
-            byte[] ab = new byte[al];
-            for (int i = total; i < total + al; i++) {
-                ab[i - (total)] = r[i];
-                System.out.print((char) r[i]);
-            }
-            total += al;
-
-
-            String title = new String(tb);
-            String author = new String(ab);
-
-            str = title+"</split/>"+author;
-            System.out.println("String"+j+": "+str);
-
-            data = data.concat(str+"!:split:!");
-            total++;
-        }
-
-
-        System.out.println("sc.data: "+data);
-        return data;
+        return null;
     }
 }
 

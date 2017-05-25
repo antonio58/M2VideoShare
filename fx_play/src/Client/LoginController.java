@@ -39,16 +39,11 @@ public class LoginController implements Initializable{
         actiontargetBox.setVisible(false);
         userId.setPromptText("user");
         password.setPromptText("password");
-        password.setOnKeyPressed(event -> {
-            if(event.getCode() == KeyCode.ENTER){
-                signIn();
-            }
-        });
     }
 
     void signIn(){
         try {
-            if(sc.checkLogin("q", "q"/*userId.getText(), password.getText()*/)){
+            if(sc.checkLogin(/*userId.getText(), password.getText()*/"q","q")){
                 System.out.println("User check!!!");
                 String data = sc.getFeed(1, (byte)5);
                 application.openMainMenu(1, data, (byte)5);
