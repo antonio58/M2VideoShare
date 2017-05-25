@@ -9,16 +9,12 @@
     <bookmark url="file://$PROJECT_DIR$/src/Models/Playlist.java" description="        this.name = name;&#10;        this.data = data..." line="7" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e1c71ac-7cf6-4ac2-920e-d28e975834bf" name="Default" comment="Update dos grids do main menu. Correçao no controller.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/TESTS/TEST_GRIDFS.java" />
+    <list default="true" id="3e1c71ac-7cf6-4ac2-920e-d28e975834bf" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/MainMenuController.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/MainMenuController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ServerSide/MongoSide.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ServerSide/MongoSide.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/TESTS/TEST_OBU.class" afterPath="$PROJECT_DIR$/out/production/VideoHUB/TESTS/TEST_OBU.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/VideoHUB.iml" afterPath="$PROJECT_DIR$/VideoHUB.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/fxml/MainMenu.fxml" afterPath="$PROJECT_DIR$/out/production/VideoHUB/ClientSide/UI/fxml/MainMenu.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ServerSide/MongoSide.java" afterPath="$PROJECT_DIR$/src/ServerSide/MongoSide.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TESTS/TEST_OBU.java" afterPath="$PROJECT_DIR$/src/TESTS/TEST_OBU.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -750,7 +746,7 @@
       <workItem from="1495656213101" duration="1201000" />
       <workItem from="1495705262415" duration="280000" />
       <workItem from="1495705591684" duration="782000" />
-      <workItem from="1495706675864" duration="16808000" />
+      <workItem from="1495706675864" duration="16846000" />
     </task>
     <task id="LOCAL-00001" summary="Versão mais atual do projeto:&#10;-&gt; Ficheiros .fxml atualizados;&#10;-&gt; Ficheiros desnecessários (.class) eliminados;&#10;-&gt; Hash da password.">
       <created>1493283181740</created>
@@ -780,11 +776,18 @@
       <option name="project" value="LOCAL" />
       <updated>1493376975649</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="saveFile">
+      <created>1495732847267</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1495732847267</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109269000" />
+    <option name="totallyTimeSpent" value="109307000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -873,7 +876,8 @@
     <MESSAGE value="Versão mais atual do projeto:&#10;-&gt; Ficheiros .fxml atualizados;&#10;-&gt; Ficheiros desnecessários (.class) eliminados;&#10;-&gt; Hash da password." />
     <MESSAGE value="fiz merda?" />
     <MESSAGE value="Update dos grids do main menu. Correçao no controller." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update dos grids do main menu. Correçao no controller." />
+    <MESSAGE value="saveFile" />
+    <option name="LAST_COMMIT_MESSAGE" value="saveFile" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
