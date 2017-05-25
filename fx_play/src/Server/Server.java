@@ -44,7 +44,7 @@ public class Server {
 
         List<String> tag5 = Arrays.asList("music", "funny", "video games");
         LocalDateTime d5 = LocalDateTime.now();
-        Video v5 = new Video(5, "Pikachu on Acid", "PinkUmbreon", tag5, d5, "file:///home/mangas/Documents/VideoHub/PikachuOnAcid.mp4");
+        Video v5 = new Video(5, "Pikachu on Acid", "PinkUmbreon", tag5, d5, "/home/mangas/Documents/VideoHub/DB/PikachuOnAcid.mp4");
         //*********************************************************
 
         ArrayList<User> users = new ArrayList<>();

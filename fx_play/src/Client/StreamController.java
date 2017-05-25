@@ -55,9 +55,15 @@ public class StreamController implements Initializable {
         String aux = String.valueOf(this.id);
         String[] aux2 = {aux};
         aux = sc.buildFrame((byte)8, aux2);
+        aux = sc.talk(aux);
         List<String> aux3 = sc.readFrame(aux);
-        aux = aux3.get(0);
+        aux = aux3.get(2);
+        int i = aux.lastIndexOf("/");
+        aux = aux.substring(i,aux.length());
         //Correr thread download aqui
+        DownloadHandler dh = new DownloadHandler(sc, this.id, aux);
+        Thread DH = new Thread(dh);
+        DH.start();
         this.application.openPlayer(gridPane, aux);
     }
 

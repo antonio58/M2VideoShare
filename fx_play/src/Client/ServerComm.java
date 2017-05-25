@@ -19,6 +19,10 @@ public class ServerComm {
     DataOutputStream dos;
     DataInputStream dis;
 
+    public Socket getSocket() {
+        return socket;
+    }
+
     public DataOutputStream getDos() {
         return dos;
     }
@@ -54,8 +58,8 @@ public class ServerComm {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("message: "+message);
-        System.out.println("reply: "+reply);
+        /*System.out.println("message: "+message);
+        System.out.println("reply: "+reply);*/
 
         return reply;
     }
@@ -120,7 +124,7 @@ public class ServerComm {
                 framePointer++;
             }
             int esse = ByteBuffer.wrap(aux).getInt();
-            System.out.println("Fields Size "+i+": "+esse);
+            System.out.println("Fields Size "+i+": "/*+esse*/);
             sizeFields.add(esse);
 
         }
@@ -137,9 +141,9 @@ public class ServerComm {
             fields.add(temp);
         }
 
-        System.out.println("(readFrame)Fields: ");
+        /*System.out.println("(readFrame)Fields: ");
         for(String str : fields)
-            System.out.println(str);
+            System.out.println(str);*/
 
         return fields;
     }
@@ -246,10 +250,10 @@ public class ServerComm {
 
         List<String> fieldList = readFrame(str);
         String info = "";
-        int c = 0;
+        int c = 1;
         for(String s : fieldList){
             info = info.concat(s);
-            if(c%2 == 0)
+            if(c%3 != 0)
                 info = info.concat("</split/>");
             else
                 info = info.concat("!:split:!");
@@ -343,7 +347,7 @@ public class ServerComm {
         int c = 0;
         for(String s : fieldList){
             info = info.concat(s);
-            if(c%2 == 0)
+            if(c%3 != 0)
                 info = info.concat("</split/>");
             else
                 info = info.concat("!:split:!");

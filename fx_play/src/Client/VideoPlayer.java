@@ -30,6 +30,8 @@ import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
+import static java.lang.Thread.sleep;
+
 public class VideoPlayer extends Application {
 
     public static void main(String args[]) {
@@ -41,7 +43,9 @@ public class VideoPlayer extends Application {
         stage.setTitle("VideoHub Streamer");
         Group root = new Group();
 
-        Media media = new Media("file:///home/mangas/Documents/VideoHub/"+fileName);
+        sleep(1000);
+
+        Media media = new Media("file:///home/mangas/Documents/VideoHub/Temp"+fileName);
 //        Media media = new Media("file:///home/luisf99/Documentos/UniversidadeMinho/ProjetodeTelecomunicacoesInformatica2/Videos/VideoDemo.mp4");
         final MediaPlayer player = new MediaPlayer(media);
         MediaView view = new MediaView(player);

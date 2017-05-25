@@ -1,11 +1,13 @@
 package Server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import sun.misc.IOUtils;
+import sun.nio.ch.IOUtil;
+
+import java.io.*;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -17,6 +19,8 @@ public class ServerClientHandler implements Runnable {
     private int clientNumber;
     private String response;
     private User self = new User();
+    DataOutputStream dos;
+    DataInputStream dis;
     private ArrayList<User> users = new ArrayList<>();
     ArrayList<Video> videos = new ArrayList<>();
 
@@ -35,9 +39,9 @@ public class ServerClientHandler implements Runnable {
     //Inicia a comunicação com a trama
     public void run() {
         try {
-            DataOutputStream dos = new DataOutputStream(
+            dos = new DataOutputStream(
                     socketClient.getOutputStream());
-            DataInputStream dis = new DataInputStream(
+            dis = new DataInputStream(
                     socketClient.getInputStream());
 
             dos.writeUTF("Welcome Client number " + clientNumber);
@@ -104,10 +108,14 @@ public class ServerClientHandler implements Runnable {
                         dos.writeUTF(results);
                         break;
 
-                    /*case 8:
+                    case 8:
                         String info = getVideoInfo(response);
                         dos.writeUTF(info);
-                        break;*/
+                        break;
+
+                    case 13:
+                        sendVideo(response);
+                        break;
 
                 }
 
@@ -208,6 +216,30 @@ public class ServerClientHandler implements Runnable {
         frame = frame.concat("<!end!>");
 
         return frame;
+    }
+
+    public String talk(String message){
+        String reply = "";
+        try {
+            dos.writeUTF(message);
+            //while(reply.equals("")) {
+            reply = dis.readUTF();
+            //}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("talk");
+
+        return reply;
+    }
+
+    public void send(String message){
+        try {
+            dos.writeUTF(message);
+            //}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -448,7 +480,7 @@ public class ServerClientHandler implements Runnable {
 
     }
 
-    /*private String getVideoInfo(String data){
+    private String getVideoInfo(String data){
 
         List<String> aux = readFrame(data);
 
@@ -460,9 +492,86 @@ public class ServerClientHandler implements Runnable {
                 break;
             }
         }
-        String[] fields = {vid.getAuthor(),vid.getTitle(),vid.getTags().toString()};
+        String[] fields = {vid.getTitle(),vid.getAuthor(),vid.getPath(),vid.getTags().toString()};
 
 
         return buildFrame((byte)0, fields);
-    }*/
+    }
+
+    private void sendVideo(String vid) throws IOException {
+
+        int count = 0;
+
+        String[] aux2 = {""};
+        String ack = buildFrame((byte) 15, aux2);
+        send(ack);
+
+        System.out.println("Getting video");
+
+        List<String> foo = readFrame(vid);
+        int id = Integer.parseInt(foo.get(0));
+        String path = "";
+        for(Video v : videos){
+            if(v.getId()==id)
+                path = v.getPath();
+        }
+        File f = new File(path);
+        FileInputStream fis;
+        String newName;
+        int fileSize = (int) f.length();
+        int nChunks = 0, read = 0, readLength = 8000;
+        byte[] byteChunk;
+        fis = new FileInputStream(f);
+
+        /*byte[] bFile = Files.readAllBytes(f.toPath());
+        System.out.println("File size: "+bFile.length);*/
+
+        System.out.println("Sending video");
+
+        //byte[] temp = new byte[4000];
+        //int pointer = 0;
+        //while(pointer<bFile.length){
+        while (fileSize > 0) {
+
+            if (fileSize <= 8000) {
+                readLength = fileSize;
+            }
+            byteChunk = new byte[readLength];
+            read = fis.read(byteChunk, 0, readLength);
+            fileSize -= read;
+
+            /*for(int i = pointer; i < pointer+4000 && i < bFile.length; i++){
+                temp[i-pointer] = bFile[i];
+
+            }
+            pointer += 4000;
+            count++;
+
+            System.out.println("Sent "+pointer);
+            System.out.println("Frame number: "+count);*/
+
+
+
+
+            String auxS = new String(byteChunk);
+            String[] auxA = {auxS};
+            auxS = buildFrame((byte)14, auxA);
+            auxS = talk(auxS);
+            while(auxS.charAt(0)!=(byte)15)
+                auxS = talk(auxS);
+
+
+        }
+
+        System.out.println("Sending frame 16");
+        String auxS = "";
+        String[] auxA = {auxS};
+        auxS = buildFrame((byte)16, auxA);
+        auxS = talk(auxS);
+        System.out.println("File Sent");
+
+    }
 }
+
+
+

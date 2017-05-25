@@ -20,7 +20,7 @@ public class Video {
         id = 0;
         this.title = "";
         this.author = "";
-        this.tags = Arrays.asList(null);
+        this.tags = null;
         this.date = LocalDateTime.now();
         this.path = "";
     }
@@ -32,6 +32,10 @@ public class Video {
         this.tags = tags;
         this.date = d;
         this.path = path;
+    }
+
+    public String getPath() {
+        return path;
     }
 
     public int getId(){ return this.id;}

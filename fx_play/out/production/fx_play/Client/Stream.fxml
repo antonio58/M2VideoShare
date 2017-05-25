@@ -34,12 +34,12 @@
 
         <Button fx:id="logout" onAction="#handleLogout" prefHeight="28.0" prefWidth="74.0" text="Logout" translateX="900.0" translateY="450.0" />
         <Button fx:id="back" onAction="#handleSubmitBack" prefHeight="28.0" prefWidth="74.0" styleClass="confirm" text="Back" translateX="50.0" translateY="450.0" />
-        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="info" text="Author:" translateY="-70.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="info" text="Title:" translateY="-35.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="info" text="Title:" translateY="-70.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="info" text="Author:" translateY="-35.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="info" text="Description:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Text fx:id="autor" fill="#fb9e03" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" translateX="110.0" translateY="-70.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Text fx:id="titulo" fill="#fb9e03" strokeType="OUTSIDE" strokeWidth="0.0" text="Titulo" translateX="110.0" translateY="-35.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Button fx:id="btnStream" mnemonicParsing="false" onAction="#handlePlay" styleClass="big" text="¡Stream!" translateY="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Button fx:id="btnStream" mnemonicParsing="false" onAction="#handlePlay" styleClass="big" text="Stream" translateY="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <ImageView id="thumbnail" fitHeight="120.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
             <image>
                 <Image url="@../img/wti.png" />
