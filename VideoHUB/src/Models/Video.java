@@ -3,6 +3,7 @@ package Models;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by fernando on 21-04-2017.
@@ -14,6 +15,7 @@ public class Video {
     String category = null;
     String duration = null;
     String file = null;
+    Date creationDate = null;
     ArrayList<String> deliveries = null;
     int views = 0;
     ArrayList<String> tags = null;
@@ -154,4 +156,33 @@ public class Video {
         this.n_blocks = n_blocks;
     }
 
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "_id=" + _id +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", category='" + category + '\'' +
+                ", duration='" + duration + '\'' +
+                ", file='" + file + '\'' +
+                ", creationDate=" + creationDate +
+                ", deliveries=" + deliveries +
+                ", views=" + views +
+                ", tags=" + tags +
+                ", likes=" + likes +
+                ", commentList=" + commentList +
+                ", premium=" + premium +
+                ", size=" + size +
+                ", n_blocks=" + n_blocks +
+                '}';
+    }
 }

@@ -1,9 +1,9 @@
 package ServerSide;
 
-import ClientSide.DataHandle;
 import Models.Channel;
 import Models.Playlist;
 import Models.User;
+import Models.Video;
 import org.bson.types.ObjectId;
 
 import java.io.DataInputStream;
@@ -67,16 +67,15 @@ public class ServerClientHandler implements Runnable {
                     }
                 }
                 char b = response.charAt(0);
-                System.out.print("Frame type: " + b);
 
                 switch (b) {
                     case 1:
-                        currentUserId = checkUser(response);
+                        ;
                         //readFrame(response);
-                        if (currentUserId != 0)
+                        if (checkUser(response))
                             dos.writeUTF("check_1");
                         else
-                            dos.writeUTF("nonono");
+                            dos.writeUTF("Failed Login");
                         break;
 
                     case 2:
@@ -84,7 +83,7 @@ public class ServerClientHandler implements Runnable {
                             if (registerUser(response))
                                 dos.writeUTF("check_2");
                             else
-                                dos.writeUTF("ooooohhhh");
+                                dos.writeUTF("Failed Register");
                         } catch (NoSuchAlgorithmException e) {
                             e.printStackTrace();
                         }
@@ -95,7 +94,7 @@ public class ServerClientHandler implements Runnable {
                         dos.writeUTF(str);
                         break;
 
-                    /*case 4:
+                    case 4:
                         if (updateProfile(response, currentUserId))
                             dos.writeUTF("check_4");
                         else
@@ -113,9 +112,9 @@ public class ServerClientHandler implements Runnable {
                         break;
 
                     case 7:
-                        String results = getSearchResults(response);
-                        dos.writeUTF(results);
-                        break;*/
+                        //String results = getSearchResults(response);
+                        //dos.writeUTF(results);
+                        break;
 
                 }
 
@@ -130,7 +129,7 @@ public class ServerClientHandler implements Runnable {
     }
 
     //Leitura e construção de frames
-    public List<String> readFrame(String s) {
+    private List<String> readFrame(String s) {
 
         List<String> fields = new ArrayList<>();
         List<Integer> sizeFields = new ArrayList<>();
@@ -222,7 +221,7 @@ public class ServerClientHandler implements Runnable {
     //Funções de tratamento de dados de comunicação
 
     //Login
-    public int checkUser(String s) {
+    public boolean checkUser(String s) {
 
         List<String> fields = readFrame(s);
 
@@ -234,17 +233,18 @@ public class ServerClientHandler implements Runnable {
         //Pesquisar em por utilizador utilizando o nome e verificar se a pass é igual
         //retorna o id
         System.out.println("user: " + username + " / " + password);
-        User user = new User();
-        user.setName(username);
-        user.setHashPassword(password);
-        UserTasks userTasks = new UserTasks(user);
-        try {
-            userTasks.addUser();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
 
-        return id;
+        User user = new User();
+        user.setEmail(username);
+        user.setHashPassword(password);
+
+        UserTasks userTasks = new UserTasks(user);
+
+        if(userTasks.checkUser()){
+            return true;
+
+        }
+        return false;
     }
 
     //Registar utilizador
@@ -260,7 +260,7 @@ public class ServerClientHandler implements Runnable {
 
         System.out.println("\nuser: " + username + " / " + password + " / " + email);
 
-        String pHash = DataHandle.getSHA1Hex(password);
+        //String pHash = DataHandle.getSHA1Hex(password);
 
         //Adiciona o novo utilizador
         User user = new User();
@@ -271,7 +271,7 @@ public class ServerClientHandler implements Runnable {
         user.setWatchedlist(seenList);
         user.setWatchlist(watchlist);
         user.setPlaylists(playList);
-        user.setHashPassword(pHash);
+        user.setHashPassword(password);
         userTasks = new UserTasks(user);
         userTasks.addUser();
         user.set_id(userTasks.getUserID());
@@ -299,16 +299,6 @@ public class ServerClientHandler implements Runnable {
     //Actualizar Perfil
     private boolean updateProfile(String s, int id) {
         User user = new User();
-        boolean flag = false;
-        //Verifica se o utilizador existe
-        for (User u : this.users) {
-            if (u.getId() == id) {
-                user = u;
-                flag = true;
-            }
-        }
-
-        if (!flag) return flag;
 
         List<String> fields = readFrame(s);
 
@@ -331,59 +321,45 @@ public class ServerClientHandler implements Runnable {
 
         System.out.println("registered");
 
-        return flag;
+        return true;
     }
-
 
     //Obter informação para fazer o feed. Boolean all identifica o tipo de feed
     public String getFeed(String s, boolean all) {
-
+        VideoTasks videoTasks = new VideoTasks();
         List<String> auxList = readFrame(s);
 
         int VideoIndexStart = (Integer.parseInt(auxList.get(0)) - 1) * 10;
-        if (videos.size() < 1 || videos.size() < VideoIndexStart) {
+
+        //substituir videos por numero de videos na base de dados
+        int nVideos = videoTasks.getNumberOfVideos();
+
+        if (nVideos < 1 || nVideos < VideoIndexStart) {
             String[] auxArray = {"No videos"};
             return buildFrame((byte) 0, auxArray);
         }
 
-        //Ir buscar todos os videos à base de dados
-        //Se for do tipo Subscribed vai buscar uma lista dos videos nos canais do utilizador
-        ArrayList<Video> temp = new ArrayList<>();
-        if (!all) {
-            List<String> chan = self.getChannels();
-            for (Video v : videos) {
-                List<String> tag = v.getTags();
-                for (String t : tag)
-                    for (String c : chan)
-                        if (t.equals(c) && !temp.contains(v)) {
-                            temp.add(v);
-                        }
-            }
-        } else
-            //Se for all vai uma lista com todos os videos
-            temp = videos;
+        ArrayList<ObjectId> tempIDs = new ArrayList<>();
+        tempIDs = videoTasks.getIds();
 
         List<String> fieldList = new ArrayList<>();
 
-        //Asegura são enviados no máximo 10 videos da página pedida
-        int i = 0, j = 0;
-        for (Video v : temp) {
-            if (i < VideoIndexStart)
-                i++;
-            else if (j < 10) {
-                fieldList.add(v.getTitle());
-                fieldList.add(v.getAuthor());
-                j++;
-            }
+
+        //popular array 'temp' com os videos
+        for(int i = VideoIndexStart; i < nVideos; i++){
+            //fetches video
+            Video v = videoTasks.getVideoByIndex(tempIDs.get(i));
+            fieldList.add(v.getName());
+            fieldList.add(v.getAuthor());
         }
 
         String[] fieldArray = new String[fieldList.size()];
         fieldList.toArray(fieldArray);
 
         return buildFrame((byte) 0, fieldArray);
-
     }
 
+    /*
     //Pesquisa
     private String getSearchResults(String query) {
 
@@ -393,6 +369,7 @@ public class ServerClientHandler implements Runnable {
         String data = auxList.get(0);
 
         System.out.println("(449)data: " + data);
+
 
         String[] keywords = data.split(" ");
 
@@ -427,5 +404,5 @@ public class ServerClientHandler implements Runnable {
 
         return buildFrame((byte) 0, fieldArray);
 
-    }
+    }*/
 }

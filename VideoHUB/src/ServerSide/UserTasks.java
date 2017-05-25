@@ -272,7 +272,7 @@ public class UserTasks {
             System.out.println("getUserId() in UserTasks.java --- user null");
         }
         else{
-            System.out.println("userName: " + user.getName() +" author: " + user.getEmail());
+            System.out.println("userName: " + user.getName() +" email: " + user.getEmail());
             Bson filter = Filters.eq("name", user.getName());
             Bson filter2 = Filters.eq("email", user.getEmail());
 
@@ -289,4 +289,32 @@ public class UserTasks {
         }
         return null;
     }
+
+    public boolean checkUser(){
+        if(user == null || user.getEmail() == null){
+            System.out.println("mail: " + user.getEmail() +" HashPassword: " + user.getHashPassword());
+
+            System.out.println("checkUser() in UserTasks.java --- user null");
+        }
+        else{
+            System.out.println("mail: " + user.getEmail() +" HashPassword: " + user.getHashPassword());
+            Bson filter = Filters.eq("email", user.getEmail());
+            Bson filter2 = Filters.eq("hash", user.getHashPassword());
+
+
+            //output is desired _id of "name" and "email" queries
+            List<Document> results = mMongo.getCollection("users").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.match(filter2), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("_id", "$_id")))))).into(new ArrayList<>());
+
+            //must return just one element, unique email a user name.
+            //System.out.println("\n number of video with matched name: "+ results.size());
+            //System.out.println("\n results "+ results.get(0).getObjectId("_id"));
+            user.set_id(results.get(0).getObjectId("_id"));
+            if(results.get(0).getObjectId("_id") == null){
+                return false;
+            }
+
+        }
+        return true;
+    }
+
 }
