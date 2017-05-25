@@ -354,7 +354,7 @@ public class ServerClientHandler implements Runnable {
             Video v = videoTasks.getVideoByIndex(tempIDs.get(i));
             fieldList.add(v.getName());
             fieldList.add(v.getAuthor());
-            System.out.println("Name/Author: "+v.getName()+"/"+v.getAuthor());
+            //System.out.println("Name/Author: "+v.getName()+"/"+v.getAuthor());
         }
 
         String[] fieldArray = new String[fieldList.size()];

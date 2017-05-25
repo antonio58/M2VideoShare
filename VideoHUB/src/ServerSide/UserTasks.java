@@ -323,12 +323,16 @@ public class UserTasks {
             //output is desired _id of "name" and "email" queries
             List<Document> results = mMongo.getCollection("users").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.match(filter2), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("_id", "$_id")))))).into(new ArrayList<>());
 
+
             //must return just one element, unique email a user name.
-            //System.out.println("\n number of video with matched name: "+ results.size());
+            System.out.println("\n number of video with matched name: "+ results.size());
             //System.out.println("\n results "+ results.get(0).getObjectId("_id"));
-            user.set_id(results.get(0).getObjectId("_id"));
-            if(results.get(0).getObjectId("_id") == null){
+            if(results.size() == 0){
                 return false;
+            }
+            else{
+                user.set_id(results.get(0).getObjectId("_id"));
+
             }
 
         }
