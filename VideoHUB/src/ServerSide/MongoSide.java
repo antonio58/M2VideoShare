@@ -48,10 +48,6 @@ public class MongoSide {
         return collection;
     }
 
-    public MongoDatabase getDB(){
-        return this.database;
-    }
-
     //Set collection first!
     public void insertToCollection(){
         LOGGER.info("insertToCollection");
