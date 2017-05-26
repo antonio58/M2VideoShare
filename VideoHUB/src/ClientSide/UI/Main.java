@@ -139,6 +139,8 @@ public class Main extends Application {
     }
 
 
+
+
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Main.class.getResourceAsStream(fxml);

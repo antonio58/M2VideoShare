@@ -214,12 +214,6 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    protected void handlePlaylists(ActionEvent event) {
-        actiontarget.setText("Playlist button pressed");
-        actiontargetBox.setVisible(true);
-    }
-
-    @FXML
     protected void handleProfile(ActionEvent event) {
         actiontarget.setText("Profile button pressed");
         actiontargetBox.setVisible(true);
