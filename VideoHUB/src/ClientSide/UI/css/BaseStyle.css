@@ -48,6 +48,11 @@
     -fx-border-color: #000000;
 }
 
+.confirmSmall {
+    -fx-background-color: #FB9E03;
+    -fx-border-color: #000000;
+}
+
 .feeds {
     -fx-font-size: 10px;
     -fx-text-fill: #FB9E03;

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -47,19 +48,12 @@
         <items>
             <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="83.0" prefHeight="275.0" prefWidth="123.0" style="-fx-background-color: #525760;">
                 <children>
-                    <Separator layoutX="2.0" layoutY="75.0" prefHeight="15.0" prefWidth="120.0" />
+                    <Separator layoutX="3.0" layoutY="109.0" prefHeight="15.0" prefWidth="120.0" />
                     <Text id="text-feed" layoutX="-3.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playlists" translateX="5.0" />
-               <Button alignment="BOTTOM_LEFT" layoutY="42.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="New playlist" />
-               <Button fx:id="playlist1" alignment="BOTTOM_LEFT" layoutY="111.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Playlist 1" />
-               <Button fx:id="playlist2" alignment="BOTTOM_LEFT" layoutY="145.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Playlist 2" />
-               <Button fx:id="playlist3" alignment="BOTTOM_LEFT" layoutX="2.0" layoutY="182.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Playlist 3" />
-               <Button fx:id="playlist4" alignment="BOTTOM_LEFT" layoutX="2.0" layoutY="218.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Playlist 4" />
-               <Button fx:id="playlist5" alignment="BOTTOM_LEFT" layoutX="2.0" layoutY="252.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Playlist 5" />
-               <Button fx:id="playlist6" alignment="BOTTOM_LEFT" layoutX="2.0" layoutY="289.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Playlist 6" />
-               <Button fx:id="playlist7" alignment="BOTTOM_LEFT" layoutX="2.0" layoutY="322.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Playlist 7" />
-               <Button fx:id="playlist8" alignment="BOTTOM_LEFT" layoutX="2.0" layoutY="355.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Playlist 8" />
-               <Button fx:id="playlist9" alignment="BOTTOM_LEFT" layoutX="2.0" layoutY="388.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Playlist 9" />
-               <Button fx:id="playlist10" alignment="BOTTOM_LEFT" layoutX="2.0" layoutY="422.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Playlist 10" />
+               <Button fx:id="playlist1" alignment="BOTTOM_LEFT" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Favorites" />
+               <Button fx:id="playlist2" alignment="BOTTOM_LEFT" layoutY="176.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Watch later" />
+               <TextField layoutX="2.0" layoutY="43.0" prefHeight="26.0" prefWidth="120.0" promptText="New playlist" translateX="-1.0" />
+               <Button layoutX="65.0" layoutY="75.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="40.0" styleClass="confirmSmall" text="OK" translateX="16.0" />
                 </children>
             </AnchorPane>
         </items>
