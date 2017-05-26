@@ -21,6 +21,7 @@ public class MongoSide {
     private MongoDatabase database = null;
     private MongoCollection<Document> collection = null;
 
+
     public MongoSide(){
         mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
         database = connectDB();
@@ -51,8 +52,8 @@ public class MongoSide {
     public void insertToCollection(){
         LOGGER.info("insertToCollection");
         Document document = new Document()
-        .append("name", "Fernando")
-        .append("createdDate", new Date());
+                .append("name", "Fernando")
+                .append("createdDate", new Date());
         collection.insertOne(document);
     }
 

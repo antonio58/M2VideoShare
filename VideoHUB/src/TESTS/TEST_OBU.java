@@ -4,6 +4,8 @@ import Models.Obu;
 import ServerSide.ObuTasks;
 import org.bson.types.ObjectId;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,7 +16,7 @@ public class TEST_OBU {
     private static Obu obu = new Obu();
     private static ArrayList<ObjectId> allowedUsers = new ArrayList<>();
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         allowedUsers = populateAllowedUsers();
         obu = populateObuModel(0.92, "/etc/path/pk.txt", true, 4, "2001:690:2280:82a::4",new Date(), new Date(), allowedUsers , 5.5 ,"6661");
 
@@ -26,7 +28,8 @@ public class TEST_OBU {
 
         obuTasks = new ObuTasks(obu);
         obuTasks.addObu();
-
+        TEST_GRIDFS test = new TEST_GRIDFS();
+        test.test();
     }
 
     private static Obu populateObuModel(Double successRate, String path, boolean state, int badResult, String ipAddress, Date creationDate, Date resetDate, ArrayList<ObjectId> allowedUsers, double timeout, String pin){
