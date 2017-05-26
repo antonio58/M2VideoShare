@@ -32,17 +32,8 @@ public class PlaylistController implements Initializable {
     @FXML private GridPane grid8;
     @FXML private GridPane grid9;
     @FXML private GridPane grid10;
-    @FXML private GridPane grid11;
     @FXML private Button playlist1;
     @FXML private Button playlist2;
-    @FXML private Button playlist3;
-    @FXML private Button playlist4;
-    @FXML private Button playlist5;
-    @FXML private Button playlist6;
-    @FXML private Button playlist7;
-    @FXML private Button playlist8;
-    @FXML private Button playlist9;
-    @FXML private Button playlist10;
     @FXML private ImageView img1;
     @FXML private ImageView img2;
     @FXML private ImageView img3;
