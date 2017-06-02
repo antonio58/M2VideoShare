@@ -50,10 +50,10 @@
                 <children>
                     <Separator layoutX="3.0" layoutY="109.0" prefHeight="15.0" prefWidth="120.0" />
                     <Text id="text-feed" layoutX="-3.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playlists" translateX="5.0" />
-               <Button fx:id="playlist1" onMouseClicked="#handleSearch" alignment="BOTTOM_LEFT" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Favorites" />
+               <Button fx:id="playlist1" alignment="BOTTOM_LEFT" layoutY="135.0" mnemonicParsing="false" onMouseClicked="#handleSearch" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Favorites" />
                <Button fx:id="playlist2" alignment="BOTTOM_LEFT" layoutY="176.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" styleClass="menu" text="Watch later" />
                <TextField layoutX="2.0" layoutY="43.0" prefHeight="26.0" prefWidth="120.0" promptText="New playlist" translateX="-1.0" />
-               <Button layoutX="65.0" layoutY="75.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="40.0" styleClass="confirmSmall" text="OK" translateX="16.0" />
+               <Button layoutX="56.0" layoutY="75.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="49.0" styleClass="confirmSmall" text="OK" translateX="16.0" />
                 </children>
             </AnchorPane>
         </items>

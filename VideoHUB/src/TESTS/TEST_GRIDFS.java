@@ -1,5 +1,6 @@
 package TESTS;
 
+import ClientSide.UI.VideoPlayer;
 import Models.Hop;
 import ServerSide.DeliveryTasks;
 import ServerSide.MongoSide;
@@ -43,7 +44,7 @@ public class TEST_GRIDFS {
     public void test() throws IOException {
         collection = mMongo.getCollection("fs.chunks");
         //TODO: É preciso alterar aqui o ObjectId que corresponde ao video
-        Bson filter = Filters.eq("files_id", new ObjectId("5926fbc8e0c6260fa8b50498"));
+        Bson filter = Filters.eq("files_id", new ObjectId("59313eb6d2bccd385089caa8"));
         /* Results fica com todos os chunks que correspondem a este video. */
         List<Document> results = collection.aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("data", "$data")))))).into(new ArrayList<>());
         //Escolhe o ficheiro para qual serão escritos os chunks.
@@ -58,18 +59,17 @@ public class TEST_GRIDFS {
 
         fos.close();
         System.out.println(results.size());
+
 //        saveFile("/home/rafael/Documentos/videos/MyHorseisAmazing.mp4");
     }
 
-    public void saveFile(String path) throws FileNotFoundException {
+    public void saveFile(String path) throws IOException {
         MongoClient client = new MongoClient();
         File fich = new File(path);
         String filename = path.substring(path.lastIndexOf("/")+1, path.length());
-        int byteLength = (int)fich.length();
-        byte[] data = new byte[byteLength];
         GridFS gridFS = new GridFS(client.getDB("VideoHub"));
-        GridFSInputFile in = gridFS.createFile(data);
-        in.setChunkSize(261120);
+        GridFSInputFile in = gridFS.createFile(fich);
+        in.setChunkSize(8000);
         in.setFilename(filename);
         in.save();
     }

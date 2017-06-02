@@ -138,7 +138,13 @@ public class Main extends Application {
         }
     }
 
-
+    public void openPlaylist(){
+        try {
+            PlaylistController profile = (PlaylistController) replaceSceneContent("../UI/fxml/Playlist.fxml");
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 
     private Initializable replaceSceneContent(String fxml) throws Exception {

@@ -49,7 +49,7 @@
             <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="83.0" prefHeight="275.0" prefWidth="123.0" style="-fx-background-color: #525760;">
                 <children>
                     <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleProfile" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Profile" translateY="-12.0" AnchorPane.leftAnchor="2.0" />
-                    <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="185.0" mnemonicParsing="false" onAction="#handlePlaylists" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Playlists" translateY="-8.0" />
+                    <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="185.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Playlists" translateY="-8.0" />
                     <TextField fx:id="query" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="121.0" promptText="Search..." />
                     <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleWatchList" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Watchlist" translateY="-2.0" />
                     <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="100.0" layoutY="27.0" onMousePressed="#handleSearch" pickOnBounds="true" preserveRatio="true">
@@ -105,7 +105,7 @@
                      </padding>
                      <ImageView fx:id="img1" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true">
                          <image>
-                             <Image url="@../img/pepe" />
+                             <Image url="@../img/bbc.png" />
                          </image>
                      </ImageView>
                      <Text fx:id="title1" fill="#000000f7" text="Video 1" translateX="5.0" translateY="-10.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -127,7 +127,7 @@
                      </padding>
                      <ImageView fx:id="img2" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true" translateY="3.0">
                          <image>
-                             <Image url="@../img/frank" />
+                             <Image url="@../img/trip.jpg" />
                          </image>
                      </ImageView>
                      <Text fx:id="title2" text="Video 2" translateX="5.0" translateY="-13.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
