@@ -1,4 +1,4 @@
-package Client;
+/*package Client;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 /**
  * The Project fx_play was created by
  * António Lourenço on 21, April of 2017.
- */
+ *
 public class FeedController implements Initializable{
     @FXML private Text actiontarget;
     @FXML private HBox actiontargetBox;
@@ -197,3 +197,4 @@ public class FeedController implements Initializable{
     }
 
 }
+*/

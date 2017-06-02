@@ -14,22 +14,31 @@ public class Video {
     String author;
     List<String> tags;
     LocalDateTime date;
+    String path;
 
     public Video() {
         id = 0;
         this.title = "";
         this.author = "";
-        this.tags = Arrays.asList(null);
+        this.tags = null;
         this.date = LocalDateTime.now();
+        this.path = "";
     }
 
-    public Video(int i, String title, String author, List<String> tags, LocalDateTime d) {
+    public Video(int i, String title, String author, List<String> tags, LocalDateTime d, String path) {
         id = i;
         this.title = title;
         this.author = author;
         this.tags = tags;
         this.date = d;
+        this.path = path;
     }
+
+    public String getPath() {
+        return path;
+    }
+
+    public int getId(){ return this.id;}
 
     public String getTitle() {
         return title;

@@ -20,34 +20,38 @@ public class Server {
         int clientNumber = 0;
 
         //********************************************************
-        List<String> chan = Arrays.asList("Cats", "Fails", "Funny");
+        List<String> chan = Arrays.asList("cats", "fails", "funny");
         User u = new User(1, "esse","esse@email.com", "pass", chan);
 
-        List<String> chan2 = Arrays.asList("Video Games", "Music");
+        List<String> chan2 = Arrays.asList("video games", "music");
         User u2 = new User(2, "q","q@email.com", "q", chan2);
         //--------------------------------------------------------
-        List<String> tag = Arrays.asList("Cats", "Music");
+        List<String> tag = Arrays.asList("cats", "music", "animals");
         LocalDateTime d = LocalDateTime.of(1994,5,9,1,1);
-        Video v = new Video(1, "1: Cats playing piano","phatguy", tag, d);
+        Video v = new Video(1, "1: Cats playing piano","phatguy", tag, d, "");
 
-        List<String> tag2 = Arrays.asList("Sport", "Fails", "Funny");
+        List<String> tag2 = Arrays.asList("sport", "fails", "funny");
         LocalDateTime d2 = LocalDateTime.of(2005,2,3,4,5);
-        Video v2 = new Video(2, "2: Boxer get punched in the balls","just4lulz", tag2, d2);
+        Video v2 = new Video(2, "2: Boxer get punched in the balls","just4lulz", tag2, d2, "");
 
-        List<String> tag3 = Arrays.asList("Video Games", "Music");
+        List<String> tag3 = Arrays.asList("video games", "music");
         LocalDateTime d3 = LocalDateTime.of(2017,2,16,0,0);
-        Video v3 = new Video(3, "3: Guitar Hero crazy pro mode","gamer4life", tag3, d3);
+        Video v3 = new Video(3, "3: Guitar Hero crazy pro mode","gamer4life", tag3, d3, "");
 
-        List<String> tag4 = Arrays.asList("Fails", "Funny");
+        List<String> tag4 = Arrays.asList("fails", "funny");
         LocalDateTime d4 = LocalDateTime.now();
-        Video v4 = new Video(4, "4: Best Fails on live TV!","paparazi", tag4, d4);
+        Video v4 = new Video(4, "4: Best Fails on live TV!","paparazi", tag4, d4, "");
+
+        List<String> tag5 = Arrays.asList("music", "funny", "video games");
+        LocalDateTime d5 = LocalDateTime.now();
+        Video v5 = new Video(5, "Pikachu on Acid", "PinkUmbreon", tag5, d5, "/home/mangas/Documents/VideoHub/DB/PikachuOnAcid.mp4");
         //*********************************************************
 
         ArrayList<User> users = new ArrayList<>();
         users.add(u); users.add(u2);
 
         ArrayList<Video> videos = new ArrayList<>();
-        videos.add(v); videos.add(v2); videos.add(v3); videos.add(v4);
+        videos.add(v); videos.add(v2); videos.add(v3); videos.add(v4); videos.add(v5);
 
         System.out.println("Server Online");
         try {

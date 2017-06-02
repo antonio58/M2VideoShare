@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -64,82 +65,92 @@ public class MainMenuController implements Initializable {
     @FXML private Text author10;
     @FXML private Button next;
     @FXML private TextField query;
+    @FXML private Text wText;
 
     private int page;
     private byte feedType;
     private Main application;
     private ServerComm sc;
+    String[] Videos;
 
     public void setApp(Main application, ServerComm sc, int p, String data, byte fT){
         this.application = application;
         this.sc = sc;
         this.page = p;
         this.feedType = fT;
-        String[] aux = data.split("!:split:!");
-        System.out.println("data: "+data+"\nlength: "+aux.length);
+        if(data.equals("No videos")||data.isEmpty()){
+            grid1.setVisible(false);
+            wText.setVisible(true);
+            wText.setText("No videos found...");
+        }
+        else {
+            wText.setVisible(false);
+            String[] aux = data.split("!:split:!");
+            System.out.println("data: " + data + "\nlength: " + aux.length);
+            Videos = aux;
 
 
-
-        if(aux.length > 0){
-            String[] aux2 = aux[0].split("</split/>");
-            grid1.setVisible(true);
-            //img1.setImage(new Image(aux2[0]));
-            title1.setText(aux2[0]);
-            author1.setText(aux2[1]);
-            if(aux.length > 1){
-                aux2 = aux[1].split("</split/>");
-                grid2.setVisible(true);
-                //img2.setImage(new Image(aux2[0]));
-                title2.setText(aux2[0]);
-                author2.setText(aux2[1]);
-                if(aux.length > 2){
-                    aux2 = aux[2].split("</split/>");
-                    grid3.setVisible(true);
-                    //img3.setImage(new Image(aux2[0]));
-                    title3.setText(aux2[0]);
-                    author3.setText(aux2[1]);
-                    if(aux.length > 3){
-                        aux2 = aux[3].split("</split/>");
-                        grid4.setVisible(true);
-                        //img4.setImage(new Image(aux2[0]));
-                        title4.setText(aux2[0]);
-                        author4.setText(aux2[1]);
-                        if(aux.length > 4){
-                            aux2 = aux[4].split("</split/>");
-                            grid5.setVisible(true);
-                            //img5.setImage(new Image(aux2[0]));
-                            title5.setText(aux2[0]);
-                            author5.setText(aux2[1]);
-                            if(aux.length > 5){
-                                aux2 = aux[5].split("</split/>");
-                                grid6.setVisible(true);
-                                //img6.setImage(new Image(aux2[0]));
-                                title6.setText(aux2[0]);
-                                author6.setText(aux2[1]);
-                                if(aux.length > 6){
-                                    aux2 = aux[6].split("</split/>");
-                                    grid7.setVisible(true);
-                                    //img7.setImage(new Image(aux2[0]));
-                                    title7.setText(aux2[0]);
-                                    author7.setText(aux2[1]);
-                                    if(aux.length > 7){
-                                        aux2 = aux[7].split("</split/>");
-                                        grid8.setVisible(true);
-                                        //img8.setImage(new Image(aux2[0]));
-                                        title8.setText(aux2[0]);
-                                        author8.setText(aux2[1]);
-                                        if(aux.length > 8){
-                                            aux2 = aux[8].split("</split/>");
-                                            grid9.setVisible(true);
-                                            //img9.setImage(new Image(aux2[0]));
-                                            title9.setText(aux2[0]);
-                                            author9.setText(aux2[1]);
-                                            if(aux.length > 9){
-                                                aux2 = aux[9].split("</split/>");
-                                                grid10.setVisible(true);
-                                                //img10.setImage(new Image(aux2[0]));
-                                                title10.setText(aux2[0]);
-                                                author10.setText(aux2[1]);
+            if (aux.length > 0) {
+                String[] aux2 = aux[0].split("</split/>");
+                grid1.setVisible(true);
+                //img1.setImage(new Image(aux2[0]));
+                title1.setText(aux2[0]);
+                author1.setText(aux2[1]);
+                if (aux.length > 1) {
+                    aux2 = aux[1].split("</split/>");
+                    grid2.setVisible(true);
+                    //img2.setImage(new Image(aux2[0]));
+                    title2.setText(aux2[0]);
+                    author2.setText(aux2[1]);
+                    if (aux.length > 2) {
+                        aux2 = aux[2].split("</split/>");
+                        grid3.setVisible(true);
+                        //img3.setImage(new Image(aux2[0]));
+                        title3.setText(aux2[0]);
+                        author3.setText(aux2[1]);
+                        if (aux.length > 3) {
+                            aux2 = aux[3].split("</split/>");
+                            grid4.setVisible(true);
+                            //img4.setImage(new Image(aux2[0]));
+                            title4.setText(aux2[0]);
+                            author4.setText(aux2[1]);
+                            if (aux.length > 4) {
+                                aux2 = aux[4].split("</split/>");
+                                grid5.setVisible(true);
+                                //img5.setImage(new Image(aux2[0]));
+                                title5.setText(aux2[0]);
+                                author5.setText(aux2[1]);
+                                if (aux.length > 5) {
+                                    aux2 = aux[5].split("</split/>");
+                                    grid6.setVisible(true);
+                                    //img6.setImage(new Image(aux2[0]));
+                                    title6.setText(aux2[0]);
+                                    author6.setText(aux2[1]);
+                                    if (aux.length > 6) {
+                                        aux2 = aux[6].split("</split/>");
+                                        grid7.setVisible(true);
+                                        //img7.setImage(new Image(aux2[0]));
+                                        title7.setText(aux2[0]);
+                                        author7.setText(aux2[1]);
+                                        if (aux.length > 7) {
+                                            aux2 = aux[7].split("</split/>");
+                                            grid8.setVisible(true);
+                                            //img8.setImage(new Image(aux2[0]));
+                                            title8.setText(aux2[0]);
+                                            author8.setText(aux2[1]);
+                                            if (aux.length > 8) {
+                                                aux2 = aux[8].split("</split/>");
+                                                grid9.setVisible(true);
+                                                //img9.setImage(new Image(aux2[0]));
+                                                title9.setText(aux2[0]);
+                                                author9.setText(aux2[1]);
+                                                if (aux.length > 9) {
+                                                    aux2 = aux[9].split("</split/>");
+                                                    grid10.setVisible(true);
+                                                    //img10.setImage(new Image(aux2[0]));
+                                                    title10.setText(aux2[0]);
+                                                    author10.setText(aux2[1]);
+                                                }
                                             }
                                         }
                                     }
@@ -149,10 +160,10 @@ public class MainMenuController implements Initializable {
                     }
                 }
             }
-        }
 
-        if(aux.length<10)
-            next.setVisible(false);
+            if (aux.length < 10)
+                next.setVisible(false);
+        }
     }
 
 
@@ -244,6 +255,18 @@ public class MainMenuController implements Initializable {
     protected void handleStream(MouseEvent event) {
         actiontarget.setText("Stream button pressed");
         actiontargetBox.setVisible(true);
-        application.openStream();
+        String id = ((GridPane)event.getSource()).getId();
+
+        String n = ""+id.charAt(4);
+        if(id.length()>5)
+            n = n.concat(""+id.charAt(5));
+        System.out.println("handlestream: "+n);
+
+        int i = Integer.parseInt(n);
+
+        //String video = sc.getVideoInfo(i);
+        application.openStream(Videos[i-1]);
+
+        /*String data = sc.getVideoInfo();*/
     }
 }
