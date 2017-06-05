@@ -126,11 +126,12 @@ public class Main extends Application {
         }
     }
 
-    public void openPlayer(GridPane grid){
+    public void openPlayer(GridPane grid, String fileName){
         try {
             VideoPlayer video = new VideoPlayer();
             Stage stage = new Stage();
-            video.start(stage, grid);
+            String path = "";
+            video.start(stage, grid, fileName);
             grid.setDisable(true);
             stage.setAlwaysOnTop(true);
         } catch (Exception ex) {

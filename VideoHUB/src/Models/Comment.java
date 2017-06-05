@@ -13,6 +13,11 @@ public class Comment {
 
     public Comment(){}
 
+    public Comment(String text, String user_id){
+        this.text = text;
+        this.user_id = user_id;
+    }
+
     public Comment(String text, Date date, String user_id) {
         this.text = text;
         this.user_id = user_id;

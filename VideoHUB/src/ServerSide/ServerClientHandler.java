@@ -6,9 +6,7 @@ import Models.User;
 import Models.Video;
 import org.bson.types.ObjectId;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -410,4 +408,105 @@ public class ServerClientHandler implements Runnable {
         return buildFrame((byte) 0, fieldArray);
 
     }
+
+/*
+    private String getVideoInfo(String data){
+
+        List<String> aux = readFrame(data);
+
+        int id = Integer.parseInt(aux.get(0));
+        Video vid = new Video();
+        for(Video v : videos){
+            if(v.getId()==id){
+                vid = v;
+                break;
+            }
+        }
+        String[] fields = {vid.getTitle(),vid.getAuthor(),vid.getPath(),vid.getTags().toString()};
+
+
+        return buildFrame((byte)0, fields);
+    }
+
+    private void sendVideo(String vid) throws IOException {
+
+        int count = 0;
+
+        String[] aux2 = {""};
+        String ack = buildFrame((byte) 15, aux2);
+        send(ack);
+
+        System.out.println("Getting video");
+
+        List<String> foo = readFrame(vid);
+        int id = Integer.parseInt(foo.get(0));
+        String path = "";
+        for(Video v : videos){
+            if(v.getId()==id)
+                path = v.getPath();
+        }
+        File f = new File(path);
+        FileInputStream fis;
+        String newName;
+        int fileSize = (int) f.length();
+        int nChunks = 0, read = 0, readLength = 8000;
+        byte[] byteChunk;
+        fis = new FileInputStream(f);
+
+        /*byte[] bFile = Files.readAllBytes(f.toPath());
+        System.out.println("File size: "+bFile.length);*/
+/*
+        System.out.println("Sending video");
+
+        //byte[] temp = new byte[4000];
+        //int pointer = 0;
+        //while(pointer<bFile.length){
+        while (fileSize > 0) {
+
+            if (fileSize <= 8000) {
+                readLength = fileSize;
+            }
+            byteChunk = new byte[readLength];
+            read = fis.read(byteChunk, 0, readLength);
+            fileSize -= read;
+
+            /*for(int i = pointer; i < pointer+4000 && i < bFile.length; i++){
+                temp[i-pointer] = bFile[i];
+
+            }
+            pointer += 4000;
+            count++;
+
+            System.out.println("Sent "+pointer);
+            System.out.println("Frame number: "+count);*/
+
+
+/*
+            byte[] aux = new byte[byteChunk.length+1];
+            /*aux[0] = 14;
+            for(int i = 0; i<byteChunk.length; i++)
+                aux[i+1] = byteChunk[i];
+            dos.write(byteChunk);
+            dos.flush();*//*
+            String auxS = new String(byteChunk);
+            String[] auxA = {auxS};
+            auxS = buildFrame((byte)14, auxA);
+            auxS = talk(auxS);
+            //dis.read(aux);
+            while(auxS.charAt(0)!=(byte)15) {
+                dos.writeUTF(auxS);
+                dos.flush();
+                dis.read(aux);
+            }
+
+        }
+
+        System.out.println("Sending frame 16");
+        String auxS = "";
+        String[] auxA = {auxS};
+        auxS = buildFrame((byte)16, auxA);
+        auxS = talk(auxS);
+        System.out.println("File Sent");
+
+    }*/
 }

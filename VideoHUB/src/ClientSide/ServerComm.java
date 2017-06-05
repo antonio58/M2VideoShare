@@ -36,7 +36,15 @@ public class ServerComm {
         this.dis = dis;
     }
 
-    private String talk(String message){
+    public DataOutputStream getDos() {
+        return dos;
+    }
+
+    public DataInputStream getDis() {
+        return dis;
+    }
+
+    public String talk(String message){
         String reply = "";
         try {
             dos.writeUTF(message);
@@ -52,7 +60,7 @@ public class ServerComm {
         return reply;
     }
 
-    private String buildFrame(byte type, String[] fields){
+    public String buildFrame(byte type, String[] fields){
 
         int nFields = fields.length;
         int headerPointer = 1;
@@ -210,45 +218,14 @@ public class ServerComm {
 
         String[] fields = {user,pass,email};
         String frame = buildFrame((byte)4, fields);
-        /*
-
-        byte[] ubl = ByteBuffer.allocate(4).putInt(user.length()).array();
-        byte[] pbl = ByteBuffer.allocate(4).putInt(pass.length()).array();
-        byte[] ebl = ByteBuffer.allocate(4).putInt(email.length()).array();
-
-        byte[] header = new byte[13];
-        header[0] = (byte) 4;
-        for (int i = 1; i < 13; i++) {
-            if (i < 5) {
-                header[i] = ubl[i - 1];
-            } else if(i < 9){
-                header[i] = pbl[i - 5];
-            } else
-                header[i] = ebl[i-9];
-        }
-        String aux = user + pass + email;
-        byte[] payload = aux.getBytes();
-
-        byte[] packet = new byte[payload.length + header.length];
-
-        for (int i = 0; i < payload.length + header.length; i++) {
-            if (i < header.length) {
-                packet[i] = header[i];
-            } else {
-                packet[i] = payload[i - header.length];
-            }
-        }
-        String message = new String(packet);
-
-        message = message.concat("<!end!>");*/
 
         String reply = talk(frame);
 
         if (reply.equals("check_4")){
-            System.out.println("true dat");
+            System.out.println("Profile updated");
             return true;
         }
-        System.out.println("shiet");
+        //System.out.println("");
         return false;
 
     }
@@ -279,72 +256,6 @@ public class ServerComm {
         }
 
         return info;
-        /*
-        String data = new String();
-
-        System.out.println("Decode string");
-        byte[] r = str.getBytes(StandardCharsets.UTF_8);
-        int total = 5;
-        /*int nVid = r[0];
-        System.out.println("nVid: "+nVid);*/
-/*
-        byte[] bnVid = new byte[4];
-        for(int i = 0; i<4; i++){
-            bnVid[i] = r[i];
-        }
-
-        int nVid = ByteBuffer.wrap(bnVid).getInt();
-        System.out.println("nVid: "+nVid);
-
-        for(int j = 0; j<nVid; j++){
-
-            byte[] t = new byte[4];
-            for (int i = total; i < total+4; i++) {
-                t[i - total] = r[i];
-                //System.out.println(i + "u" + r[i]);
-            }
-            total += 4;
-            byte[] a = new byte[4];
-            for (int i = total; i < total+4; i++) {
-                a[i - total] = r[i];
-                //System.out.println(i + "p" + r[i]);
-            }
-
-            int tl = ByteBuffer.wrap(t).getInt();
-            int al = ByteBuffer.wrap(a).getInt();
-            total += 4;
-
-            System.out.println("n: " + tl + " / " + al);
-
-            System.out.print("title: ");
-            byte[] tb = new byte[tl];
-            for (int i = total; i < total + tl; i++) {
-                tb[i - total] = r[i];
-                System.out.print((char) r[i]);
-            }
-            total += tl;
-            System.out.println("\nauthor: ");
-            byte[] ab = new byte[al];
-            for (int i = total; i < total + al; i++) {
-                ab[i - (total)] = r[i];
-                System.out.print((char) r[i]);
-            }
-            total += al;
-
-
-            String title = new String(tb);
-            String author = new String(ab);
-
-            str = title+"</split/>"+author;
-            System.out.println("String"+j+": "+str);
-
-            data = data.concat(str+"!:split:!");
-            total++;
-        }
-
-
-        System.out.println("sc.data: "+data);
-        return data;*/
     }
 
     public String getSearchResults(String query){

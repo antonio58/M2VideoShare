@@ -214,6 +214,12 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
+    protected void handlePlaylists(ActionEvent event) {
+        actiontarget.setText("Playlist button pressed");
+        actiontargetBox.setVisible(true);
+    }
+
+    @FXML
     protected void handleProfile(ActionEvent event) {
         actiontarget.setText("Profile button pressed");
         actiontargetBox.setVisible(true);
@@ -231,10 +237,24 @@ public class MainMenuController implements Initializable {
 
     @FXML
     protected void handleStream(MouseEvent event) {
-        actiontarget.setText("Stream button pressed");
+        /*actiontarget.setText("Stream button pressed");
         actiontargetBox.setVisible(true);
         String id = ((GridPane)event.getSource()).getId();
         int i = Integer.parseInt(id);
+        application.openStream(Videos[i-1]);*/
+
+        actiontarget.setText("Stream button pressed");
+        actiontargetBox.setVisible(true);
+        String id = ((GridPane)event.getSource()).getId();
+
+        String n = ""+id.charAt(4);
+        if(id.length()>5)
+            n = n.concat(""+id.charAt(5));
+        System.out.println("handlestream: "+n);
+
+        int i = Integer.parseInt(n);
+
+        //String video = sc.getVideoInfo(i);
         application.openStream(Videos[i-1]);
     }
 }

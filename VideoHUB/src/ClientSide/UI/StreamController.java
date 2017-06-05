@@ -1,6 +1,7 @@
 package ClientSide.UI;
 
 import ClientSide.ServerComm;
+import ClientSide.DownloadHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -22,6 +24,7 @@ public class StreamController implements Initializable {
     @FXML Text descricao;
     private Main application;
     private ServerComm sc;
+    int id;
 
     public void setApp(Main application, ServerComm s, String data){
         this.application = application;
@@ -43,13 +46,25 @@ public class StreamController implements Initializable {
     }
 
     @FXML
-    protected void handlePlay(ActionEvent event){
-        this.application.openPlayer(gridPane);
-    }
-    
-
-    @FXML
     protected void handleLogout(ActionEvent event) {
         this.application.openWelcome();
     }
+
+    @FXML
+    protected void handlePlay(ActionEvent event){
+        String aux = String.valueOf(this.id);
+        String[] aux2 = {aux};
+        aux = sc.buildFrame((byte)8, aux2);
+        aux = sc.talk(aux);
+        List<String> aux3 = sc.readFrame(aux);
+        aux = aux3.get(2);
+        int i = aux.lastIndexOf("/");
+        aux = aux.substring(i,aux.length());
+        //Correr thread download aqui
+        DownloadHandler dh = new DownloadHandler(sc, this.id, aux);
+        Thread DH = new Thread(dh);
+        DH.start();
+        this.application.openPlayer(gridPane, aux);
+    }
+
 }
