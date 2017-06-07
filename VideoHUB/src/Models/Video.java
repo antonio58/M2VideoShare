@@ -100,8 +100,8 @@ public class Video {
         this.deliveries = deliveries;
     }
 
-    public int getViews() {
-        return views;
+    public String getViews() {
+        return String.valueOf(views);
     }
 
     public void setViews(int views) {
@@ -155,7 +155,6 @@ public class Video {
     public void setN_blocks(int n_blocks) {
         this.n_blocks = n_blocks;
     }
-
 
     public Date getCreationDate() {
         return creationDate;

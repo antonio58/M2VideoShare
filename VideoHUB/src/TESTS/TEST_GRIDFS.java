@@ -2,9 +2,12 @@ package TESTS;
 
 import ClientSide.UI.VideoPlayer;
 import Models.Hop;
+import Models.Video;
 import ServerSide.DeliveryTasks;
 import ServerSide.MongoSide;
 
+import ServerSide.ServerClientHandler;
+import ServerSide.VideoTasks;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
@@ -27,11 +30,12 @@ import org.bson.types.ObjectId;
 import org.bson.types.Binary;
 
 
-
+import javax.print.Doc;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by rafael on 25-05-2017.
@@ -44,16 +48,16 @@ public class TEST_GRIDFS {
     public void test() throws IOException {
         collection = mMongo.getCollection("fs.chunks");
         //TODO: É preciso alterar aqui o ObjectId que corresponde ao video
-        Bson filter = Filters.eq("files_id", new ObjectId("59313eb6d2bccd385089caa8"));
+        Bson filter = Filters.eq("files_id", new ObjectId("5937c430d2bccd4c8f30b750"));
         /* Results fica com todos os chunks que correspondem a este video. */
         List<Document> results = collection.aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("data", "$data")))))).into(new ArrayList<>());
         //Escolhe o ficheiro para qual serão escritos os chunks.
         FileOutputStream fos = new FileOutputStream(new File("abc.mp4"),true);
-        Binary aux = null;
+        Binary aux;
+        Binary aux2;
         //Saca os chunks e escreve no ficheiro
         for(int i = 0; i < results.size(); i++) {
             aux = (Binary)results.get(i).get("data");
-            System.out.println(aux.getData());
             fos.write(aux.getData());
         }
 
@@ -62,6 +66,9 @@ public class TEST_GRIDFS {
 
 //        saveFile("/home/rafael/Documentos/videos/MyHorseisAmazing.mp4");
     }
+
+
+
 
     public void saveFile(String path) throws IOException {
         MongoClient client = new MongoClient();

@@ -186,7 +186,8 @@ public class VideoTasks{
         video.setPremium(results.get(0).getBoolean("premium"));
         video.setCreationDate(results.get(0).getDate("creationDate"));
         video.setViews(results.get(0).getInteger("views"));
-
+        video.setTags(tags);
+        video.setCommentList(comments);
         //System.out.println("\ngetVideoIndex() video: "+ video.toString());
 
         return video;

@@ -23,11 +23,9 @@ public class WelcomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         actiontargetBox.setVisible(false);
-
     }
 
-    @FXML
-    void handleLogIn(ActionEvent event) {
+    @FXML void handleLogIn(ActionEvent event) {
         actiontarget.setText("Log in button pressed");
         actiontargetBox.setVisible(true);
         this.application.openLogin();
