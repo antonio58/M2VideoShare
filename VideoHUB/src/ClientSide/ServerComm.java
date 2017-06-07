@@ -285,5 +285,11 @@ public class ServerComm {
 
         return info;
     }
+
+    public String getVideoInfo(String id){
+
+
+        return null;
+    }
 }
 

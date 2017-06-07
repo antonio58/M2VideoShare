@@ -10,12 +10,14 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 
 import java.io.*;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -129,9 +131,9 @@ public class ServerClientHandler implements Runnable {
                         dos.writeUTF(info);
                         break;
 
-//                    case 13:
-//                        sendVideo(response);
-//                        break;
+                    case 13:
+                        sendVideo(response);
+                        break;
                 }
 
 
@@ -256,7 +258,6 @@ public class ServerClientHandler implements Runnable {
             e.printStackTrace();
         }
     }
-
 
     //Funções de tratamento de dados de comunicação
 
@@ -394,12 +395,20 @@ public class ServerClientHandler implements Runnable {
             //fetches video
             Video v = videoTasks.getVideoByIndex(tempIDs.get(i));
             fieldList.add(v.getName());
-            fieldList.add(v.getAuthor());
+
+            collection = mMongo.getCollection("users");
+            Bson filter = Filters.eq("_id", new ObjectId(v.getAuthor()));
+            /* Results fica com todos os chunks que correspondem a este video. */
+            List<Document> results = collection.aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("name", "$name")))))).into(new ArrayList<>());
+            String name = results.get(0).getString("name");
+            fieldList.add(name);
+            fieldList.add(v.get_id().toString());
             //System.out.println("Name/Author: "+v.getName()+"/"+v.getAuthor());
         }
 
         String[] fieldArray = new String[fieldList.size()];
         fieldList.toArray(fieldArray);
+        System.out.println("TRAMA:\n"+fieldList.toString());
 
         return buildFrame((byte) 0, fieldArray);
     }
@@ -443,6 +452,7 @@ public class ServerClientHandler implements Runnable {
         for (Video v : temp) {
             auxList.add(v.getName());
             auxList.add(v.getAuthor());
+            auxList.add(v.get_id().toString());
         }
 
         String[] fieldArray = new String[auxList.size()];
@@ -453,7 +463,7 @@ public class ServerClientHandler implements Runnable {
     }
 
     //Obter a info do video
-    private String getVideoInfo(String s) {
+    private String getVideoInfo(String s)   {
         List<String> fields = readFrame(s);
         ObjectId id = new ObjectId(fields.get(0));
         Video vid = videoTasks.getVideoByIndex(id);
@@ -462,85 +472,61 @@ public class ServerClientHandler implements Runnable {
         return buildFrame((byte) 0, info);
     }
 
-//    private void sendVideo(String vid) throws IOException {
-//
-//        int count = 0;
-//
-//        String[] aux2 = {""};
-//        String ack = buildFrame((byte) 15, aux2);
-//        send(ack);
-//
-//        System.out.println("Getting video");
-//
-//        List<String> foo = readFrame(vid);
-//        int id = Integer.parseInt(foo.get(0));
-//        String path = "";
-//        for (Video v : videos) {
-//            if (v.getId() == id)
-//                path = v.getPath();
-//        }
-//        File f = new File(path);
-//        FileInputStream fis;
-//        String newName;
-//        int fileSize = (int) f.length();
-//        int nChunks = 0, read = 0, readLength = 8000;
-//        byte[] byteChunk;
-//        fis = new FileInputStream(f);
-//
-//        byte[] bFile = Files.readAllBytes(f.toPath());
-//        System.out.println("File size: " + bFile.length);*/
-//
-//        System.out.println("Sending video");
-//
-//        byte[] temp = new byte[4000];
-//        int pointer = 0;
-//        while (pointer < bFile.length) {
-//            while (fileSize > 0) {
-//
-//                if (fileSize <= 8000) {
-//                    readLength = fileSize;
-//                }
-//                byteChunk = new byte[readLength];
-//                read = fis.read(byteChunk, 0, readLength);
-//                fileSize -= read;
-//
-//                for (int i = pointer; i < pointer + 4000 && i < bFile.length; i++) {
-//                    temp[i - pointer] = bFile[i];
-//
-//                }
-//                pointer += 4000;
-//                count++;
-//
-//                System.out.println("Sent " + pointer);
-//                System.out.println("Frame number: " + count);
-//
-//
-//                byte[] aux = new byte[byteChunk.length + 1];
-//                aux[0] = 14;
-//                for (int i = 0; i < byteChunk.length; i++)
-//                    aux[i + 1] = byteChunk[i];
-//                dos.write(byteChunk);
-//                dos.flush();*//*
-//                String auxS = new String(byteChunk);
-//                String[] auxA = {auxS};
-//                auxS = buildFrame((byte) 14, auxA);
-//                auxS = talk(auxS);
-//                //dis.read(aux);
-//                while (auxS.charAt(0) != (byte) 15) {
-//                    dos.writeUTF(auxS);
-//                    dos.flush();
-//                    dis.read(aux);
-//                }
-//
-//            }
-//
-//            System.out.println("Sending frame 16");
-//            String auxS = "";
-//            String[] auxA = {auxS};
-//            auxS = buildFrame((byte) 16, auxA);
-//            auxS = talk(auxS);
-//            System.out.println("File Sent");
-//
-//        }
-//    }
+    private void sendVideo(String vid) throws IOException {
+
+        int count = 0;
+        Binary aux;
+
+        String[] aux2 = {""};
+        String ack = buildFrame((byte) 15, aux2);
+        send(ack);
+
+        System.out.println("Getting video");
+
+        List<String> foo = readFrame(vid);
+        String id = foo.get(0);
+        System.out.println("id: "+id);
+        //id: 5938084ad2bccd1992a35bf5
+
+        collection = mMongo.getCollection("fs.chunks");
+        Bson filter = Filters.eq("files_id", new ObjectId(id));
+        List<Document> results = collection.aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("data", "$data")))))).into(new ArrayList<>());
+
+        System.out.println("Sending video");
+
+        for(int i = 0; i < results.size(); i++) {
+            aux = (Binary)results.get(i).get("data");
+            byte[] data = aux.getData();
+            byte[] auxByte = new byte[10];
+            String end = "<!end!>";
+
+            byte[] frame = new byte[data.length+5/*+end.length()*/];
+            frame[0] = (byte)14;
+
+            byte[] dataSize = ByteBuffer.allocate(4).putInt(data.length).array();
+            for(int j = 1; j <4 ; j++){
+                frame[j] = dataSize[j-1];
+            }
+            //String auxStr = aux;
+
+            for(int j= 0; j<data.length; j++){
+                frame[j+5] = data[j];
+            }
+            /*byte[] endB = end.getBytes();
+            for(int j = 0; j<endB.length; j++ ){
+                frame[data.length+5+j] = endB[j];
+            }*/
+
+            do {
+                dos.write(frame);
+                dis.read(auxByte);
+            }
+            while(auxByte[0]!=15);
+
+        }
+        byte[] auxByte = {(byte)16};
+        dos.write(auxByte);
+
+        System.out.println("File sent");
+    }
 }

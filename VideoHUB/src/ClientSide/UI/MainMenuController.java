@@ -80,12 +80,14 @@ public class MainMenuController implements Initializable {
         String[] aux = data.split("!:split:!");
         System.out.println("data: "+data+"\nlength: "+aux.length);
         Videos = aux;
+        System.out.println(data);
 
 
 
         if(aux.length > 0){
             String[] aux2 = aux[0].split("</split/>");
             grid1.setVisible(true);
+
             //img1.setImage(new Image(aux2[0]));
             title1.setText(aux2[0]);
             author1.setText(aux2[1]);
@@ -247,14 +249,17 @@ public class MainMenuController implements Initializable {
         actiontargetBox.setVisible(true);
         String id = ((GridPane)event.getSource()).getId();
 
-        String n = ""+id.charAt(4);
-        if(id.length()>5)
-            n = n.concat(""+id.charAt(5));
+        System.out.println(id);
+        String n = ""+id.charAt(3);
+        if(id.length()>4)
+            n = n.concat(""+id.charAt(4));
         System.out.println("handlestream: "+n);
 
         int i = Integer.parseInt(n);
+        String[] aux2 = Videos[i-1].split("</split/>");
+        System.out.println(Videos[i-1]);
 
-        //String video = sc.getVideoInfo(i);
+        //String video = sc.getVideoInfo(aux2[1]);
         application.openStream(Videos[i-1]);
     }
 }

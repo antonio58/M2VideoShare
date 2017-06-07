@@ -23,10 +23,10 @@ public class TEST_VIDEOS {
         comments = populateComments();
         likes = populateLikes();
 
-        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Animais","20:40", tags,"BBC Vida Selvagem episodio x.25", false, 404, comments, likes);
+        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Animais","20:40", tags,"BBC Vida Selvagem episodio x.25", false, "404", comments, likes);
         VideoTasks videoTasks = new VideoTasks(video);
         videoTasks.addVideo();
-        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Viagens","4:20", tags,"Amazing trip to Panoias", false, 123, comments, likes);
+        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Viagens","4:20", tags,"Amazing trip to Panoias", false, "123", comments, likes);
         videoTasks = new VideoTasks(video);
         videoTasks.addVideo();
         videoTasks.getVideoID();
@@ -39,7 +39,7 @@ public class TEST_VIDEOS {
         videotasks.getVideoByIndex(new ObjectId("5926b8aa1fb2bf1950db0f84"));
     }
 
-    private static Video populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags, String name, boolean bool, int views, ArrayList<Comment> comments, ArrayList<String> likes){
+    private static Video populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags, String name, boolean bool, String views, ArrayList<Comment> comments, ArrayList<String> likes){
         Video video = new Video();
         video.setAuthor(author);
         video.setCategory(Cat);

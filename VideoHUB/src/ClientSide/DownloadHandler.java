@@ -2,6 +2,7 @@ package ClientSide;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,23 +36,10 @@ public class DownloadHandler implements Runnable {
         System.out.println("running download");
         int count = 0;
 
-        /*try {
-            InputStream is = sc.getSocket().getInputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            FileOutputStream fos = new FileOutputStream("/home/mangas/Documents/VideoHub/"+fileName);
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }*/
 
         dos = sc.getDos();
         dis = sc.getDis();
 
-        /*String aux = String.valueOf(this.VidId);*/
         String[] aux2 = {""};
 
 
@@ -60,21 +48,21 @@ public class DownloadHandler implements Runnable {
         boolean flag = true;
         String fileContent = "";
 
-        File file = new File("/home/mangas/Documents/VideoHub/Temp" + fileName);
+        File file = new File("/home/rafael/M2VideoShare/VideoHUB/esse");
         //BufferedOutputStream bos = getBos(file);
         FileOutputStream fos;
         System.out.println("Created File");
 
         String[] foo = {String.valueOf(VidId)};
         String aux = sc.talk(sc.buildFrame((byte)13, foo));
-        //byte[] auxB = new byte[8001];
+        byte[] auxB = new byte[4015];
 
         if (aux.charAt(0) == (byte) 15)
             while (flag) {
                 try {
                     fos = new FileOutputStream(file,true);
-                    aux = dis.readUTF();
-                    //dis.read(auxB);
+                    //aux = dis.readUTF();
+                    dis.read(auxB);
                     count++;
                     System.out.println("Frame number: "+count);
                     boolean flag2 = true;
@@ -83,23 +71,36 @@ public class DownloadHandler implements Runnable {
                         flag = flag2 = false;
                     }
 
-                    while (flag2) {
+                    /*while (flag2) {
                         if (aux.indexOf("<!end!>") == aux.length() - 7) {
                             flag2 = false;
                         } else {
                             String part = dis.readUTF();
                             aux = aux.concat(part);
                         }
-                    }
+                    }*/
                     if(flag) {
 
-                        List<String> fields = sc.readFrame(aux);
+                        /*List<String> fields = sc.readFrame(aux);
                         fileContent = fields.get(0);//checkFrames(fields, fileContent);
 
-                        byte[] esse = fileContent.getBytes();
+                        byte[] esse = fileContent.getBytes();*/
+
+                        byte[] temp = new byte[4];
+
+                        for(int j = 0; j<4; j++){
+                            temp[j] = auxB[j+1];
+                        }
+
+                        int size = ByteBuffer.wrap(temp).getInt();
+                        temp = new byte[size];
+                        for(int j = 0; j<size; j++){
+                            temp[j] = auxB[j+5];
+                        }
+
 
                         System.out.println("writing file: ");
-                        fos.write(esse);
+                        fos.write(temp);
                     }
                     byte b = 15;
                     dos.write(b);

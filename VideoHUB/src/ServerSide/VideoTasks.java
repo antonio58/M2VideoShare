@@ -49,6 +49,7 @@ public class VideoTasks{
                 .append("author",video.getAuthor())
                 .append("creationDate", new Date())
                 .append("premium",video.isPremium())
+                .append("files_id",video.getFiles_id())
                 .append("file", video.getFile()) //string
                 .append("size", video.getSize()) //double
                 .append("duration", video.getDuration())
@@ -182,10 +183,11 @@ public class VideoTasks{
         video.setAuthor(results.get(0).getString("author"));
         video.setName(results.get(0).getString("name"));
         video.setDuration(results.get(0).getString("duration"));
+        video.setFiles_id(results.get(0).getString("files_id"));
         video.setCategory(results.get(0).getString("category"));
         video.setPremium(results.get(0).getBoolean("premium"));
         video.setCreationDate(results.get(0).getDate("creationDate"));
-        video.setViews(results.get(0).getInteger("views"));
+        video.setViews(results.get(0).getString("views"));
         video.setTags(tags);
         video.setCommentList(comments);
         //System.out.println("\ngetVideoIndex() video: "+ video.toString());

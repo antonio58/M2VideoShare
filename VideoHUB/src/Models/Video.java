@@ -17,7 +17,8 @@ public class Video {
     private String file = null;
     private Date creationDate = null;
     private ArrayList<String> deliveries = null;
-    private int views = 0;
+    private String views = null;
+    private String files_id = null;
     private ArrayList<String> tags = null;
     private ArrayList<String> likes = null;
     private ArrayList<Comment> commentList = null;
@@ -27,11 +28,12 @@ public class Video {
 
     public Video(){}
 
-    public void Video(ObjectId _id, String name, String author, String category, String duration, String file, ArrayList<String> deliveries, int views, ArrayList<String> tags, ArrayList<String> likes, ArrayList<Comment> commentList, boolean premium, Double size, int n_blocks) {
+    public void Video(ObjectId _id, String name, String author, String files_id, String category, String duration, String file, ArrayList<String> deliveries, String views, ArrayList<String> tags, ArrayList<String> likes, ArrayList<Comment> commentList, boolean premium, Double size, int n_blocks) {
         this._id = _id;
         this.name = name;
         this.author = author;
         this.category = category;
+        this.files_id = files_id;
         this.duration = duration;
         this.file = file;
         this.deliveries = deliveries;
@@ -104,7 +106,7 @@ public class Video {
         return String.valueOf(views);
     }
 
-    public void setViews(int views) {
+    public void setViews(String views) {
         this.views = views;
     }
 
@@ -162,6 +164,14 @@ public class Video {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getFiles_id() {
+        return files_id;
+    }
+
+    public void setFiles_id(String files_id) {
+        this.files_id = files_id;
     }
 
     @Override

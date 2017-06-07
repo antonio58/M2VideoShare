@@ -18,11 +18,11 @@ public class VideoTasksDigging {
         tags = populatetags();
         populatetags();
         populateComments();
-        populateVideoModel("58f9f7a91fb2bf7c46abe5d6", "Animais","20:40", tags,"BBC Vida Selvagem episódio x.25", false, 404, comments);
+        populateVideoModel("58f9f7a91fb2bf7c46abe5d6", "Animais","20:40", tags,"BBC Vida Selvagem episódio x.25", false, "404", comments);
 
     }
 
-    private static void populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags, String name, boolean bool, int views, ArrayList<Comment> comments){
+    private static void populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags, String name, boolean bool, String views, ArrayList<Comment> comments){
         video.setAuthor(author);
         video.setCategory(Cat);
         video.setDuration(duration);
