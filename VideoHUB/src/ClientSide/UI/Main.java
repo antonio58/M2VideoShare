@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -61,7 +62,21 @@ public class Main extends Application {
             openWelcome();
         else
             openErrorScreen("Can't connect to the server");
+//        String data = "olhaolhaolha";
+//        int p = 5;
+//        byte b = 3;
+//        openMenuPrincipal(p, data, b);
     }
+
+    public void openMenuPrincipal(int p, String data, byte b){
+        try {
+            MenuPrincipalController welcome = (MenuPrincipalController) replaceSceneContent("../UI/fxml/MenuPrincipal.fxml");
+            welcome.setApp(this, this.sc, p, data, b);
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
     public void openErrorScreen(String s){
         try {

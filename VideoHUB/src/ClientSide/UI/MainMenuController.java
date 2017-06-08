@@ -250,9 +250,9 @@ public class MainMenuController implements Initializable {
         String id = ((GridPane)event.getSource()).getId();
 
         System.out.println(id);
-        String n = ""+id.charAt(3);
-        if(id.length()>4)
-            n = n.concat(""+id.charAt(4));
+        String n = ""+id.charAt(4);
+        if(id.length()>5)
+            n = n.concat(""+id.charAt(5));
         System.out.println("handlestream: "+n);
 
         int i = Integer.parseInt(n);

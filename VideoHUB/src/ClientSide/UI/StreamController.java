@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by rafael on 25-04-2017.
  */
@@ -52,6 +54,7 @@ public class StreamController implements Initializable {
 
     @FXML
     protected void handlePlay(ActionEvent event){
+
         String aux = String.valueOf(this.id);
         String[] aux2 = {aux};
         aux = sc.buildFrame((byte)8, aux2);
@@ -60,9 +63,15 @@ public class StreamController implements Initializable {
         aux = aux3.get(2);
         int i = aux.lastIndexOf("/");
         aux = aux.substring(i,aux.length());
+
         //Correr thread download aqui
         DownloadHandler dh = new DownloadHandler(sc, this.id, aux);
         Thread DH = new Thread(dh);
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         DH.start();
         this.application.openPlayer(gridPane, aux);
     }

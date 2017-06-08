@@ -465,6 +465,7 @@ public class ServerClientHandler implements Runnable {
     //Obter a info do video
     private String getVideoInfo(String s)   {
         List<String> fields = readFrame(s);
+        System.out.println("e isto crl: "+fields.toString());
         ObjectId id = new ObjectId(fields.get(0));
         Video vid = videoTasks.getVideoByIndex(id);
         String[] info = {vid.getName(), vid.getAuthor(), vid.getCategory(), vid.getViews(), vid.getTags().toString(), vid.getCommentList().toString(), vid.getDuration()};
@@ -474,7 +475,6 @@ public class ServerClientHandler implements Runnable {
 
     private void sendVideo(String vid) throws IOException {
 
-        int count = 0;
         Binary aux;
 
         String[] aux2 = {""};
@@ -504,7 +504,7 @@ public class ServerClientHandler implements Runnable {
             frame[0] = (byte)14;
 
             byte[] dataSize = ByteBuffer.allocate(4).putInt(data.length).array();
-            for(int j = 1; j <4 ; j++){
+            for(int j = 1; j < 5 ; j++){
                 frame[j] = dataSize[j-1];
             }
             //String auxStr = aux;
@@ -512,10 +512,10 @@ public class ServerClientHandler implements Runnable {
             for(int j= 0; j<data.length; j++){
                 frame[j+5] = data[j];
             }
-            /*byte[] endB = end.getBytes();
+            byte[] endB = end.getBytes();
             for(int j = 0; j<endB.length; j++ ){
                 frame[data.length+5+j] = endB[j];
-            }*/
+            }
 
             do {
                 dos.write(frame);

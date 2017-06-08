@@ -71,14 +71,14 @@ public class DownloadHandler implements Runnable {
                         flag = flag2 = false;
                     }
 
-                    /*while (flag2) {
+                    while (flag2) {
                         if (aux.indexOf("<!end!>") == aux.length() - 7) {
                             flag2 = false;
                         } else {
                             String part = dis.readUTF();
                             aux = aux.concat(part);
                         }
-                    }*/
+                    }
                     if(flag) {
 
                         /*List<String> fields = sc.readFrame(aux);
