@@ -244,11 +244,11 @@ public class ServerComm {
 
         List<String> fieldList = readFrame(str);
         String info = "";
-        int c = 0;
+        int c = 1;
         for(String s : fieldList){
             System.out.println("field: "+s);
             info = info.concat(s);
-            if(c%2 == 0)
+            if(c%3 != 0)
                 info = info.concat("</split/>");
             else
                 info = info.concat("!:split:!");
@@ -273,10 +273,10 @@ public class ServerComm {
 
         List<String> fieldList = readFrame(str);
         String info = "";
-        int c = 0;
+        int c = 1;
         for(String s : fieldList){
             info = info.concat(s);
-            if(c%2 == 0)
+            if(c%3 != 0)
                 info = info.concat("</split/>");
             else
                 info = info.concat("!:split:!");
@@ -286,10 +286,15 @@ public class ServerComm {
         return info;
     }
 
-    public String getVideoInfo(String id){
+    public List<String> getVideoInfo(String id){
+        String aux = id;//String.valueOf(this.id);
+        String[] aux2 = {aux};
+        System.out.println("handlePlay: "+aux);
+        aux = buildFrame((byte)8, aux2);
+        aux = talk(aux);
+        List<String> aux3 = readFrame(aux);
 
-
-        return null;
+        return aux3;
     }
 }
 

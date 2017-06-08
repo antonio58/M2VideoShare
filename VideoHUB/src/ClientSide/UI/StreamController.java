@@ -18,22 +18,24 @@ import static java.lang.Thread.sleep;
  * Created by rafael on 25-04-2017.
  */
 public class StreamController implements Initializable {
-
     @FXML private java.awt.Button btnButton;
     @FXML private GridPane gridPane;
-    @FXML Text autor;
-    @FXML Text titulo;
+    @FXML Text author;
+    @FXML Text title;
     @FXML Text descricao;
     private Main application;
     private ServerComm sc;
-    int id;
+    String id;
+    String title_;
 
-    public void setApp(Main application, ServerComm s, String data){
+    public void setApp(Main application, ServerComm s, List<String> data){
         this.application = application;
         this.sc = s;
-        String aux[] = data.split("</split/>");
-        autor.setText(aux[0]);
-        titulo.setText(aux[1]);
+        title.setText(data.get(1));
+        author.setText(data.get(0));
+        this.title_ = data.get(0);
+        this.id = data.get(2);
+
     }
 
     @Override
@@ -55,25 +57,27 @@ public class StreamController implements Initializable {
     @FXML
     protected void handlePlay(ActionEvent event){
 
-        String aux = String.valueOf(this.id);
+        /*String aux = id;//String.valueOf(this.id);
         String[] aux2 = {aux};
+        System.out.println("handlePlay: "+aux);
         aux = sc.buildFrame((byte)8, aux2);
         aux = sc.talk(aux);
         List<String> aux3 = sc.readFrame(aux);
-        aux = aux3.get(2);
-        int i = aux.lastIndexOf("/");
-        aux = aux.substring(i,aux.length());
+        aux = aux3.get(0);*/
+        /*int i = aux.lastIndexOf("/");
+        aux = aux.substring(i,aux.length());*/
 
         //Correr thread download aqui
-        DownloadHandler dh = new DownloadHandler(sc, this.id, aux);
+        DownloadHandler dh = new DownloadHandler(sc, this.id);
         Thread DH = new Thread(dh);
+
+        DH.start();
+
         try {
-            sleep(2000);
+            sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        DH.start();
-        this.application.openPlayer(gridPane, aux);
+        this.application.openPlayer(gridPane, this.id);
     }
-
 }

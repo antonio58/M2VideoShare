@@ -16,16 +16,15 @@ import static java.nio.file.StandardOpenOption.CREATE;
 public class DownloadHandler implements Runnable {
     ServerComm sc;
     private String fileName;
-    int VidId;
+    String VidId;
     DataOutputStream dos;
     DataInputStream dis;
     List<Integer> receivedChunks;
 
 
-    public DownloadHandler(ServerComm sc, int id, String filename) {
+    public DownloadHandler(ServerComm sc, String id) {
         this.VidId = id;
         this.sc = sc;
-        this.fileName = filename;
         System.out.println("\n New Download:\n");
 
     }
@@ -48,37 +47,44 @@ public class DownloadHandler implements Runnable {
         boolean flag = true;
         String fileContent = "";
 
-        File file = new File("/home/rafael/M2VideoShare/VideoHUB/esse");
+        File file = new File("../Temp/" + VidId);
         //BufferedOutputStream bos = getBos(file);
-        FileOutputStream fos;
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file, false);
+            fos.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("Created File");
 
         String[] foo = {String.valueOf(VidId)};
         String aux = sc.talk(sc.buildFrame((byte)13, foo));
         byte[] auxB = new byte[4015];
 
-        if (aux.charAt(0) == (byte) 15)
-            while (flag) {
+        if(aux.charAt(0) == 15) {
+            while(flag) {
                 try {
-                    fos = new FileOutputStream(file,true);
-                    //aux = dis.readUTF();
+                    dos.flush();
+                    fos = new FileOutputStream(file, true);
                     dis.read(auxB);
-                    count++;
-                    System.out.println("Frame number: "+count);
+                    ++count;
                     boolean flag2 = true;
-                    if (aux.charAt(0) == (byte) 16) {
+                    if(auxB[0] == (byte)16) {
                         System.out.println("Received frame 16");
-                        flag = flag2 = false;
+                        flag2 = false;
+                        flag = false;
                     }
 
-                    while (flag2) {
-                        if (aux.indexOf("<!end!>") == aux.length() - 7) {
+                    while(flag2) {
+                        if(aux.indexOf("<!end!>") == aux.length() - 7) {
                             flag2 = false;
                         } else {
                             String part = dis.readUTF();
                             aux = aux.concat(part);
                         }
                     }
+
                     if(flag) {
 
                         /*List<String> fields = sc.readFrame(aux);
@@ -94,28 +100,22 @@ public class DownloadHandler implements Runnable {
 
                         int size = ByteBuffer.wrap(temp).getInt();
                         temp = new byte[size];
-                        for(int j = 0; j<size; j++){
-                            temp[j] = auxB[j+5];
+                        for(int j = 0; j < size; ++j) {
+                            temp[j] = auxB[j + 5];
                         }
-
 
                         System.out.println("writing file: ");
                         fos.write(temp);
                     }
+
                     byte b = 15;
                     dos.write(b);
-
-                    //while(reply.equals("")) {
-                    //}
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            System.out.println("End of download");
-
-
-
-
+        }
+        System.out.println("End of download");
     }
 
     private String checkFrames(List<String> fields, String s) {

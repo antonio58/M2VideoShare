@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
 
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -159,7 +160,7 @@ public class MainMenuController implements Initializable {
 
     @FXML
     protected void handleStream(MouseEvent event) {
-        /*actiontarget.setText("Stream button pressed");
+ /*actiontarget.setText("Stream button pressed");
         actiontargetBox.setVisible(true);
         String id = ((GridPane)event.getSource()).getId();
         int i = Integer.parseInt(id);
@@ -170,16 +171,19 @@ public class MainMenuController implements Initializable {
         String id = ((GridPane)event.getSource()).getId();
 
         System.out.println(id);
-        String n = ""+id.charAt(3);
-        if(id.length()>4)
-            n = n.concat(""+id.charAt(4));
+        String n = ""+id.charAt(4);
+        if(id.length()>5)
+            n = n.concat(""+id.charAt(5));
         System.out.println("handlestream: "+n);
 
         int i = Integer.parseInt(n);
-        String[] aux2 = Videos[i-1].split("</split/>");
         System.out.println(Videos[i-1]);
 
+        String aux[] = Videos[i-1].split("</split/>");
+
+        List<String> fieldList = sc.getVideoInfo(aux[2]);
+
         //String video = sc.getVideoInfo(aux2[1]);
-        application.openStream(Videos[i-1]);
+        application.openStream(fieldList);
     }
 }

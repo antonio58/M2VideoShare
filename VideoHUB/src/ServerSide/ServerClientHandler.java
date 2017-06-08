@@ -394,13 +394,13 @@ public class ServerClientHandler implements Runnable {
         for (int i = VideoIndexStart; i < nVideos; i++) {
             //fetches video
             Video v = videoTasks.getVideoByIndex(tempIDs.get(i));
-            fieldList.add(v.getName());
-
             collection = mMongo.getCollection("users");
-            Bson filter = Filters.eq("_id", new ObjectId(v.getAuthor()));
+//            Bson filter = Filters.eq("_id", new ObjectId(v.getAuthor()));
             /* Results fica com todos os chunks que correspondem a este video. */
-            List<Document> results = collection.aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("name", "$name")))))).into(new ArrayList<>());
+            List<Document> results = collection.aggregate(Arrays.asList(/*Aggregates.match(filter),*/ Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("name", "$name")))))).into(new ArrayList<>());
             String name = results.get(0).getString("name");
+
+            fieldList.add(v.getName());
             fieldList.add(name);
             fieldList.add(v.get_id().toString());
             //System.out.println("Name/Author: "+v.getName()+"/"+v.getAuthor());
@@ -468,7 +468,7 @@ public class ServerClientHandler implements Runnable {
         System.out.println("e isto crl: "+fields.toString());
         ObjectId id = new ObjectId(fields.get(0));
         Video vid = videoTasks.getVideoByIndex(id);
-        String[] info = {vid.getName(), vid.getAuthor(), vid.getCategory(), vid.getViews(), vid.getTags().toString(), vid.getCommentList().toString(), vid.getDuration()};
+        String[] info = {vid.getName(), vid.getAuthor(),vid.get_id().toHexString(), vid.getCategory(), vid.getViews(), /*vid.getTags().toString(), /*vid.getCommentList().toString(), vid.getDuration()*/};
 
         return buildFrame((byte) 0, info);
     }
@@ -485,11 +485,18 @@ public class ServerClientHandler implements Runnable {
 
         List<String> foo = readFrame(vid);
         String id = foo.get(0);
-        System.out.println("id: "+id);
+
         //id: 5938084ad2bccd1992a35bf5
+        collection = mMongo.getCollection("videos");
+        Bson filter0 = Filters.eq("_id", new ObjectId(id));
+        /* Results fica com todos os chunks que correspondem a este video. */
+        List<Document> results0 = collection.aggregate(Arrays.asList(Aggregates.match(filter0), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("files_id", "$files_id")))))).into(new ArrayList<>());
+        String files_id = results0.get(0).get("files_id").toString();
+
+
 
         collection = mMongo.getCollection("fs.chunks");
-        Bson filter = Filters.eq("files_id", new ObjectId(id));
+        Bson filter = Filters.eq("files_id", new ObjectId(files_id));
         List<Document> results = collection.aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("data", "$data")))))).into(new ArrayList<>());
 
         System.out.println("Sending video");
@@ -500,7 +507,7 @@ public class ServerClientHandler implements Runnable {
             byte[] auxByte = new byte[10];
             String end = "<!end!>";
 
-            byte[] frame = new byte[data.length+5/*+end.length()*/];
+            byte[] frame = new byte[data.length+5+end.length()];
             frame[0] = (byte)14;
 
             byte[] dataSize = ByteBuffer.allocate(4).putInt(data.length).array();
@@ -520,12 +527,13 @@ public class ServerClientHandler implements Runnable {
             do {
                 dos.write(frame);
                 dis.read(auxByte);
+                dos.flush();
             }
             while(auxByte[0]!=15);
 
         }
-        byte[] auxByte = {(byte)16};
-        dos.write(auxByte);
+        byte b = (byte)16;
+        dos.write(b);
 
         System.out.println("File sent");
     }

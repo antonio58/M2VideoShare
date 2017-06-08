@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -241,7 +242,21 @@ public class PlaylistController implements Initializable {
         actiontarget.setText("Stream button pressed");
         actiontargetBox.setVisible(true);
         String id = ((GridPane)event.getSource()).getId();
-        int i = Integer.parseInt(id);
-        application.openStream(Videos[i-1]);
+
+        System.out.println(id);
+        String n = ""+id.charAt(4);
+        if(id.length()>5)
+            n = n.concat(""+id.charAt(5));
+        System.out.println("handlestream: "+n);
+
+        int i = Integer.parseInt(n);
+        System.out.println(Videos[i-1]);
+
+        String aux[] = Videos[i-1].split("</split/>");
+
+        List<String> fieldList = sc.getVideoInfo(aux[2]);
+
+        //String video = sc.getVideoInfo(aux2[1]);
+        application.openStream(fieldList);
     }
 }

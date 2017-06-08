@@ -18,7 +18,7 @@ public class Video {
     private Date creationDate = null;
     private ArrayList<String> deliveries = null;
     private String views = null;
-    private ObjectId file_id = null;
+    private String files_id = null;
     private ArrayList<String> tags = null;
     private ArrayList<String> likes = null;
     private ArrayList<Comment> commentList = null;
@@ -28,12 +28,12 @@ public class Video {
 
     public Video(){}
 
-    public void Video(ObjectId _id, String name, String author, ObjectId file_id, String category, String duration, String file, ArrayList<String> deliveries, String views, ArrayList<String> tags, ArrayList<String> likes, ArrayList<Comment> commentList, boolean premium, Double size, int n_blocks) {
+    public void Video(ObjectId _id, String name, String author, String files_id, String category, String duration, String file, ArrayList<String> deliveries, String views, ArrayList<String> tags, ArrayList<String> likes, ArrayList<Comment> commentList, boolean premium, Double size, int n_blocks) {
         this._id = _id;
         this.name = name;
         this.author = author;
-        this.file_id = file_id;
         this.category = category;
+        this.files_id = files_id;
         this.duration = duration;
         this.file = file;
         this.deliveries = deliveries;
@@ -166,13 +166,14 @@ public class Video {
         this.views = views;
     }
 
-    public ObjectId getFile_id() {
-        return file_id;
+    public String getFiles_id() {
+        return files_id;
     }
 
-    public void setFile_id(ObjectId file_id) {
-        this.file_id = file_id;
+    public void setFiles_id(String files_id) {
+        this.files_id = files_id;
     }
+
     @Override
     public String toString() {
         return "Video{" +

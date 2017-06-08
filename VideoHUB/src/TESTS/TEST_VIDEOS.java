@@ -24,19 +24,19 @@ public class TEST_VIDEOS {
         comments = populateComments();
         likes = populateLikes();
         tags = populateTags(1);
-        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Animais","20:40", tags,"BBC Vida Selvagem episodio x.25", false, "404", comments, likes, new ObjectId("58f9f7a91fb2bf7c46abe5d4"));
+        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Animais","20:40", tags,"BBC Vida Selvagem episodio x.25", false, "404", comments, likes, "58f9f7a91fb2bf7c46abe5d4");
         VideoTasks videoTasks = new VideoTasks(video);
         videoTasks.addVideo();
 
         tags = populateTags(3);
-        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Viagens","4:20", tags,"Amazing trip to Panoias", false, "123", comments, likes, new ObjectId("58f9f7a91fb2bf7c46abe5d4"));
+        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Viagens","4:20", tags,"Amazing trip to Panoias", false, "123", comments, likes, "58f9f7a91fb2bf7c46abe5d4");
         videoTasks = new VideoTasks(video);
         videoTasks.addVideo();
 
         tags = populateTags(2);
         ChunkTasks chunkTasks = new ChunkTasks();
-        chunkTasks.fileToChunks("/home/fernando/Desktop/PTI2/VideoHUB/src/TESTS/Videos/OBSCURA - 'The Anticosmic Overload' (Official Music Video).mp4");
-        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Metal","4:20", tags,"Obsura - Anticosmic Overload", false, "666", comments, likes, new ObjectId(chunkTasks.getId()));
+        chunkTasks.fileToChunks("/home/rafael/Documentos/videos/MyHorseisAmazing.mp4");
+        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Metal","4:20", tags,"Obsura - Anticosmic Overload", false, "666", comments, likes, chunkTasks.getId());
         videoTasks = new VideoTasks(video);
         videoTasks.addVideo();
 
@@ -47,10 +47,10 @@ public class TEST_VIDEOS {
         }
 
         VideoTasks videotasks = new VideoTasks();
-        videotasks.getVideoByIndex(new ObjectId("593930c3c9f0ed4bf63db32e"));
+        videotasks.getVideoByIndex(new ObjectId("59393d67d2bccd7dc421cee5"));
     }
 
-    private static Video populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags, String name, boolean bool, String views, ArrayList<Comment> comments, ArrayList<String> likes, ObjectId filedId){
+    private static Video populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags, String name, boolean bool, String views, ArrayList<Comment> comments, ArrayList<String> likes, String filedId){
         Video video = new Video();
         video.setAuthor(author);
         video.setCategory(Cat);
@@ -59,7 +59,7 @@ public class TEST_VIDEOS {
         video.setName(name);
         video.setPremium(bool);
         video.setViews(views);
-        video.setFile_id(filedId);
+        video.setFiles_id(filedId);
         video.setCommentList(comments);
         video.setLikes(likes);
 

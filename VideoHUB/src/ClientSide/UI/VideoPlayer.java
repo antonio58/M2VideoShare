@@ -37,11 +37,13 @@ public class VideoPlayer extends Application {
     }
 
 
-    public void start(final Stage stage, GridPane grid, String fileName) throws Exception {
+    public void start(final Stage stage, GridPane grid, String id) throws Exception {
         stage.setTitle("VideoHub Streamer");
         Group root = new Group();
 
-        Media media = new Media("file:///home/rafael/M2VideoShare/VideoHUB/abc.mp4");
+        System.out.println("Playing video: "+id);
+
+        Media media = new Media("file:///home/rafael/Documentos/VideoHubVideos/Temp/"+id);
 //        Media media = new Media("file:///home/luisf99/Documentos/UniversidadeMinho/ProjetodeTelecomunicacoesInformatica2/Videos/VideoDemo.mp4");
         final MediaPlayer player = new MediaPlayer(media);
         MediaView view = new MediaView(player);

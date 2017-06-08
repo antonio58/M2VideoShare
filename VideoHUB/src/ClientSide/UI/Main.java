@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,22 +62,12 @@ public class Main extends Application {
         if(b)
             openWelcome();
         else
-            openErrorScreen("fds Can't connect to the server");
+            openErrorScreen("Can't connect to the server");
 //        String data = "olhaolhaolha";
 //        int p = 5;
 //        byte b = 3;
 //        openMenuPrincipal(p, data, b);
     }
-
-    public void openMenuPrincipal(int p, String data, byte b){
-        try {
-            MainMenuController welcome = (MainMenuController) replaceSceneContent("../UI/fxml/MenuPrincipal.fxml");
-            welcome.setApp(this, this.sc, p, data, b);
-        } catch (Exception ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
 
     public void openErrorScreen(String s){
         try {
@@ -132,7 +123,7 @@ public class Main extends Application {
         }
     }
 
-    public void openStream(String data){
+    public void openStream(List<String> data){
         try {
             StreamController stream = (StreamController) replaceSceneContent("../UI/fxml/Stream.fxml");
             stream.setApp(this, this.sc, data);
