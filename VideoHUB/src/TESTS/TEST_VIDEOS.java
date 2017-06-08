@@ -2,9 +2,11 @@ package TESTS;
 
 import Models.Comment;
 import Models.Video;
+import ServerSide.ChunkTasks;
 import ServerSide.VideoTasks;
 import org.bson.types.ObjectId;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,17 +20,26 @@ public class TEST_VIDEOS {
     private static ArrayList<String> tags = new ArrayList<>();
     private static ArrayList<String> likes = new ArrayList<>();
 
-    public static void main(String[] args){
-        tags = populateTags();
+    public static void main(String[] args) throws IOException {
         comments = populateComments();
         likes = populateLikes();
-
-        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Animais","20:40", tags,"BBC Vida Selvagem episodio x.25", false, "404", comments, likes);
+        tags = populateTags(1);
+        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Animais","20:40", tags,"BBC Vida Selvagem episodio x.25", false, "404", comments, likes, new ObjectId("58f9f7a91fb2bf7c46abe5d4"));
         VideoTasks videoTasks = new VideoTasks(video);
         videoTasks.addVideo();
-        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Viagens","4:20", tags,"Amazing trip to Panoias", false, "123", comments, likes);
+
+        tags = populateTags(3);
+        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Viagens","4:20", tags,"Amazing trip to Panoias", false, "123", comments, likes, new ObjectId("58f9f7a91fb2bf7c46abe5d4"));
         videoTasks = new VideoTasks(video);
         videoTasks.addVideo();
+
+        tags = populateTags(2);
+        ChunkTasks chunkTasks = new ChunkTasks();
+        chunkTasks.fileToChunks("/home/fernando/Desktop/PTI2/VideoHUB/src/TESTS/Videos/OBSCURA - 'The Anticosmic Overload' (Official Music Video).mp4");
+        video = populateVideoModel("58f9f7a91fb2bf7c46abe5d4", "Metal","4:20", tags,"Obsura - Anticosmic Overload", false, "666", comments, likes, new ObjectId(chunkTasks.getId()));
+        videoTasks = new VideoTasks(video);
+        videoTasks.addVideo();
+
         videoTasks.getVideoID();
 
         for (Comment comment : comments) { //for each
@@ -36,10 +47,10 @@ public class TEST_VIDEOS {
         }
 
         VideoTasks videotasks = new VideoTasks();
-        videotasks.getVideoByIndex(new ObjectId("5926b8aa1fb2bf1950db0f84"));
+        videotasks.getVideoByIndex(new ObjectId("593930c3c9f0ed4bf63db32e"));
     }
 
-    private static Video populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags, String name, boolean bool, String views, ArrayList<Comment> comments, ArrayList<String> likes){
+    private static Video populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags, String name, boolean bool, String views, ArrayList<Comment> comments, ArrayList<String> likes, ObjectId filedId){
         Video video = new Video();
         video.setAuthor(author);
         video.setCategory(Cat);
@@ -48,6 +59,7 @@ public class TEST_VIDEOS {
         video.setName(name);
         video.setPremium(bool);
         video.setViews(views);
+        video.setFile_id(filedId);
         video.setCommentList(comments);
         video.setLikes(likes);
 
@@ -69,13 +81,27 @@ public class TEST_VIDEOS {
         return comments;
     }
 
-    private static ArrayList<String> populateTags(){
+    private static ArrayList<String> populateTags(int i){
         ArrayList<String> tags = new ArrayList<>();
-        tags.add("Gato");
-        tags.add("Tigre");
-        tags.add("Jacaré");
-        tags.add("Dinossauro");
-        tags.add("Armadilho");
+        switch (i) {
+            case 1:
+                tags.add("Gato");
+                tags.add("Tigre");
+                tags.add("Jacaré");
+                tags.add("Dinossauro");
+                tags.add("Armadilho");
+                break;
+            case 2:
+                tags.add("Metal");
+                tags.add("Obscura");
+                tags.add("Cosmogenesis");
+                break;
+            case 3:
+                tags.add("Corridas");
+                tags.add("Cars");
+                tags.add("Formula 1");
+
+        }
         return tags;
     }
 

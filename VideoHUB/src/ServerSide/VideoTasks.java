@@ -49,8 +49,8 @@ public class VideoTasks{
                 .append("author",video.getAuthor())
                 .append("creationDate", new Date())
                 .append("premium",video.isPremium())
-                .append("files_id",video.getFiles_id())
                 .append("file", video.getFile()) //string
+                .append("file_id",video.getFile_id())
                 .append("size", video.getSize()) //double
                 .append("duration", video.getDuration())
                 .append("nBlocks", video.getN_blocks())
@@ -148,13 +148,24 @@ public class VideoTasks{
         return results.size();
     }
 
-    //gets all video data
-    public Video getVideoByIndex(ObjectId index) {
-        int i = 0;
+    public String getVideoNameByIndex(ObjectId index) {
         Video video  = new Video();
         Bson filter = Filters.eq("_id", index);
         //returns to Results list, playlist name
         List<Document> results = mMongo.getCollection("videos").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("name", "$name"), Projections.computed("duration", "$duration"), Projections.computed("category", "$category"), Projections.computed("date", "$creationDate"), Projections.computed("premium", "$premium"), Projections.computed("views", "$views"), Projections.computed("author", "$author")))))).into(new ArrayList<>());
+
+
+        return results.get(0).getString("name");
+    }
+
+        //gets all video data
+    public Video getVideoByIndex(ObjectId index) {
+        tags.clear();
+        int i = 0;
+        Video video  = new Video();
+        Bson filter = Filters.eq("_id", index);
+        //returns to Results list, playlist name
+        List<Document> results = mMongo.getCollection("videos").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("name", "$name"), Projections.computed("duration", "$duration"), Projections.computed("category", "$category"), Projections.computed("date", "$creationDate"), Projections.computed("premium", "$premium"), Projections.computed("views", "$views"), Projections.computed("author", "$author"), Projections.computed("file_id", "file_id")))))).into(new ArrayList<>());
         List<Document> DocComments = mMongo.getCollection("videos").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.unwind("$comments"), Aggregates.project(Projections.fields(Arrays.asList(Projections.computed("comment", "$comments.comment"), Projections.computed("_idComment", "$comments._idComment"), Projections.computed("creationDate", "$comments.creationDate"), Projections.computed("author", "$comments.author")))))).into(new ArrayList<>());
         List<Document> DocTags = mMongo.getCollection("videos").aggregate(Arrays.asList(Aggregates.match(filter), Aggregates.unwind("$tags"), Aggregates.project((Projections.computed("tags", "$tags"))))).into(new ArrayList<>());
 
@@ -176,14 +187,14 @@ public class VideoTasks{
         //System.out.println("\ngetVideoIndex() number tags result: "+ DocTags.size());
         for ( i = 0; i < DocTags.size(); i++){
             tags.add(DocTags.get(i).getString("tags"));
-            //System.out.println("getVideoByIndex() Comments " + tags.toString());
+            System.out.println("getVideoByIndex() Tags" + tags.toString());
         }
 
         video.set_id(results.get(0).getObjectId("_id"));
         video.setAuthor(results.get(0).getString("author"));
         video.setName(results.get(0).getString("name"));
+        video.setFile_id(results.get(0).getObjectId("file_id"));
         video.setDuration(results.get(0).getString("duration"));
-        video.setFiles_id(results.get(0).getString("files_id"));
         video.setCategory(results.get(0).getString("category"));
         video.setPremium(results.get(0).getBoolean("premium"));
         video.setCreationDate(results.get(0).getDate("creationDate"));

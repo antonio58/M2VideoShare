@@ -70,8 +70,6 @@ public class UserTasks {
         mMongo.getCollection("users").updateOne(query, updateObj);
     }
 
-
-
     //Adds new object to seen videos list
     public void setWatchlist(String parameter, ObjectId value, ObjectId video_id){
         BasicDBObject query = new BasicDBObject();
@@ -247,6 +245,7 @@ public class UserTasks {
         }
         return -1;
     }
+
     //returns next available channel ID
     private int getNextChannelIndex(String parameter, ObjectId value) {
         // filter by user name or user id e.g, parameter: "name" , value: "fernando guima"
@@ -264,6 +263,7 @@ public class UserTasks {
             return 0;
         }
     }
+
     // email is a unique id, ideal for search in users collection
     public ObjectId getUserID(){
         if(user == null || user.getEmail() == null){
