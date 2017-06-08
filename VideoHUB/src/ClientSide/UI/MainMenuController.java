@@ -2,6 +2,7 @@ package ClientSide.UI;
 
 import ClientSide.ServerComm;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -37,6 +38,7 @@ public class MainMenuController implements Initializable {
     private Main application;
     private ServerComm sc;
     String[] Videos;
+    EventHandler<MouseEvent> eventHandler;
 
     public void setApp(Main application, ServerComm sc, int p, String data, byte fT){
         this.application = application;
@@ -46,7 +48,22 @@ public class MainMenuController implements Initializable {
         String[] aux = data.split("!:split:!");
         System.out.println("data: "+data+"\nlength: "+aux.length);
         Videos = aux;
-        System.out.println(data);
+        System.out.println("---MainMenu data---\n"+data+"\n-------------------");
+
+        eventHandler = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                handleStream(e);
+            }
+        };
+
+        int i = 0;
+        for(String str : aux){
+            String[] temp = str.split("</split/>");
+            handleAddGPChildren(i,temp[0],temp[1]);
+            i++;
+        }
+
     }
 
 
@@ -56,7 +73,7 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    protected void handleAdicionar(ActionEvent event){
+    protected void handleAddGPChildren(int i, String t, String a){
         System.out.println(anchor.getChildren().toString());
         GridPane gp = new GridPane();
         ImageView iv = new ImageView();
@@ -64,9 +81,8 @@ public class MainMenuController implements Initializable {
         Text author = new Text();
         Rectangle separator = new Rectangle();
 
-        title.setText("Teste do titulo");
-        author.setText("Teste do autor");
-
+        title.setText(t);
+        author.setText(a);
 
         iv.setLayoutY(95+3);
         iv.setId("img2");
@@ -75,13 +91,14 @@ public class MainMenuController implements Initializable {
         gp.setMinHeight(78);
         gp.setMinWidth(641);
         gp.setLayoutX(108);
-        gp.setLayoutY(106);
+        //gp.setLayoutY(106);
+        gp.setLayoutY(3+(103*i));
         gp.getColumnConstraints().add(new ColumnConstraints(630));
         gp.getRowConstraints().add(new RowConstraints(40));
         gp.getRowConstraints().add(new RowConstraints(40));
         gp.add(title,0,0);
         gp.add(author,0,1);
-        gp.setId("grid2");
+        gp.setId("grid"+String.valueOf(i+1));
         separator.setArcHeight(5);
         separator.setArcWidth(5);
         separator.setStyle("-fx-fill: #dddddd");
@@ -91,6 +108,8 @@ public class MainMenuController implements Initializable {
         separator.setHeight(8);
         separator.setStroke(Color.BLACK);
         separator.setStrokeType(StrokeType.INSIDE);
+
+        gp.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
         anchor.getChildren().add(gp);
         anchor.getChildren().add(iv);
@@ -177,7 +196,7 @@ public class MainMenuController implements Initializable {
         System.out.println("handlestream: "+n);
 
         int i = Integer.parseInt(n);
-        System.out.println(Videos[i-1]);
+        System.out.println("Info Stream: "+Videos[i-1]);
 
         String aux[] = Videos[i-1].split("</split/>");
 

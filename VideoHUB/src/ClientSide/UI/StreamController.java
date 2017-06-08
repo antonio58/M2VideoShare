@@ -31,6 +31,7 @@ public class StreamController implements Initializable {
     public void setApp(Main application, ServerComm s, List<String> data){
         this.application = application;
         this.sc = s;
+        System.out.println("Stream data: "+data.toString());
         title.setText(data.get(1));
         author.setText(data.get(0));
         this.title_ = data.get(0);

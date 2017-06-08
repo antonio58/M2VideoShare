@@ -43,7 +43,7 @@ public class VideoPlayer extends Application {
 
         System.out.println("Playing video: "+id);
 
-        Media media = new Media("file:///home/rafael/Documentos/VideoHubVideos/Temp/"+id);
+        Media media = new Media("file:///home/mangas/Documents/VideoHub/Temp/"+id);
 //        Media media = new Media("file:///home/luisf99/Documentos/UniversidadeMinho/ProjetodeTelecomunicacoesInformatica2/Videos/VideoDemo.mp4");
         final MediaPlayer player = new MediaPlayer(media);
         MediaView view = new MediaView(player);
