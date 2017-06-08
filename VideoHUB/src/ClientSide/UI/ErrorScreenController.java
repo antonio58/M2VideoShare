@@ -18,7 +18,6 @@ public class ErrorScreenController implements Initializable{
     @FXML
     private Text actiontarget;
     @FXML private HBox actiontargetBox;
-
     private String errorMessage;
     private Main application;
 
@@ -31,19 +30,19 @@ public class ErrorScreenController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         actiontargetBox.setVisible(true);
-        //actiontarget.setText("Can't connect to the server");
+        actiontarget.setText("Can't connect to the server");
 
     }
 
     @FXML protected void handleExit(ActionEvent event) {
-        actiontarget.setText("Exit button pressed");
-        actiontargetBox.setVisible(true);
+//        actiontarget.setText("Exit button pressed");
+//        actiontargetBox.setVisible(true);
         Platform.exit();
     }
 
     @FXML protected void handleRetry(ActionEvent event) {
-        actiontarget.setText("Exit button pressed");
-        actiontargetBox.setVisible(true);
-        application.reallyStart();;
+//        actiontarget.setText("Exit button pressed");
+//        actiontargetBox.setVisible(true);
+        application.reallyStart();
     }
 }

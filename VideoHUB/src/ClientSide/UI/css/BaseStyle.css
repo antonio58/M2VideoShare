@@ -1,5 +1,6 @@
 .root {
-    -fx-background-image: url("../img/fundo.jpg");
+    /*-fx-background-image: url("../img/fundo.jpg");*/
+    -fx-background-color: #777a7f;
     /*-fx-background-color: linear-gradient(to bottom right, lightgray, gray);*/
 }
 
@@ -45,7 +46,6 @@
 .confirm {
     -fx-font-weight: bold;
     -fx-background-color: #FB9E03;
-    -fx-border-color: #000000;
 }
 
 .confirmSmall {
@@ -101,7 +101,7 @@
 #actiontarget {
    -fx-fill: FIREBRICK;
    -fx-font-weight: bold;
-   -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+   -fx-font-size: 16px;
  }
 
  /*#actiontargetBox {

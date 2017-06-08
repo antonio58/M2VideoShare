@@ -18,12 +18,12 @@ import java.util.ResourceBundle;
 /**
  * Created by Utilizador on 19/04/2017.
  */
+
 public class LoginController implements Initializable{
-    @FXML private Text actiontarget;
-    @FXML private HBox actiontargetBox;
     @FXML TextField userId;
     @FXML PasswordField password;
     @FXML Button signIn;
+    @FXML Text actiontarget;
 
     private Main application;
     private ServerComm sc;
@@ -35,9 +35,9 @@ public class LoginController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        actiontargetBox.setVisible(false);
-        userId.setPromptText("user");
-        password.setPromptText("password");
+        actiontarget.setVisible(false);
+        userId.setPromptText("User");
+        password.setPromptText("Password");
     }
 
     void signIn(){
@@ -57,8 +57,6 @@ public class LoginController implements Initializable{
 
     @FXML
     void handleSubmitSignIn(ActionEvent event) {
-        actiontarget.setText("Hello "+userId.getText());
-        actiontargetBox.setVisible(true);
         signIn();
         /*try {
             if(sc.checkLogin(userId.getText(), password.getText())){

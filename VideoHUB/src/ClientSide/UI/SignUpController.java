@@ -18,13 +18,11 @@ import java.util.ResourceBundle;
  */
 public class SignUpController implements Initializable{
     @FXML private Text actiontarget;
-    @FXML private HBox actiontargetBox;
     @FXML TextField userId;
     @FXML TextField email;
     @FXML TextField cemail;
     @FXML PasswordField password;
     @FXML PasswordField cpassword;
-    @FXML Button signIn;
 
     private Main application;
     private ServerComm sc;
@@ -36,7 +34,6 @@ public class SignUpController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        actiontargetBox.setVisible(false);
         userId.setPromptText("User");
         password.setPromptText("Password");
         email.setPromptText("Email");
@@ -46,9 +43,6 @@ public class SignUpController implements Initializable{
 
     @FXML
     protected void handleConfirm(ActionEvent event){
-        actiontarget.setText("Confirm button pressed");
-        actiontargetBox.setVisible(true);
-
         if(!email.getText().equals(cemail.getText())) {
             actiontarget.setText("The emails didn't match!");
             return;

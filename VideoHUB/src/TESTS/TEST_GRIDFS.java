@@ -1,38 +1,17 @@
 package TESTS;
 
-import ClientSide.UI.MenuPrincipalController;
-import ClientSide.UI.VideoPlayer;
 import Models.Comment;
-import Models.Hop;
 import Models.Video;
-import ServerSide.DeliveryTasks;
 import ServerSide.MongoSide;
 
-import ServerSide.ServerClientHandler;
 import ServerSide.VideoTasks;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoIterable;
-import com.mongodb.client.gridfs.GridFSBucket;
-import com.mongodb.client.gridfs.GridFSBuckets;
-import com.mongodb.client.gridfs.GridFSDownloadStream;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Projections;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSInputFile;
 import org.bson.Document;
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
-import org.bson.types.Binary;
 
 
-import javax.print.Doc;
 import java.io.*;
 import java.util.*;
 
@@ -87,18 +66,19 @@ public class TEST_GRIDFS {
         in.save();
         String id = String.valueOf(in.get("_id"));
         System.out.println("Devia imprimir : 59383564d2bccd472d54af20, foi? "+id);
-        Video video =  populateVideoModel("592719ebd2bccd463dbc7060", "Animais","20:40", tags,id, false, "404", comments, likes);
+        Video video =  populateVideoModel("592719ebd2bccd463dbc7060", "Animais","20:40", tags,id, path, false, "404", comments, likes);
         VideoTasks videoTasks = new VideoTasks(video);
         videoTasks.addVideo();
 
     }
 
-    private static Video populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags, String name, boolean bool, String views, ArrayList<Comment> comments, ArrayList<String> likes){
+    private static Video populateVideoModel(String author, String Cat, String duration, ArrayList<String> tags,String id, String name, boolean bool, String views, ArrayList<Comment> comments, ArrayList<String> likes){
         Video video = new Video();
         video.setAuthor(author);
         video.setCategory(Cat);
         video.setDuration(duration);
         video.setTags(tags);
+        video.setFiles_id(id);
         video.setName(name);
         video.setPremium(bool);
         video.setViews(views);

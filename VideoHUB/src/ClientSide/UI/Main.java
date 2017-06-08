@@ -61,7 +61,7 @@ public class Main extends Application {
         if(b)
             openWelcome();
         else
-            openErrorScreen("Can't connect to the server");
+            openErrorScreen("fds Can't connect to the server");
 //        String data = "olhaolhaolha";
 //        int p = 5;
 //        byte b = 3;
@@ -70,7 +70,7 @@ public class Main extends Application {
 
     public void openMenuPrincipal(int p, String data, byte b){
         try {
-            MenuPrincipalController welcome = (MenuPrincipalController) replaceSceneContent("../UI/fxml/MenuPrincipal.fxml");
+            MainMenuController welcome = (MainMenuController) replaceSceneContent("../UI/fxml/MenuPrincipal.fxml");
             welcome.setApp(this, this.sc, p, data, b);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,7 +168,7 @@ public class Main extends Application {
         InputStream in = Main.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
         loader.setLocation(Main.class.getResource(fxml));
-        GridPane page;
+        AnchorPane page;
         try {
             page = loader.load(in);
         } finally {

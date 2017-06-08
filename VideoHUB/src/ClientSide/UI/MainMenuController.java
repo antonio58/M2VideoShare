@@ -5,12 +5,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,49 +28,8 @@ public class MainMenuController implements Initializable {
 
     @FXML private Text actiontarget;
     @FXML private HBox actiontargetBox;
-    @FXML private GridPane grid1;
-    @FXML private GridPane grid2;
-    @FXML private GridPane grid3;
-    @FXML private GridPane grid4;
-    @FXML private GridPane grid5;
-    @FXML private GridPane grid6;
-    @FXML private GridPane grid7;
-    @FXML private GridPane grid8;
-    @FXML private GridPane grid9;
-    @FXML private GridPane grid10;
-    @FXML private GridPane grid11;
-    @FXML private ImageView img1;
-    @FXML private ImageView img2;
-    @FXML private ImageView img3;
-    @FXML private ImageView img4;
-    @FXML private ImageView img5;
-    @FXML private ImageView img6;
-    @FXML private ImageView img7;
-    @FXML private ImageView img8;
-    @FXML private ImageView img9;
-    @FXML private ImageView img10;
-    @FXML private Text title1;
-    @FXML private Text title2;
-    @FXML private Text title3;
-    @FXML private Text title4;
-    @FXML private Text title5;
-    @FXML private Text title6;
-    @FXML private Text title7;
-    @FXML private Text title8;
-    @FXML private Text title9;
-    @FXML private Text title10;
-    @FXML private Text author1;
-    @FXML private Text author2;
-    @FXML private Text author3;
-    @FXML private Text author4;
-    @FXML private Text author5;
-    @FXML private Text author6;
-    @FXML private Text author7;
-    @FXML private Text author8;
-    @FXML private Text author9;
-    @FXML private Text author10;
-    @FXML private Button next;
     @FXML private TextField query;
+    @FXML private AnchorPane anchor;
 
     private int page;
     private byte feedType;
@@ -81,99 +46,54 @@ public class MainMenuController implements Initializable {
         System.out.println("data: "+data+"\nlength: "+aux.length);
         Videos = aux;
         System.out.println(data);
-
-
-
-        if(aux.length > 0){
-            String[] aux2 = aux[0].split("</split/>");
-            grid1.setVisible(true);
-
-            //img1.setImage(new Image(aux2[0]));
-            title1.setText(aux2[0]);
-            author1.setText(aux2[1]);
-            if(aux.length > 1){
-                aux2 = aux[1].split("</split/>");
-                grid2.setVisible(true);
-                //img2.setImage(new Image(aux2[0]));
-                title2.setText(aux2[0]);
-                author2.setText(aux2[1]);
-                if(aux.length > 2){
-                    aux2 = aux[2].split("</split/>");
-                    grid3.setVisible(true);
-                    //img3.setImage(new Image(aux2[0]));
-                    title3.setText(aux2[0]);
-                    author3.setText(aux2[1]);
-                    if(aux.length > 3){
-                        aux2 = aux[3].split("</split/>");
-                        grid4.setVisible(true);
-                        //img4.setImage(new Image(aux2[0]));
-                        title4.setText(aux2[0]);
-                        author4.setText(aux2[1]);
-                        if(aux.length > 4){
-                            aux2 = aux[4].split("</split/>");
-                            grid5.setVisible(true);
-                            //img5.setImage(new Image(aux2[0]));
-                            title5.setText(aux2[0]);
-                            author5.setText(aux2[1]);
-                            if(aux.length > 5){
-                                aux2 = aux[5].split("</split/>");
-                                grid6.setVisible(true);
-                                //img6.setImage(new Image(aux2[0]));
-                                title6.setText(aux2[0]);
-                                author6.setText(aux2[1]);
-                                if(aux.length > 6){
-                                    aux2 = aux[6].split("</split/>");
-                                    grid7.setVisible(true);
-                                    //img7.setImage(new Image(aux2[0]));
-                                    title7.setText(aux2[0]);
-                                    author7.setText(aux2[1]);
-                                    if(aux.length > 7){
-                                        aux2 = aux[7].split("</split/>");
-                                        grid8.setVisible(true);
-                                        //img8.setImage(new Image(aux2[0]));
-                                        title8.setText(aux2[0]);
-                                        author8.setText(aux2[1]);
-                                        if(aux.length > 8){
-                                            aux2 = aux[8].split("</split/>");
-                                            grid9.setVisible(true);
-                                            //img9.setImage(new Image(aux2[0]));
-                                            title9.setText(aux2[0]);
-                                            author9.setText(aux2[1]);
-                                            if(aux.length > 9){
-                                                aux2 = aux[9].split("</split/>");
-                                                grid10.setVisible(true);
-                                                //img10.setImage(new Image(aux2[0]));
-                                                title10.setText(aux2[0]);
-                                                author10.setText(aux2[1]);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if(aux.length<10)
-            next.setVisible(false);
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         actiontargetBox.setVisible(false);
-        grid1.setVisible(false);
-        grid2.setVisible(false);
-        grid3.setVisible(false);
-        grid4.setVisible(false);
-        grid5.setVisible(false);
-        grid6.setVisible(false);
-        grid7.setVisible(false);
-        grid8.setVisible(false);
-        grid9.setVisible(false);
-        grid10.setVisible(false);
+    }
+
+    @FXML
+    protected void handleAdicionar(ActionEvent event){
+        System.out.println(anchor.getChildren().toString());
+        GridPane gp = new GridPane();
+        ImageView iv = new ImageView();
+        Text title = new Text();
+        Text author = new Text();
+        Rectangle separator = new Rectangle();
+
+        title.setText("Teste do titulo");
+        author.setText("Teste do autor");
+
+
+        iv.setLayoutY(95+3);
+        iv.setId("img2");
+
+        gp.addRow(1);
+        gp.setMinHeight(78);
+        gp.setMinWidth(641);
+        gp.setLayoutX(108);
+        gp.setLayoutY(106);
+        gp.getColumnConstraints().add(new ColumnConstraints(630));
+        gp.getRowConstraints().add(new RowConstraints(40));
+        gp.getRowConstraints().add(new RowConstraints(40));
+        gp.add(title,0,0);
+        gp.add(author,0,1);
+        gp.setId("grid2");
+        separator.setArcHeight(5);
+        separator.setArcWidth(5);
+        separator.setStyle("-fx-fill: #dddddd");
+        separator.setLayoutX(3);
+        separator.setLayoutY(195);
+        separator.setWidth(740);
+        separator.setHeight(8);
+        separator.setStroke(Color.BLACK);
+        separator.setStrokeType(StrokeType.INSIDE);
+
+        anchor.getChildren().add(gp);
+        anchor.getChildren().add(iv);
+        anchor.getChildren().add(separator);
     }
 
     @FXML
@@ -250,9 +170,9 @@ public class MainMenuController implements Initializable {
         String id = ((GridPane)event.getSource()).getId();
 
         System.out.println(id);
-        String n = ""+id.charAt(4);
-        if(id.length()>5)
-            n = n.concat(""+id.charAt(5));
+        String n = ""+id.charAt(3);
+        if(id.length()>4)
+            n = n.concat(""+id.charAt(4));
         System.out.println("handlestream: "+n);
 
         int i = Integer.parseInt(n);

@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 
 public class WelcomeController implements Initializable {
     @FXML private Text actiontarget;
-    @FXML private HBox actiontargetBox;
 
     private Main application;
 
@@ -22,25 +21,22 @@ public class WelcomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        actiontargetBox.setVisible(false);
+        actiontarget.setVisible(false);
     }
 
     @FXML void handleLogIn(ActionEvent event) {
-        actiontarget.setText("Log in button pressed");
-        actiontargetBox.setVisible(true);
+        actiontarget.setVisible(false);
         this.application.openLogin();
 
     }
 
     @FXML protected void handleSignUp(ActionEvent event) {
-        actiontarget.setText("Sign up button pressed");
-        actiontargetBox.setVisible(true);
+        actiontarget.setVisible(false);
         this.application.openSignUp();
     }
 
     @FXML protected void handleExit(ActionEvent event) {
-        actiontarget.setText("Exit button pressed");
-        actiontargetBox.setVisible(true);
+        actiontarget.setVisible(false);
         Platform.exit();
     }
 }
