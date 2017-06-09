@@ -66,7 +66,7 @@ public class ChunkTasks {
         String filename = path.substring(path.lastIndexOf("/")+1, path.length());
         GridFS gridFS = new GridFS(client.getDB("VideoHub"));
         GridFSInputFile in = gridFS.createFile(file);
-        in.setChunkSize(8000);
+        in.setChunkSize(4000);
         in.setFilename(filename);
         id = String.valueOf(in.get("_id"));
         in.save();
