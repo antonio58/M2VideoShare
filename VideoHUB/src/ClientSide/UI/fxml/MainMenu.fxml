@@ -9,11 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1000" styleClass="root" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientSide.UI.MainMenuController">
@@ -52,14 +48,14 @@
             </AnchorPane>
         </items>
     </SplitPane>
-    <Button layoutX="872.0" layoutY="537.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleLogout" prefHeight="28.0" prefWidth="82.0" styleClass="confirm" text="Logout">
+    <Button layoutX="901.0" layoutY="552.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleLogout" prefHeight="28.0" prefWidth="82.0" styleClass="confirm" text="Logout">
         <cursor>
             <Cursor fx:constant="OPEN_HAND" />
         </cursor>
     </Button>
-    <ScrollPane layoutX="204.0" layoutY="73.0" prefHeight="455.0" prefWidth="749.0">
+    <ScrollPane fx:id="scroll" fitToHeight="true" layoutX="204.0" layoutY="73.0" prefHeight="455.0" prefWidth="779.0">
         <content>
-            <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="746.0">
+            <AnchorPane fx:id="anchor" maxWidth="753.0" minHeight="0.0" minWidth="0.0" prefHeight="451.0" prefWidth="753.0">
                 <children>
                     <!--<GridPane fx:id="grid1" layoutX="108.0" prefHeight="80.0" prefWidth="631.0">
                         <columnConstraints>
@@ -74,8 +70,8 @@
                             <Text fx:id="author1" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" GridPane.rowIndex="1" />
                         </children>
                     </GridPane>-->
-                    <ImageView fx:id="img1" fitHeight="78.0" fitWidth="96.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dddddd" height="8.0" layoutX="3.0" layoutY="89.0" stroke="BLACK" strokeType="INSIDE" width="740.0" />
+                    <!--<ImageView fx:id="img1" fitHeight="78.0" fitWidth="96.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />-->
+                    <!--<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dddddd" height="8.0" layoutX="3.0" layoutY="89.0" stroke="BLACK" strokeType="INSIDE" width="740.0" />-->
                 </children></AnchorPane>
         </content>
     </ScrollPane>
