@@ -1,13 +1,11 @@
 package ClientSide;
 
+import Network.Frame;
+
 import java.io.*;
-import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.nio.file.StandardOpenOption.CREATE;
 
 /**
  * The Project fx_play was created by
@@ -20,6 +18,7 @@ public class DownloadHandler implements Runnable {
     DataOutputStream dos;
     DataInputStream dis;
     List<Integer> receivedChunks;
+    Frame frame = new Frame();
 
 
     public DownloadHandler(ServerComm sc, String id) {
@@ -38,11 +37,11 @@ public class DownloadHandler implements Runnable {
 
         dos = sc.getDos();
         dis = sc.getDis();
-
+        frame = new Frame(dos,dis);
         String[] aux2 = {""};
 
 
-        String ack = sc.buildFrame((byte) 15, aux2);
+        String ack = frame.buildFrame((byte) 15, aux2);
 
         boolean flag = true;
         String fileContent = "";
@@ -59,7 +58,7 @@ public class DownloadHandler implements Runnable {
         System.out.println("Created File");
 
         String[] foo = {String.valueOf(VidId)};
-        String aux = sc.talk(sc.buildFrame((byte)13, foo));
+        String aux = frame.talk(frame.buildFrame((byte)13, foo));
         byte[] auxB = new byte[4015];
 
         if(aux.charAt(0) == 15) {

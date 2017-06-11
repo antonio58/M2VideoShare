@@ -13,15 +13,15 @@ public class DTN_Server {
 
     public DTN_Server(){}
 
-    //Received "DTNetwork peer loss, his chunks are going for your by DTN orders, soon there is a connected mate retransmit as fast as you can ;)"
-    public void SenderNode(){
+    //Received "DTNetwork peer loss, his chunks are going for your by DTN orders, as soon as there is a connected mate, retransmit as fast as you can ;)"
+    public void activateNode(){
         final String TAG = "DTNode";
         int clientNumber = 0;
 
-        System.out.println("\nDTN server Online "+ TAG);
+        System.out.println(TAG + " server running...");
         try {
             ServerSocket socketServer = new ServerSocket(3333);
-            System.out.println("\nWaiting for lost peers");
+            System.out.println("\nWaiting for lost peers to connect");
             while (true) {
                 Socket socket = socketServer.accept();
 

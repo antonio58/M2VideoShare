@@ -1,20 +1,25 @@
 package DTNmecanisms;
 
+import Network.Frame;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 
 /**
  * Created by fernando on 07-06-2017.
  */
 
 public class DTN_ClientHandler implements Runnable {
+    private static String TAG = "DTN_ClientHandler";
     private Socket socketClient;
     private int clientNumber;
     private DataOutputStream dos;
     private DataInputStream dis;
     private String response;
+    private Frame frame;
 
     public DTN_ClientHandler(Socket socketClient, int clientNumber) {
         this.socketClient = socketClient;
@@ -33,15 +38,16 @@ public class DTN_ClientHandler implements Runnable {
                     socketClient.getOutputStream());
             dis = new DataInputStream(
                     socketClient.getInputStream());
-
+            frame = new Frame(dos,dis);
             dos.writeUTF("Welcome Lost Peer number " + clientNumber);
             dos.flush();
             while (true) {
+                dos.flush();
                 response = "";
                 boolean flag = true;
                 while (flag) {
                     String part = dis.readUTF();
-                    System.out.println("(\"Welcome Lost Peer number \"" + clientNumber + " \n->Message Received: " + part);
+                    System.out.println("Welcome Lost Peer number " + clientNumber + " \n->Message Received: " + part);
                     response = response.concat(part);
                     //a mensagem terá de ser um pedido por parte do cliente e confirmar o reatar do streaming
                     if (part.indexOf("<!end!>") == part.length() - 7) {
@@ -81,8 +87,16 @@ public class DTN_ClientHandler implements Runnable {
 
     }
 
-    //resume Stream
-    private boolean resumeStream(String response) {
+    //resume Stream Ticket handling
+    private boolean resumeStream(String response){
+        //System.out.println("resumeStream frame: " + response);
+        List<String> fields = frame.readFrame(response);
+
+        for(int i = 0; i<fields.size(); i++) {
+            System.out.println(TAG + " resumeStream field: " + fields.get(i));
+        }
+
+        //search for asked video, and start writing data to client socket
         return true;
     }
 

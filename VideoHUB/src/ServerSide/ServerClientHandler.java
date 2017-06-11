@@ -4,6 +4,7 @@ import Models.Channel;
 import Models.Playlist;
 import Models.User;
 import Models.Video;
+import Network.Frame;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
@@ -13,11 +14,11 @@ import org.bson.conversions.Bson;
 import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +44,7 @@ public class ServerClientHandler implements Runnable {
     private MongoCollection<Document> collection = null;
     private DataOutputStream dos;
     private DataInputStream dis;
+    private Frame frame;
 
 
     public ServerClientHandler(Socket socketClient, int clientNumber) {
@@ -61,14 +63,12 @@ public class ServerClientHandler implements Runnable {
                     socketClient.getOutputStream());
             dis = new DataInputStream(
                     socketClient.getInputStream());
-
+            frame = new Frame(dos, dis);
             dos.writeUTF("Welcome Client number " + clientNumber);
             dos.flush();
             while (true) {
-                //dos.writeUTF("\nWrite something");
                 dos.flush();
-
-                response = new String();
+                response = "";
                 boolean flag = true;
                 while (flag) {
                     String part = dis.readUTF();
@@ -146,110 +146,6 @@ public class ServerClientHandler implements Runnable {
 
     }
 
-    //Leitura e construção de frames
-    private List<String> readFrame(String s) {
-
-        List<String> fields = new ArrayList<>();
-        List<Integer> sizeFields = new ArrayList<>();
-
-        //Transforma a trama num array de bytes
-        byte[] frameB = s.getBytes(StandardCharsets.UTF_8);
-        int framePointer = 1;
-
-        //Obtém o número de campos na trama
-        byte[] numFieldsB = new byte[4];
-        for (int i = 0; i < 4; i++) {
-            numFieldsB[i] = frameB[framePointer];
-            framePointer++;
-        }
-        int numFields = ByteBuffer.wrap(numFieldsB).getInt();
-        System.out.println("readFreame133: " + numFields);
-
-        //Obtém o tamanho de cada campo
-        for (int i = 0; i < numFields; i++) {
-            byte[] aux = new byte[4];
-            for (int k = 0; k < 4; k++) {
-                aux[k] = frameB[framePointer];
-                framePointer++;
-            }
-            int esse = ByteBuffer.wrap(aux).getInt();
-            System.out.println("Fields Size " + i + ": " + esse);
-            sizeFields.add(esse);
-
-        }
-
-
-        //Obtém os campos
-        for (int i : sizeFields) {
-            byte[] aux = new byte[i];
-            for (int j = 0; j < i; j++) {
-                aux[j] = frameB[framePointer];
-                framePointer++;
-            }
-            String temp = new String(aux);
-            fields.add(temp);
-        }
-
-        System.out.println("(readFrame)Fields: ");
-        for (String str : fields)
-            System.out.println(str);
-
-        return fields;
-    }
-
-    private String buildFrame(byte type, String[] fields) {
-
-
-        int nFields = fields.length;
-        int headerPointer = 1;
-        byte[] header = new byte[(nFields * 4) + 5];
-
-        header[0] = type;
-
-        //Coloca o numero de campos
-        byte[] nFb = ByteBuffer.allocate(4).putInt(nFields).array();
-        for (int i = 0; i < 4; i++) {
-            header[headerPointer] = nFb[i];
-            headerPointer++;
-        }
-
-        //Coloca o tamanho de cada campo
-        for (int i = 0; i < nFields; i++) {
-            String str_aux = fields[i];
-            byte[] fieldLength = ByteBuffer.allocate(4).putInt(str_aux.length()).array();
-            for (int j = 0; j < 4; j++) {
-                header[headerPointer] = fieldLength[j];
-                headerPointer++;
-            }
-        }
-
-        //Coloca os campos
-        String frame = new String(header);
-        for (int i = 0; i < nFields; i++) {
-            frame = frame.concat(fields[i]);
-        }
-
-        //Termina a trama com um palavra de controlo
-        frame = frame.concat("<!end!>");
-
-        return frame;
-    }
-
-    public String talk(String message) {
-        String reply = "";
-        try {
-            dos.writeUTF(message);
-            //while(reply.equals("")) {
-            reply = dis.readUTF();
-            //}
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("message: " + message);
-        System.out.println("reply: " + reply);
-
-        return reply;
-    }
 
     public void send(String message) {
         try {
@@ -264,7 +160,7 @@ public class ServerClientHandler implements Runnable {
     //Login
     public boolean checkUser(String s) {
 
-        List<String> fields = readFrame(s);
+        List<String> fields = frame.readFrame(s);
 
         String username = fields.get(0);
         String password = fields.get(1);
@@ -290,7 +186,7 @@ public class ServerClientHandler implements Runnable {
     //Registar utilizador
     private boolean registerUser(String s) throws NoSuchAlgorithmException {
 
-        List<String> fields = readFrame(s);
+        List<String> fields = frame.readFrame(s);
 
         /**************/
         //Strings com os valores minimos para criar um novo utilizador
@@ -326,21 +222,21 @@ public class ServerClientHandler implements Runnable {
         userTasks.getUserID();
         userTasks.getUserInfo();
 
-        System.out.println("getUserData(): self: " + self.toString());
+        //System.out.println("getUserData(): self: " + self.toString());
         //Obter nome e email do user
         String userN = self.getName();
         String email = self.getEmail();
 
-        System.out.println("getUserData(): self: " + self.toString());
+        //System.out.println("getUserData(): self: " + self.toString());
         String[] fields = {userN, email};
-        String message = buildFrame((byte) 0, fields);
+        String message = frame.buildFrame((byte) 0, fields);
 
         return message;
     }
 
     //Actualizar Perfil
     private boolean updateProfile(String s, ObjectId id) {
-        List<String> fields = readFrame(s);
+        List<String> fields = frame.readFrame(s);
 
         //Valores para actualizar no perfil em que verifica se têm conteúdo ou vieram vazios
         //Ou seja no utilizador logado alteram-se os dados que passarem nos ifs
@@ -363,7 +259,7 @@ public class ServerClientHandler implements Runnable {
         userTasks.updateUser("_id", self.get_id(), "email", self.getEmail());
 
 
-        System.out.println("\nuser: " + userN + " / " + password + " / " + email);
+        //System.out.println("\nuser: " + userN + " / " + password + " / " + email);
 
 
         return true;
@@ -371,7 +267,7 @@ public class ServerClientHandler implements Runnable {
 
     //Obter informação para fazer o feed. Boolean all identifica o tipo de feed
     public String getFeed(String s) {
-        List<String> auxList = readFrame(s);
+        List<String> auxList = frame.readFrame(s);
 
         int VideoIndexStart = (Integer.parseInt(auxList.get(0)) - 1) * 10;
 
@@ -381,7 +277,7 @@ public class ServerClientHandler implements Runnable {
 
         if (nVideos < 1 || nVideos < VideoIndexStart) {
             String[] auxArray = {"No videos"};
-            return buildFrame((byte) 0, auxArray);
+            return frame.buildFrame((byte) 0, auxArray);
         }
 
         tempIDs = videoTasks.getIds();
@@ -408,16 +304,16 @@ public class ServerClientHandler implements Runnable {
 
         String[] fieldArray = new String[fieldList.size()];
         fieldList.toArray(fieldArray);
-        System.out.println("TRAMA:\n"+fieldList.toString());
+        //System.out.println("TRAMA:\n"+fieldList.toString());
 
-        return buildFrame((byte) 0, fieldArray);
+        return frame.buildFrame((byte) 0, fieldArray);
     }
 
     //Pesquisa
     private String getSearchResults(String query) {
 
         System.out.println("getSearchResults.query: " + query);
-        List<String> auxList = readFrame(query);
+        List<String> auxList = frame.readFrame(query);
         String data = auxList.get(0);
         //System.out.println("(449)data: " + data);
         String[] keywords = data.split(" ");
@@ -458,19 +354,19 @@ public class ServerClientHandler implements Runnable {
         String[] fieldArray = new String[auxList.size()];
         auxList.toArray(fieldArray);
 
-        return buildFrame((byte) 0, fieldArray);
+        return frame.buildFrame((byte) 0, fieldArray);
 
     }
 
     //Obter a info do video
     private String getVideoInfo(String s)   {
-        List<String> fields = readFrame(s);
-        System.out.println("e isto crl: "+fields.toString());
+        List<String> fields = frame.readFrame(s);
+        //System.out.println("video info: "+fields.toString());
         ObjectId id = new ObjectId(fields.get(0));
         Video vid = videoTasks.getVideoByIndex(id);
         String[] info = {vid.getName(), vid.getAuthor(),vid.get_id().toHexString(), vid.getCategory(), vid.getViews(), /*vid.getTags().toString(), /*vid.getCommentList().toString(), vid.getDuration()*/};
 
-        return buildFrame((byte) 0, info);
+        return frame.buildFrame((byte) 0, info);
     }
 
     private void sendVideo(String vid) throws IOException {
@@ -478,12 +374,12 @@ public class ServerClientHandler implements Runnable {
         Binary aux;
 
         String[] aux2 = {""};
-        String ack = buildFrame((byte) 15, aux2);
+        String ack = frame.buildFrame((byte) 15, aux2);
         send(ack);
 
         System.out.println("Getting video");
 
-        List<String> foo = readFrame(vid);
+        List<String> foo = frame.readFrame(vid);
         String id = foo.get(0);
 
         //id: 5938084ad2bccd1992a35bf5
