@@ -24,7 +24,7 @@ public class TEST_USERS {
     public static void main(String[] args) throws NoSuchAlgorithmException {
 
         //TODO avatar stuff and hashing the password / sign
-        user = populateUserModel(false, "Ze Foguetao", "etc/images/ava.png", "foguetao@hotmil.com", "@2123ewqfff");
+        user = populateUserModel(false, "Zé Foguetão", "etc/images/ava.png", "foguetao@hotmil.com", "@2123ewqfff");
         UserTasks userTasks = new UserTasks(user);
         userTasks.addUser();
         user.set_id(userTasks.getUserID());

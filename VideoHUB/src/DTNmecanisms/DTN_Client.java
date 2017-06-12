@@ -18,7 +18,7 @@ public class DTN_Client {
     }
 
     public DTN_Client(String host, int port) throws IOException {
-        if(serverComm.connectToDTNServer(host, port)) {
+        if(serverComm.connectToServer(host, port)) {
             frame = new Frame(serverComm.getDos(), serverComm.getDis());
         }else{
             System.out.println("Can't connect do DTN node, try network search again");

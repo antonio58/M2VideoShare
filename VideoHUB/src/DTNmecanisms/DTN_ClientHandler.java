@@ -153,7 +153,7 @@ public class DTN_ClientHandler implements Runnable {
         while(flag) {
             ServerComm sc = new ServerComm();
             try {
-                sc.connectToServer();
+                sc.connectToServer("::1", 3333);
                 if(sc.deliveryStateUpdate(new ObjectId(fields.get(0)), fields.get(1))){
                     flag = false;
                 }

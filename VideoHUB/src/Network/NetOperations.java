@@ -13,7 +13,6 @@ public class NetOperations {
     public boolean icmpRequest(String ipAddress, int timeout)throws IOException {
         final InetAddress host = InetAddress.getByName(ipAddress);
         //System.out.println("icmpRequest " + ipAddress + " = " + host.isReachable(timeout));
-
         return host.isReachable(timeout);
     }
 
@@ -25,6 +24,5 @@ public class NetOperations {
         System.out.println("Result: " + timeoutThread.getResult());
         return timeoutThread.getResult();
     }
-
 
 }

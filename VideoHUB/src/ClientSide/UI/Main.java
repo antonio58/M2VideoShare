@@ -53,7 +53,7 @@ public class Main extends Application {
 
         boolean b = false;
         try {
-            b = sc.connectToServer();
+            b = sc.connectToServer("::1", 3333);
         } catch (IOException e) {
             e.printStackTrace();
         }

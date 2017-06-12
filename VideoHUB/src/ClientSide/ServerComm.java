@@ -63,7 +63,7 @@ public class ServerComm {
     }
 
 
-    public boolean connectToDTNServer(String host, int port) throws IOException {
+    public boolean connectToServer(String host, int port) throws IOException {
         try {
             socket = new Socket(host, port);
         } catch (IOException e) {

@@ -46,7 +46,7 @@ public class DownloadHandler implements Runnable {
         boolean flag = true;
         String fileContent = "";
 
-        File file = new File("/home/mangas/Documents/VideoHub/Temp/" + VidId);
+        File file = new File("/home/fernando/Documentos/VideoHub/temp/" + VidId);
         //BufferedOutputStream bos = getBos(file);
         FileOutputStream fos = null;
         try {
@@ -110,6 +110,7 @@ public class DownloadHandler implements Runnable {
                     byte b = 15;
                     dos.write(b);
                 } catch (IOException e) {
+                    System.out.println("Download aborted");
                     e.printStackTrace();
                 }
             }
