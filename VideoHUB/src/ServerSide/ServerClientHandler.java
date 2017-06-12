@@ -1,9 +1,6 @@
 package ServerSide;
 
-import Models.Channel;
-import Models.Playlist;
-import Models.User;
-import Models.Video;
+import Models.*;
 import Network.Frame;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Aggregates;
@@ -133,8 +130,13 @@ public class ServerClientHandler implements Runnable {
                     case 13:
                         sendVideo(response);
                         break;
-                }
 
+                    case 14:
+                        if(deliveryStateUpdate(response)){
+                            dos.writeUTF("check_14");
+                        }else
+                            dos.writeUTF("fail to Update Delivery State");
+                }
 
                 //dos.writeUTF("Message Received");
                 dos.flush();
@@ -431,5 +433,17 @@ public class ServerClientHandler implements Runnable {
         dos.write(b);
 
         System.out.println("File sent");
+    }
+
+    public boolean deliveryStateUpdate(String s){
+        List<String> fields = frame.readFrame(s);
+        System.out.println("delivery info: "+fields.toString());
+        Delivery delivery = new Delivery();
+        delivery.setId_video(new ObjectId(fields.get(0)));
+        delivery.setState(fields.get(1));
+        //etc
+        DeliveryTasks deliveryTasks = new DeliveryTasks(delivery);
+        deliveryTasks.updateState();
+        return true;
     }
 }

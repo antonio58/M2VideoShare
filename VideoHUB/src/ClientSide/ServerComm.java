@@ -1,6 +1,7 @@
 package ClientSide;
 
 import Network.Frame;
+import org.bson.types.ObjectId;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -51,20 +52,18 @@ public class ServerComm {
         String reply = "";
         try {
             dos.writeUTF(message);
-            //while(reply.equals("")) {
             reply = dis.readUTF();
-            //}
         } catch (IOException e) {
-            //TODO ACTIVATE DTN CLIENT NODE HERE
+            //TODO ACTIVATE DTN CLIENT NODE HERE in DownloadHandler
             e.printStackTrace();
         }
-        System.out.println("message: "+message);
-        System.out.println("reply: "+reply);
+        System.out.println("message: "+message + " reply: "+reply);
 
         return reply;
     }
 
-    public boolean connectToServer() throws IOException {
+
+    public boolean connectToDTNServer(String host, int port) throws IOException {
         try {
             socket = new Socket(host, port);
         } catch (IOException e) {
@@ -213,5 +212,44 @@ public class ServerComm {
 
         return frame.readFrame(aux);
     }
+
+    public boolean deliveryStateUpdate(ObjectId videoId, String state) throws UnsupportedEncodingException {
+
+        String[] fields = {videoId.toHexString(), state};
+        String message = frame.buildFrame((byte)14, fields);
+
+        String reply = talk(message);
+
+        if (reply.equals("check_14")){
+            System.out.println("check_14");
+            return true;
+        }
+        System.out.println("oh no");
+        return false;
+    }
+
+    //receives ACK from DTN node of streaming successful conclusion
+    public boolean streamConcluded(){
+        //updates delivery table and terminates all related pending tasks
+        if(deliveryEntryUpdate("state", "completed")) {
+            return true;
+        } else
+            return false;
+    }
+
+    //updates database delivery entry with received parameters from the DTN server Node
+    public boolean deliveryEntryUpdate(String parameter1, String value){
+        String[] fields = {parameter1, value};
+        String ticket = frame.buildFrame((byte)1, fields);
+
+        String reply = frame.talk(ticket);
+        if (reply.equals("check_delivery")){
+            System.out.println("Delivery task update success");
+            return true;
+        }
+        return false;
+    }
+
+
 }
 

@@ -1,6 +1,9 @@
 package DTNmecanisms;
 
+import ClientSide.ServerComm;
 import Network.Frame;
+import ServerSide.ChunkTasks;
+import org.bson.types.ObjectId;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -77,6 +80,17 @@ public class DTN_ClientHandler implements Runnable {
                         else
                             dos.writeUTF("failed buffer cleanse");
                         break;
+                    case 14:
+                        try {
+                            if(deliveryUpdate(response)){
+                                dos.writeUTF("check_delivery");
+                            }
+                            else {
+                                dos.writeUTF("failed delivery update");
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                 }
                 dos.flush();
 
@@ -104,28 +118,57 @@ public class DTN_ClientHandler implements Runnable {
 
     /**Answers to Main server TICKETS**/
     //TODO Only in answer to VideoHub main server tickets
-    private boolean storeVideoChunks(String response){
+    private boolean storeVideoChunks(String response) throws IOException {
         List<String> fields = frame.readFrame(response);
 
+        ObjectId videoId = new ObjectId("");
+        ChunkTasks chunkTasks = new ChunkTasks(videoId);
+        chunkTasks.fileToChunks("");
         //store to remote temp DB
         return true;
     }
 
     //TODO clear buffer of said streamId only the main server sets this or by timeout or finished transfer
-    private boolean clearBufferOfStream(String response) {
+    private boolean clearBufferOfStream(String s) {
         //clear mongoDB entry for a given video
         return true;
     }
 
     //TODO clear buffer of all streams
-    private boolean clearBuffer(String response){
+    private boolean clearBuffer(String s){
         //clear all entries
         return true;
     }
 
     //as soon as client ACKs conclusion of the stream, .this updates Main Server with the conclusion (to posterior Delivery Database table update)
-    private boolean streamConcluded(){
-        return true;
+    private boolean deliveryUpdate(String s) throws InterruptedException {
+        //receives update from DTN client
+        List<String> fields = frame.readFrame(s);
+
+        String[] text = {"success"};
+        String aux = frame.buildFrame((byte)1, text);
+
+        boolean flag =true;
+
+        while(flag) {
+            ServerComm sc = new ServerComm();
+            try {
+                sc.connectToServer();
+                if(sc.deliveryStateUpdate(new ObjectId(fields.get(0)), fields.get(1))){
+                    flag = false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Thread.sleep(10000);
+            }
+        }
+        String reply = frame.talk(aux);
+
+        if (reply.equals("check_4")){
+            System.out.println("Delivery updated");
+            return true;
+        }
+        return false;
     }
 
 }
