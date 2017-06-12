@@ -55,6 +55,7 @@ public class ServerComm {
             reply = dis.readUTF();
             //}
         } catch (IOException e) {
+            //TODO ACTIVATE DTN CLIENT NODE HERE
             e.printStackTrace();
         }
         System.out.println("message: "+message);

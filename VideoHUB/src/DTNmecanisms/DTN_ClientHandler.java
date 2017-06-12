@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by fernando on 07-06-2017.
+ * Establishes lost connection with node that lost direct connection with main server. Tries to handle pending video streams by retransmitting as soon as a client connects
  */
 
 public class DTN_ClientHandler implements Runnable {
@@ -87,7 +88,8 @@ public class DTN_ClientHandler implements Runnable {
 
     }
 
-    //resume Stream Ticket handling
+    /** client node TICKETS */
+    //resumes streaming to connected client
     private boolean resumeStream(String response){
         //System.out.println("resumeStream frame: " + response);
         List<String> fields = frame.readFrame(response);
@@ -96,15 +98,34 @@ public class DTN_ClientHandler implements Runnable {
             System.out.println(TAG + " resumeStream field: " + fields.get(i));
         }
 
-        //search for asked video, and start writing data to client socket
+        //search for asked video and given chunk, and start writing data to client socket, similar to sendVideo() in ServerClientHandler
         return true;
     }
 
-    //clear buffer of said streamId only the main server sets this or by timeout or streaming
+    /**Answers to Main server TICKETS**/
+    //TODO Only in answer to VideoHub main server tickets
+    private boolean storeVideoChunks(String response){
+        List<String> fields = frame.readFrame(response);
+
+        //store to remote temp DB
+        return true;
+    }
+
+    //TODO clear buffer of said streamId only the main server sets this or by timeout or finished transfer
     private boolean clearBufferOfStream(String response) {
+        //clear mongoDB entry for a given video
         return true;
     }
 
-    //clear buffer of all streams
-    private boolean clearBuffer(String response){return true;}
+    //TODO clear buffer of all streams
+    private boolean clearBuffer(String response){
+        //clear all entries
+        return true;
+    }
+
+    //as soon as client ACKs conclusion of the stream, .this updates Main Server with the conclusion (to posterior Delivery Database table update)
+    private boolean streamConcluded(){
+        return true;
+    }
+
 }

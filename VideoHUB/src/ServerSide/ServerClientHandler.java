@@ -46,7 +46,6 @@ public class ServerClientHandler implements Runnable {
     private DataInputStream dis;
     private Frame frame;
 
-
     public ServerClientHandler(Socket socketClient, int clientNumber) {
         this.socketClient = socketClient;
         this.clientNumber = clientNumber;

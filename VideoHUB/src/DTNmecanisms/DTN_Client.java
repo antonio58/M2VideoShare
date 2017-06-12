@@ -9,6 +9,8 @@ import java.net.Socket;
 
 /**
  * Created by fernando on 07-06-2017.
+ *
+ * This Class is for all peers that lost streaming connection with main server. Also used for main server to communicate with DTN server Nodes.
  */
 public class DTN_Client {
     private int port = 3333;
@@ -64,6 +66,8 @@ public class DTN_Client {
     }
 
     /**TICKETs*/
+
+    //ticket for streaming resume
     public boolean resumeStreaming(String videoId, String chunk){
         String[] fields = {"resume", videoId, chunk};
         String ticket = frame.buildFrame((byte)1, fields);
@@ -78,5 +82,23 @@ public class DTN_Client {
         return false;
 
 
+    }
+
+    /**TICKETS for VIDEO HUB main SERVER*/
+    //Sends to DTN node server pending video stream, for posterior retransmission to a lost node
+    public boolean sendPendingVideo(){
+        //store chunks in temp DB of DTN server Node
+        return true;
+    }
+
+    //receives ACK from DTN node of streaming successful conclusion
+    public boolean streamConcluded(){
+        //updates delivery table and terminates all related pending tasks
+        return true;
+    }
+
+    //updates database delivery entry with received parameters from the DTN server Node
+    public boolean deliveryEntryUpdate(){
+        return true;
     }
 }
