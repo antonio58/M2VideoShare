@@ -413,6 +413,7 @@ public class ServerClientHandler implements Runnable {
             }
             //String auxStr = aux;
 
+
             for(int j= 0; j<data.length; j++){
                 frame[j+5] = data[j];
             }

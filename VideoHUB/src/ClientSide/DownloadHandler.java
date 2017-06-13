@@ -23,11 +23,8 @@ public class DownloadHandler implements Runnable {
 
     public DownloadHandler(ServerComm sc, String id) {
         this.VidId = id;
-        this.sc = sc;/*new ServerComm();
-        try {
-            sc.connectToServer("::1", 3333);
-        } catch (IOException e) {}*/
         System.out.println("\n New Download:\n");
+
 
     }
 
@@ -37,24 +34,38 @@ public class DownloadHandler implements Runnable {
         System.out.println("running download");
         int count = 0;
 
+        this.sc = new ServerComm();
+        try {
+            sc.connectToServer("::1", 3333);
+        } catch (IOException e) {}
+        frame = new Frame(sc.getDos(),sc.getDis());
 
         dos = sc.getDos();
         dis = sc.getDis();
         frame = new Frame(dos,dis);
-        String[] aux2 = {""};
+        String[] aux2 = {VidId};
 
 
-        String ack = frame.buildFrame((byte) 15, aux2);
-
+        //String request = frame.buildFrame((byte) 13, aux2);
+        //frame.talk(ack);
+        //sc.talk(request);
+        /*try {
+            dos.writeUTF(ack);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
         boolean flag = true;
         String fileContent = "";
 
-        File file = new File("/home/rafael/Documentos/VideoHubVideo/Temp/" + VidId);
+        File file = new File("/home/mangas/Documents/VideoHub/Temp/" + VidId);
         //BufferedOutputStream bos = getBos(file);
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(file, false);
-            fos.flush();
+            fos.write("".getBytes());
+            //fos.flush();
+            fos = new FileOutputStream(file, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,7 +74,7 @@ public class DownloadHandler implements Runnable {
         String[] foo = {VidId};
         System.out.println("foo: "+foo[0]);
         String aux = frame.talk(frame.buildFrame((byte)13, foo));
-        byte[] auxB = new byte[4015];
+        byte[] auxB = new byte[4020];
 
         int i = 0;
         if(aux.charAt(0) == 15) {
@@ -71,7 +82,6 @@ public class DownloadHandler implements Runnable {
                 i++;
                 try {
                     dos.flush();
-                    fos = new FileOutputStream(file, true);
                     dis.read(auxB);
                     ++count;
                     boolean flag2 = true;
@@ -104,12 +114,16 @@ public class DownloadHandler implements Runnable {
                         }
 
                         int size = ByteBuffer.wrap(temp).getInt();
+                        if(size > 4000 || size < 0) {
+                            System.out.println("Payload size: " + size);
+                            size = 4000;
+                        }
                         temp = new byte[size];
                         for(int j = 0; j < size; ++j) {
                             temp[j] = auxB[j + 5];
                         }
 
-                        System.out.println("writing file: ");
+                        System.out.println("writing file: "+i);
                         fos.write(temp);
                     }
 
