@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -35,13 +36,13 @@ public class VideoPlayer extends Application {
     }
 
 
-    public void start(final Stage stage, GridPane grid, String id) throws Exception {
+    public void start(final Stage stage, AnchorPane grid, String id) throws Exception {
         stage.setTitle("VideoHub Streamer");
         Group root = new Group();
 
         System.out.println("Playing video: "+id);
 
-        Media media = new Media("file:///home/fernando/Documentos/VideoHub/temp/"+id);
+        Media media = new Media("file:///home/rafael/Documentos/VideoHubVideo/Temp/"+id);
 //        Media media = new Media("file:///home/luisf99/Documentos/UniversidadeMinho/ProjetodeTelecomunicacoesInformatica2/Videos/VideoDemo.mp4");
         final MediaPlayer player = new MediaPlayer(media);
         MediaView view = new MediaView(player);
@@ -159,7 +160,7 @@ public class VideoPlayer extends Application {
             @Override
             public void handle(WindowEvent event) {
                 player.stop();
-                grid.setDisable(false);
+//                grid.setDisable(false);
             }
         });
 

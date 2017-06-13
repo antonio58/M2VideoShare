@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -22,7 +23,7 @@ import static java.lang.Thread.sleep;
  */
 public class StreamController implements Initializable {
     @FXML private Button btnButton;
-    @FXML private GridPane gridPane;
+    @FXML private AnchorPane gridPane;
     @FXML Text author;
     @FXML Text title;
     @FXML
@@ -88,5 +89,10 @@ public class StreamController implements Initializable {
             e.printStackTrace();
         }
         this.application.openPlayer(gridPane, this.id);
+        try {
+            DH.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

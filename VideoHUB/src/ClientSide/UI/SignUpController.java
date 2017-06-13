@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 /**
@@ -42,7 +43,7 @@ public class SignUpController implements Initializable{
     }
 
     @FXML
-    protected void handleConfirm(ActionEvent event){
+    protected void handleConfirm(ActionEvent event) throws NoSuchAlgorithmException {
         if(!email.getText().equals(cemail.getText())) {
             actiontarget.setText("The emails didn't match!");
             return;

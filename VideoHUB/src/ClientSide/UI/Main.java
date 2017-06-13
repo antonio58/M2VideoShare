@@ -132,13 +132,13 @@ public class Main extends Application {
         }
     }
 
-    public void openPlayer(GridPane grid, String fileName){
+    public void openPlayer(AnchorPane grid, String fileName){
         try {
             VideoPlayer video = new VideoPlayer();
             Stage stage = new Stage();
             String path = "";
             video.start(stage, grid, fileName);
-            grid.setDisable(true);
+//            grid.setDisable(true);
             stage.setAlwaysOnTop(true);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

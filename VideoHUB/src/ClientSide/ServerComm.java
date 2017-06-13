@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -80,9 +81,10 @@ public class ServerComm {
         return true;
     }
 
-    public boolean checkLogin(String u, String p) throws UnsupportedEncodingException {
+    public boolean checkLogin(String u, String p) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        String pHash = DataHandler.getSHA1Hex(p);
 
-        String[] fields = {u,p};
+        String[] fields = {u,pHash};
         String message = frame.buildFrame((byte)1, fields);
 
         //System.out.println("Frame: "+message);
@@ -97,9 +99,11 @@ public class ServerComm {
         return false;
     }
 
-    public boolean registerUSer(String user, String password, String email){
+    public boolean registerUSer(String user, String password, String email) throws NoSuchAlgorithmException {
 
-        String[] fields = {user,password,email};
+        String pHash = DataHandler.getSHA1Hex(password);
+
+        String[] fields = {user,pHash,email};
         String message = frame.buildFrame((byte)2, fields);
 
         String reply = talk(message);

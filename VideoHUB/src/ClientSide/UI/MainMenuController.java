@@ -91,10 +91,10 @@ public class MainMenuController implements Initializable {
         iv.setId("img"+String.valueOf(i+1));
 
         gp.addRow(1);
-        gp.setMinHeight(78);
-        gp.setMinWidth(641);
+        gp.setMinHeight(80);
+        gp.setMinWidth(630);
         gp.setLayoutX(108);
-        gp.setLayoutY(106*i);
+        gp.setLayoutY(94*i);
         System.out.println("LayoutY do Grid"+i+" : "+gp.getLayoutY());
         gp.getColumnConstraints().add(new ColumnConstraints(630));
         gp.getRowConstraints().add(new RowConstraints(40));
@@ -106,7 +106,7 @@ public class MainMenuController implements Initializable {
         separator.setArcWidth(5);
         separator.setStyle("-fx-fill: #dddddd");
         separator.setLayoutX(3);
-        separator.setLayoutY(100*(i+1));
+        separator.setLayoutY(89+(94*i));
         System.out.println("LayoutY do separator"+i+" : "+separator.getLayoutY());
         separator.setWidth(740);
         separator.setHeight(8);
@@ -119,7 +119,7 @@ public class MainMenuController implements Initializable {
         anchor.getChildren().add(iv);
         anchor.getChildren().add(separator);
         scroll.setMinHeight(455);
-        anchor.setMinHeight((anchor.getChildren().size()/3)*105);
+        anchor.setMinHeight(((anchor.getChildren().size()/3)*94)+7);
 
  }
 

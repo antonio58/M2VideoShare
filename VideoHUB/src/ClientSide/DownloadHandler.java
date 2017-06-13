@@ -46,7 +46,7 @@ public class DownloadHandler implements Runnable {
         boolean flag = true;
         String fileContent = "";
 
-        File file = new File("/home/fernando/Documentos/VideoHub/temp/" + VidId);
+        File file = new File("/home/rafael/Documentos/VideoHubVideo/Temp/" + VidId);
         //BufferedOutputStream bos = getBos(file);
         FileOutputStream fos = null;
         try {
@@ -116,6 +116,7 @@ public class DownloadHandler implements Runnable {
             }
         }
         System.out.println("End of download");
+        Thread.currentThread().interrupt();
     }
 
     private String checkFrames(List<String> fields, String s) {

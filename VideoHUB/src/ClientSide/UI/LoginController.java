@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
 /**
@@ -50,7 +51,7 @@ public class LoginController implements Initializable{
             else {
                 actiontarget.setText("User or password wrong. Please try again.");
             }
-        } catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
     }
