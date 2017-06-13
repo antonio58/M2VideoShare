@@ -113,6 +113,7 @@ public class Frame {
 
     public String talk(String message) {
         String reply = "";
+        System.out.println("talk: "+message);
         try {
             dos.writeUTF(message);
             //while(reply.equals("")) {

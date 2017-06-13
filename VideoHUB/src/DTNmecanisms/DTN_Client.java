@@ -59,7 +59,7 @@ public class DTN_Client {
         }
         return obu;
     }
-    
+
 
     /**TICKETS for main SERVER*/
     //Sends to DTN node server pending video stream, for posterior retransmission to a lost node

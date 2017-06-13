@@ -87,7 +87,7 @@ public class MainMenuController implements Initializable {
         author.setText(a);
 
         iv.setLayoutY(95*i+3);
-        System.out.println("LayoutY da Imagem"+i+" : "+iv.getLayoutY());
+        //System.out.println("LayoutY da Imagem"+i+" : "+iv.getLayoutY());
         iv.setId("img"+String.valueOf(i+1));
 
         gp.addRow(1);
@@ -95,7 +95,7 @@ public class MainMenuController implements Initializable {
         gp.setMinWidth(630);
         gp.setLayoutX(108);
         gp.setLayoutY(94*i);
-        System.out.println("LayoutY do Grid"+i+" : "+gp.getLayoutY());
+        //System.out.println("LayoutY do Grid"+i+" : "+gp.getLayoutY());
         gp.getColumnConstraints().add(new ColumnConstraints(630));
         gp.getRowConstraints().add(new RowConstraints(40));
         gp.getRowConstraints().add(new RowConstraints(40));
@@ -107,7 +107,7 @@ public class MainMenuController implements Initializable {
         separator.setStyle("-fx-fill: #dddddd");
         separator.setLayoutX(3);
         separator.setLayoutY(89+(94*i));
-        System.out.println("LayoutY do separator"+i+" : "+separator.getLayoutY());
+        //System.out.println("LayoutY do separator"+i+" : "+separator.getLayoutY());
         separator.setWidth(740);
         separator.setHeight(8);
         separator.setStroke(Color.BLACK);

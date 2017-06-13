@@ -23,7 +23,10 @@ public class DownloadHandler implements Runnable {
 
     public DownloadHandler(ServerComm sc, String id) {
         this.VidId = id;
-        this.sc = sc;
+        this.sc = sc;/*new ServerComm();
+        try {
+            sc.connectToServer("::1", 3333);
+        } catch (IOException e) {}*/
         System.out.println("\n New Download:\n");
 
     }
@@ -55,14 +58,17 @@ public class DownloadHandler implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Created File");
+        System.out.println("Created File: "+VidId);
 
-        String[] foo = {String.valueOf(VidId)};
+        String[] foo = {VidId};
+        System.out.println("foo: "+foo[0]);
         String aux = frame.talk(frame.buildFrame((byte)13, foo));
         byte[] auxB = new byte[4015];
 
+        int i = 0;
         if(aux.charAt(0) == 15) {
-            while(flag) {
+            while(flag || i <250){
+                i++;
                 try {
                     dos.flush();
                     fos = new FileOutputStream(file, true);

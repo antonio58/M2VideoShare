@@ -153,6 +153,10 @@ public class Main extends Application {
         }
     }
 
+    public void setSC(ServerComm s){
+        this.sc = s;
+    }
+
 
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
