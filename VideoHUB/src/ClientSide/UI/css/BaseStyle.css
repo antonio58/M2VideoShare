@@ -39,7 +39,6 @@
     -fx-min-width: 100px;
     -fx-min-height: 40px;
     -fx-background-color: #FB9E03;
-    -fx-border-color: #000000;
     -fx-font-weight: bold;
 }
 
@@ -50,7 +49,6 @@
 
 .confirmSmall {
     -fx-background-color: #FB9E03;
-    -fx-border-color: #000000;
 }
 
 .feeds {

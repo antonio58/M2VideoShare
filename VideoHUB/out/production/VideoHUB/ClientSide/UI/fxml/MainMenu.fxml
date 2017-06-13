@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
@@ -14,325 +13,72 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="center" hgap="10" prefHeight="600.0" prefWidth="1000" styleClass="root" stylesheets="@../css/BaseStyle.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientSide.UI.MainMenuController">
-    <padding><Insets bottom="10" left="10" right="10" top="10" /></padding>
+<AnchorPane prefHeight="600.0" prefWidth="1000" styleClass="root" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientSide.UI.MainMenuController">
 
-    <ImageView fitHeight="65.0" fitWidth="123.0" translateY="35.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <ImageView fitHeight="65.0" fitWidth="123.0" layoutX="41.0" layoutY="-27.0" translateY="35.0">
         <image>
             <Image url="@../img/logoVH.png" />
         </image>
-        <GridPane.margin>
-            <Insets top="-50.0" />
-        </GridPane.margin>
     </ImageView>
 
-    <HBox alignment="center" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-
-
-    <HBox alignment="center" prefHeight="40.0" prefWidth="175.0" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="5">
-        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleLogout" prefHeight="28.0" prefWidth="82.0" styleClass="confirm" text="Logout" translateX="360.0" GridPane.columnSpan="2">
-            <GridPane.margin>
-                <Insets />
-            </GridPane.margin>
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor></Button>
+    <HBox fx:id="actiontargetBox" alignment="center" layoutX="1.0" layoutY="542.0" prefHeight="19.0" prefWidth="993.0" spacing="10">
+        <Text fx:id="actiontarget" textAlignment="CENTER" />
     </HBox>
 
-    <HBox fx:id="actiontargetBox" alignment="center" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="5">
-        <Text fx:id="actiontarget" />
-    </HBox>
-    <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <SplitPane layoutX="40.0" layoutY="73.0" orientation="VERTICAL" prefHeight="455.0" prefWidth="125.0">
         <items>
-            <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="83.0" prefHeight="275.0" prefWidth="123.0" style="-fx-background-color: #525760;">
+            <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="83.0" prefHeight="454.0" prefWidth="123.0" style="-fx-background-color: #525760;">
                 <children>
                     <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleProfile" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Profile" translateY="-12.0" AnchorPane.leftAnchor="2.0" />
-                    <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="185.0" mnemonicParsing="false" onAction="#handlePlaylists" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Playlists" translateY="-8.0" />
+                    <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="185.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Playlists" translateY="-8.0" />
                     <TextField fx:id="query" layoutX="1.0" layoutY="1.0" prefHeight="26.0" prefWidth="121.0" promptText="Search..." />
                     <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleWatchList" prefHeight="26.0" prefWidth="118.0" styleClass="menu" text="Watchlist" translateY="-2.0" />
                     <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="100.0" layoutY="27.0" onMousePressed="#handleSearch" pickOnBounds="true" preserveRatio="true">
                         <image>
                             <Image url="@../img/lupaL.png" />
                         </image>
-                  <cursor>
-                     <Cursor fx:constant="OPEN_HAND" />
-                  </cursor>
+                        <cursor>
+                            <Cursor fx:constant="OPEN_HAND" />
+                        </cursor>
                     </ImageView>
                     <Separator layoutX="2.0" layoutY="124.0" prefHeight="15.0" prefWidth="120.0" />
                     <Button alignment="BASELINE_LEFT" layoutX="12.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleSubmitFAll" prefHeight="22.0" prefWidth="118.0" styleClass="feeds" text="All" translateX="-10.0" />
                     <Button alignment="BASELINE_LEFT" layoutX="12.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleSubmitFSub" prefHeight="22.0" prefWidth="118.0" styleClass="feeds" text="Subscribed" translateX="-10.0" />
-               <Text id="text-feed" layoutX="2.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feed" translateX="5.0" />
+                    <Text id="text-feed" layoutX="2.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feed" translateX="5.0" />
                 </children>
             </AnchorPane>
         </items>
     </SplitPane>
-   <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
-     <content>
-       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="249.0" prefWidth="281.0" style="-fx-background-color: #525760;" />
+    <Button layoutX="872.0" layoutY="537.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleLogout" prefHeight="28.0" prefWidth="82.0" styleClass="confirm" text="Logout">
+        <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+        </cursor>
+    </Button>
+    <ScrollPane layoutX="204.0" layoutY="73.0" prefHeight="455.0" prefWidth="749.0">
+        <content>
+            <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="746.0">
+                <children>
+                    <GridPane fx:id="grid1" layoutX="108.0" prefHeight="80.0" prefWidth="631.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="630.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                            <Text fx:id="title1" strokeType="OUTSIDE" strokeWidth="0.0" text="Titulo" />
+                            <Text fx:id="author1" strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" GridPane.rowIndex="1" />
+                        </children>
+                    </GridPane>
+                    <ImageView fx:id="img1" fitHeight="78.0" fitWidth="96.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dddddd" height="8.0" layoutX="3.0" layoutY="89.0" stroke="BLACK" strokeType="INSIDE" width="740.0" />
+                </children></AnchorPane>
+        </content>
+    </ScrollPane>
+    <Button layoutX="348.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleAdicionar" text="Adiciona" />
 
-             <SplitPane dividerPositions="0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5" orientation="VERTICAL" prefHeight="726.0" prefWidth="760.0" style="-fx-background-color: #F1F1F1;">
-                 <padding>
-                     <Insets bottom="5" left="15" right="5" top="15" />
-                 </padding>
-                 <!--<columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" percentWidth="80.0" />
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" percentWidth="80.0" />
-               </columnConstraints>
-               <rowConstraints>
-                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                   <RowConstraints />
-                   <RowConstraints />
-                   <RowConstraints />
-                   <RowConstraints />
-                   <RowConstraints />
-                   <RowConstraints />
-                   <RowConstraints />
-                   <RowConstraints />
-               </rowConstraints>-->
-
-                 <GridPane fx:id="grid1" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="0">
-                     <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <padding>
-                         <Insets bottom="2" top="15" />
-                     </padding>
-                     <ImageView fx:id="img1" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true">
-                         <image>
-                             <Image url="@../img/pepe" />
-                         </image>
-                     </ImageView>
-                     <Text fx:id="title1" fill="#000000f7" text="Video 1" translateX="5.0" translateY="-10.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Text fx:id="author1" text="Author" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <columnConstraints>
-                         <ColumnConstraints />
-                         <ColumnConstraints />
-                     </columnConstraints>
-                 </GridPane>
-
-                 <GridPane fx:id="grid2" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="1">
-                     <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <padding>
-                         <Insets bottom="2" top="20" />
-                     </padding>
-                     <ImageView fx:id="img2" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true" translateY="3.0">
-                         <image>
-                             <Image url="@../img/frank" />
-                         </image>
-                     </ImageView>
-                     <Text fx:id="title2" text="Video 2" translateX="5.0" translateY="-13.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Text fx:id="author2" text="Author" translateX="5.0" translateY="9.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <columnConstraints>
-                         <ColumnConstraints />
-                         <ColumnConstraints />
-                     </columnConstraints>
-                 </GridPane>
-
-                 <GridPane fx:id="grid3" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0"  GridPane.rowIndex="2">
-                     <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <padding>
-                         <Insets bottom="2" top="20" />
-                     </padding>
-                     <ImageView fx:id="img3" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true">
-                         <image>
-                             <Image url="@../img/spongebob" />
-                         </image>
-                     </ImageView>
-                     <Text fx:id="title3" text="Video 3" translateX="5.0" translateY="-15.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Text fx:id="author3" text="Author" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <columnConstraints>
-                         <ColumnConstraints />
-                         <ColumnConstraints />
-                     </columnConstraints>
-                 </GridPane>
-
-                 <GridPane fx:id="grid4" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0"  GridPane.rowIndex="3">
-                     <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <padding>
-                         <Insets bottom="2" top="2" />
-                     </padding>
-                     <ImageView fx:id="img4" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true" translateY="15.0">
-                         <image>
-                             <Image url="@../img/pepe" />
-                         </image>
-                     </ImageView>
-                     <Text fx:id="title4" text="Video 4" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Text fx:id="author4" text="Author" translateX="5.0" translateY="6.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <columnConstraints>
-                         <ColumnConstraints />
-                         <ColumnConstraints />
-                     </columnConstraints>
-                 </GridPane>
-
-                 <GridPane fx:id="grid5" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="4">
-                     <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <padding>
-                         <Insets bottom="2" top="2" />
-                     </padding>
-                     <ImageView fx:id="img5" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true" translateY="15.0">
-                         <image>
-                             <Image url="@../img/spongebob" />
-                         </image>
-                     </ImageView>
-                     <Text fx:id="title5" text="Video 5" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Text fx:id="author5" text="Author" translateX="5.0" translateY="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <columnConstraints>
-                         <ColumnConstraints />
-                         <ColumnConstraints />
-                     </columnConstraints>
-                 </GridPane>
-
-                 <GridPane fx:id="grid6" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="5">
-                     <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <padding>
-                         <Insets bottom="2" top="2" />
-                     </padding>
-                     <ImageView fx:id="img6" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true" translateY="15.0">
-                         <image>
-                             <Image url="@../img/spongebob" />
-                         </image>
-                     </ImageView>
-                     <Text fx:id="title6" text="Video 5" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Text fx:id="author6" text="Author" translateX="5.0" translateY="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <columnConstraints>
-                         <ColumnConstraints />
-                         <ColumnConstraints />
-                     </columnConstraints>
-                 </GridPane>
-
-                 <GridPane fx:id="grid7" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="6">
-                     <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <padding>
-                         <Insets bottom="2" top="2" />
-                     </padding>
-                     <ImageView fx:id="img7" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true" translateY="15.0">
-                         <image>
-                             <Image url="@../img/spongebob" />
-                         </image>
-                     </ImageView>
-                     <Text fx:id="title7" text="Video 5" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Text fx:id="author7" text="Author" translateX="5.0" translateY="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <columnConstraints>
-                         <ColumnConstraints />
-                         <ColumnConstraints />
-                     </columnConstraints>
-                 </GridPane>
-
-                 <GridPane fx:id="grid8" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="7">
-                     <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <padding>
-                         <Insets bottom="2" top="2" />
-                     </padding>
-                     <ImageView fx:id="img8" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true" translateY="15.0">
-                         <image>
-                             <Image url="@../img/spongebob" />
-                         </image>
-                     </ImageView>
-                     <Text fx:id="title8" text="Video 5" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Text fx:id="author8" text="Author" translateX="5.0" translateY="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <columnConstraints>
-                         <ColumnConstraints />
-                         <ColumnConstraints />
-                     </columnConstraints>
-                 </GridPane>
-
-                 <GridPane fx:id="grid9" onMouseClicked="#handleStream" maxHeight="60" maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="8">
-                     <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <padding>
-                         <Insets bottom="2" top="2" />
-                     </padding>
-                     <ImageView fx:id="img9" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#handleStream" pickOnBounds="true" preserveRatio="true" translateY="15.0">
-                         <image>
-                             <Image url="@../img/spongebob" />
-                         </image>
-                     </ImageView>
-                     <Text fx:id="title9" text="Video 5" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Text fx:id="author9" text="Author" translateX="5.0" translateY="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <columnConstraints>
-                         <ColumnConstraints />
-                         <ColumnConstraints />
-                     </columnConstraints>
-                 </GridPane>
-
-                 <GridPane fx:id="grid10" onMouseClicked="#handleStream" maxHeight="60"  maxWidth="760" minHeight="60" minWidth="760" prefHeight="60" prefWidth="760.0" vgap="10.0" GridPane.rowIndex="9">
-                     <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <padding>
-                         <Insets bottom="2" top="2" />
-                     </padding>
-                     <ImageView fx:id="img10" fitHeight="50.0" fitWidth="50.0"  pickOnBounds="true" preserveRatio="true" translateY="15.0">
-                         <image>
-                             <Image url="@../img/spongebob" />
-                         </image>
-                     </ImageView>
-                     <Text fx:id="title10" text="Video 5" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                     <Text fx:id="author10" text="Author" translateX="5.0" translateY="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                     <columnConstraints>
-                         <ColumnConstraints />
-                         <ColumnConstraints />
-                     </columnConstraints>
-                 </GridPane>
-
-                 <HBox spacing="10">
-                     <Button fx:id="next" onAction="#handleSubmitNext" text="Next" />
-                 </HBox>
-
-             </SplitPane>
-         </content>
-
-   </ScrollPane>
-
-
-
-    <columnConstraints>
-        <ColumnConstraints />
-        <ColumnConstraints maxWidth="125.0" minWidth="0.0" prefWidth="300.0" />
-        <ColumnConstraints maxWidth="800.0" minWidth="300.0" prefWidth="800.0" />
-        <ColumnConstraints maxWidth="26.0" minWidth="0.0" prefWidth="0.0" />
-        <ColumnConstraints />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints maxHeight="480.0" minHeight="470.0" prefHeight="480.0" />
-        <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="40.0" />
-    </rowConstraints>
-
-
-
-</GridPane>
+</AnchorPane>
