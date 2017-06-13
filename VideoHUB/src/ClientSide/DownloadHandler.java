@@ -58,7 +58,7 @@ public class DownloadHandler implements Runnable {
         boolean flag = true;
         String fileContent = "";
 
-        File file = new File("/home/mangas/Documents/VideoHub/Temp/" + VidId);
+        File file = new File("/home/rafael/Documentos/VideoHubVideo/Temp/" + VidId);
         //BufferedOutputStream bos = getBos(file);
         FileOutputStream fos = null;
         try {
