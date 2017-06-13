@@ -4,6 +4,8 @@ import ClientSide.ServerComm;
 import Network.Frame;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.util.ArrayList;
 
 /**
  * Created by fernando on 07-06-2017.
@@ -13,6 +15,7 @@ import java.io.IOException;
 public class DTN_Client {
     private ServerComm serverComm = new ServerComm();
     private Frame frame = new Frame();
+    private ArrayList<String> obu = new ArrayList<>();
 
     public DTN_Client(){
     }
@@ -42,7 +45,21 @@ public class DTN_Client {
         return false;
     }
 
-
+    public ArrayList DiscoverOBU() {
+        int timeout = 1000;
+        for (int i = 1; i < 255; i++) {
+            String host = "2001:690:2280:82a::" + i;
+            try {
+                if (InetAddress.getByName(host).isReachable(timeout)) {
+                    obu.add(host);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return obu;
+    }
+    
 
     /**TICKETS for main SERVER*/
     //Sends to DTN node server pending video stream, for posterior retransmission to a lost node
