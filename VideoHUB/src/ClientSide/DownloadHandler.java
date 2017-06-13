@@ -46,34 +46,35 @@ public class DownloadHandler implements Runnable {
         dos = sc.getDos();
         dis = sc.getDis();
         frame = new Frame(dos,dis);
-        String[] aux2 = {""};
+        String[] aux2 = {VidId};
 
-
-        String ack = frame.buildFrame((byte) 15, aux2);
 
         boolean flag = true;
         String fileContent = "";
 
-        File file = new File("/home/luisf99/Documentos/UniversidadeMinho/ProjetodeTelecomunicacoesInformatica2/Videos/" + VidId);
+        File file = new File("/home/rafael/Documentos/VideoHubVideo/Temp/" + VidId);
         //BufferedOutputStream bos = getBos(file);
-        FileOutputStream fos;
+        FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(file, false);
-            fos.flush();
+            fos.write("".getBytes());
+            //fos.flush();
+            fos = new FileOutputStream(file, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Created File");
+        System.out.println("Created File " + VidId);
 
-        String[] foo = {String.valueOf(VidId)};
+        String[] foo = {VidId};
         String aux = frame.talk(frame.buildFrame((byte)13, foo));
-        byte[] auxB = new byte[4015];
+        byte[] auxB = new byte[4020];
 
+        int i = 0;
         if(aux.charAt(0) == 15) {
             while(flag) {
                 try {
                     dos.flush();
-                    fos = new FileOutputStream(file, true);
+//                    fos = new FileOutputStream(file, true);
                     dis.read(auxB);
                     boolean flag2 = true;
                     if(auxB[0] == (byte)16) {
@@ -128,7 +129,7 @@ public class DownloadHandler implements Runnable {
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                    File parameters = new File("/home/luisf99/Documentos/UniversidadeMinho/ProjetodeTelecomunicacoesInformatica2/Videos/parametros.txt");
+                    File parameters = new File("/home/rafael/Documentos/VideoHubVideo/Temp/parametros.txt");
                     FileOutputStream param;
                     try {
                         byte[] fields = parameters1.getBytes();

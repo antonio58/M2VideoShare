@@ -415,9 +415,9 @@ public class ServerClientHandler implements Runnable {
                 frame[j] = dataSize[j-1];
             }
 
-            if(i == 150){
-                System.exit(0);
-            }
+//            if(i == 150){
+//                System.exit(0);
+//            }
 
 
             for(int j= 0; j<data.length; j++){

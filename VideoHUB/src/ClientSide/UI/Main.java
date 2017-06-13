@@ -147,9 +147,9 @@ public class Main extends Application {
         try {
             VideoPlayer video = new VideoPlayer();
             Stage stage = new Stage();
-            video.start(getStage(), grid, fileName,this,sc);
+            video.start(stage, grid, fileName);
 //            grid.setDisable(true);
-            stage.setAlwaysOnTop(true);
+//            stage.setAlwaysOnTop(true);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
