@@ -1,51 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.ScrollPane?>
-<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="1000" styleClass="root" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientSide.UI.StreamController">
-<GridPane fx:id="gridPane" alignment="center" hgap="10" prefHeight="600.0" prefWidth="1000" >
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #525760;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <children>
-            <ScrollPane layoutX="109.0" layoutY="92.0" prefHeight="100.0" prefWidth="217.0">
-               <content>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Neste episodio de BBC Vida Selvagem podera ver como os diferentes animais do Serengueti habitam em conjunto. Elefantes, girafas, crocodilos, tigres e macacos numa harmonia nunca vista anteriormente." wrappingWidth="197.88525390625" />
-               </content>
-            </ScrollPane>
-         </children></Pane>
-      <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" translateX="50.0" translateY="-50.0">
-         <image>
-            <Image url="@../img/logoVH.png" />
-         </image>
-      </ImageView>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-       <Button fx:id="logout" onAction="#handleLogout" prefHeight="28.0" prefWidth="74.0" text="Logout" translateX="900.0" translateY="450.0" />
-       <Button fx:id="back" onAction="#handleSubmitBack" prefHeight="28.0" prefWidth="74.0" styleClass="confirm" text="Back" translateX="50.0" translateY="450.0" />
-      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="info" text="Author:" translateY="-70.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="info" text="Title:" translateY="-35.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="info" text="Description:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Text fx:id="title" fill="#fb9e03" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" translateX="110.0" translateY="-70.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Text fx:id="author" fill="#fb9e03" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" translateX="110.0" translateY="-35.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Button fx:id="btnStream" mnemonicParsing="false" onAction="#handlePlay" styleClass="big" text="Stream!" translateY="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <ImageView id="thumbnail" fitHeight="120.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-         <image>
-            <Image url="@../img/bbc.png" />
-         </image>
-      </ImageView>
-   </children>
-</GridPane>
+<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="1000" styleClass="root" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ClientSide.UI.StreamController">
+    <ImageView fitHeight="65.0" fitWidth="123.0" layoutX="41.0" layoutY="-27.0" translateY="35.0">
+        <image>
+            <Image url="@../img/logoVH.png" />
+        </image>
+    </ImageView>
+   <Text fx:id="author" layoutX="332.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #fb9e03;" text="Text" translateY="5.0" wrappingWidth="248.00000339746475" />
+   <Text fx:id="title" layoutX="332.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #fb9e03;" text="Text" translateY="5.0" wrappingWidth="248.00000339746475" />
+   <ScrollPane layoutX="330.0" layoutY="362.0" prefHeight="150.0" prefWidth="325.0">
+     <content>
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="304.0">
+            <children>
+               <TextArea fx:id="description" editable="false" prefHeight="150.0" prefWidth="306.0" />
+            </children>
+         </AnchorPane>
+     </content>
+   </ScrollPane>
+   <Label layoutX="331.0" layoutY="198.0" text="Title:" />
+   <Label layoutX="332.0" layoutY="237.0" text="Author:" translateY="10.0" />
+   <Label layoutX="332.0" layoutY="319.0" text="Description:" translateY="25.0" />
+   <ImageView fx:id="thumbnail" fitHeight="150.0" fitWidth="200.0" layoutX="330.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../img/bbc.png" />
+      </image>
+   </ImageView>
+    <Button fx:id="logout" layoutX="12.0" layoutY="108.0" onAction="#handleLogout" prefHeight="28.0" prefWidth="74.0" text="Logout" translateX="900.0" translateY="450.0" />
+    <Button fx:id="back" layoutX="-36.0" layoutY="108.0" onAction="#handleSubmitBack" prefHeight="28.0" prefWidth="74.0" styleClass="confirm" text="Back" translateX="50.0" translateY="450.0" />
+    <Button fx:id="btnStream" layoutX="330.0" layoutY="398.0" mnemonicParsing="false" onAction="#handlePlay" styleClass="big" text="Stream!" translateY="120.0" />
+   <Button layoutX="562.0" layoutY="525.0" mnemonicParsing="false" text="Watch later" />
+   <Label layoutX="731.0" layoutY="41.0" text="Comments:" />
+   <ScrollPane layoutX="731.0" layoutY="73.0" prefHeight="287.0" prefWidth="238.0">
+     <content>
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="286.0" prefWidth="218.0">
+            <children>
+               <TextArea fx:id="comments" editable="false" prefHeight="287.0" prefWidth="227.0" />
+            </children>
+         </AnchorPane>
+     </content>
+   </ScrollPane>
+   <Label layoutX="330.0" layoutY="281.0" text="Tags:" translateY="10.0" />
+   <Text fx:id="tags" layoutX="330.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #fb9e03;" text="Text" translateY="5.0" />
+   <Label layoutX="731.0" layoutY="373.0" text="Write a comment:" />
+   <ScrollPane layoutX="731.0" layoutY="400.0" prefHeight="112.0" prefWidth="238.0">
+     <content>
+       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="114.0" prefWidth="219.0">
+            <children>
+               <TextArea fx:id="new_comment" prefHeight="112.0" prefWidth="221.0" />
+            </children>
+         </AnchorPane>
+     </content>
+   </ScrollPane>
+   <Button layoutX="887.0" layoutY="512.0" mnemonicParsing="false" text="Comment" translateY="2.0" />
 </AnchorPane>

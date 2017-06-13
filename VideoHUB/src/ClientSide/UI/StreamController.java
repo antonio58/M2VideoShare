@@ -5,8 +5,11 @@ import ClientSide.DownloadHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+
+import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.List;
@@ -18,11 +21,16 @@ import static java.lang.Thread.sleep;
  * Created by rafael on 25-04-2017.
  */
 public class StreamController implements Initializable {
-    @FXML private java.awt.Button btnButton;
+    @FXML private Button btnButton;
     @FXML private GridPane gridPane;
     @FXML Text author;
     @FXML Text title;
-    @FXML Text descricao;
+    @FXML
+    TextArea description;
+    @FXML
+    TextArea comments;
+    @FXML
+    TextArea new_comment;
     private Main application;
     private ServerComm sc;
     String id;
