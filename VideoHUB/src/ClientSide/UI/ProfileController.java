@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -26,7 +25,6 @@ public class ProfileController implements Initializable {
     @FXML TextField nemail;
     @FXML PasswordField npass;
     @FXML PasswordField cnpass;
-    @FXML TextArea videos;
 
     private Main application;
     private ServerComm sc;
@@ -45,7 +43,7 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        actiontargetBox.setVisible(false);
     }
 
     @FXML
@@ -73,10 +71,5 @@ public class ProfileController implements Initializable {
     protected void handleSubmitBack(ActionEvent event){
         String data = sc.getFeed(1,(byte)5);
         this.application.openMainMenu(1,data,(byte)5);
-    }
-
-    @FXML
-    protected void handleLogout(ActionEvent event) {
-        this.application.openWelcome();
     }
 }

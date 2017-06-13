@@ -1,10 +1,13 @@
 package ClientSide;
 
+import DTNmecanisms.DTN_Client;
 import Network.Frame;
+import TESTS.TEST_DTNclient;
 
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,12 +22,12 @@ public class DownloadHandler implements Runnable {
     DataInputStream dis;
     List<Integer> receivedChunks;
     Frame frame = new Frame();
-
+    String parameters1 = "";
 
     public DownloadHandler(ServerComm sc, String id) {
         this.VidId = id;
+        this.sc = sc;
         System.out.println("\n New Download:\n");
-
 
     }
 
@@ -43,47 +46,35 @@ public class DownloadHandler implements Runnable {
         dos = sc.getDos();
         dis = sc.getDis();
         frame = new Frame(dos,dis);
-        String[] aux2 = {VidId};
+        String[] aux2 = {""};
 
 
-        //String request = frame.buildFrame((byte) 13, aux2);
-        //frame.talk(ack);
-        //sc.talk(request);
-        /*try {
-            dos.writeUTF(ack);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-*/
+        String ack = frame.buildFrame((byte) 15, aux2);
+
         boolean flag = true;
         String fileContent = "";
 
-        File file = new File("/home/rafael/Documentos/VideoHubVideo/Temp/" + VidId);
+        File file = new File("/home/luisf99/Documentos/UniversidadeMinho/ProjetodeTelecomunicacoesInformatica2/Videos/" + VidId);
         //BufferedOutputStream bos = getBos(file);
-        FileOutputStream fos = null;
+        FileOutputStream fos;
         try {
             fos = new FileOutputStream(file, false);
-            fos.write("".getBytes());
-            //fos.flush();
-            fos = new FileOutputStream(file, true);
+            fos.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Created File: "+VidId);
+        System.out.println("Created File");
 
-        String[] foo = {VidId};
-        System.out.println("foo: "+foo[0]);
+        String[] foo = {String.valueOf(VidId)};
         String aux = frame.talk(frame.buildFrame((byte)13, foo));
-        byte[] auxB = new byte[4020];
+        byte[] auxB = new byte[4015];
 
-        int i = 0;
         if(aux.charAt(0) == 15) {
-            while(flag || i <250){
-                i++;
+            while(flag) {
                 try {
                     dos.flush();
+                    fos = new FileOutputStream(file, true);
                     dis.read(auxB);
-                    ++count;
                     boolean flag2 = true;
                     if(auxB[0] == (byte)16) {
                         System.out.println("Received frame 16");
@@ -93,6 +84,9 @@ public class DownloadHandler implements Runnable {
 
                     while(flag2) {
                         if(aux.indexOf("<!end!>") == aux.length() - 7) {
+                            ++count;
+                            int trama = count - 2;
+                            parameters1 = VidId + " " + trama;
                             flag2 = false;
                         } else {
                             String part = dis.readUTF();
@@ -114,24 +108,43 @@ public class DownloadHandler implements Runnable {
                         }
 
                         int size = ByteBuffer.wrap(temp).getInt();
-                        if(size > 4000 || size < 0) {
-                            System.out.println("Payload size: " + size);
-                            size = 4000;
-                        }
                         temp = new byte[size];
                         for(int j = 0; j < size; ++j) {
                             temp[j] = auxB[j + 5];
                         }
 
-                        System.out.println("writing file: "+i);
+                        System.out.println("writing file: ");
                         fos.write(temp);
                     }
 
                     byte b = 15;
                     dos.write(b);
+
                 } catch (IOException e) {
                     System.out.println("Download aborted");
-                    e.printStackTrace();
+                    try {
+                        sc.closeSocket();
+                        flag = false;
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    File parameters = new File("/home/luisf99/Documentos/UniversidadeMinho/ProjetodeTelecomunicacoesInformatica2/Videos/parametros.txt");
+                    FileOutputStream param;
+                    try {
+                        byte[] fields = parameters1.getBytes();
+                        param = new FileOutputStream(parameters);
+                        try {
+                            param.write(fields);
+                            DTN_Client dtn_client = new DTN_Client();
+                            String[] args = dtn_client.readFile();
+                            System.out.println("Parametros: "+Arrays.toString(args));
+                            dtn_client.resumeStreaming(args[0], args[1]);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             }
         }

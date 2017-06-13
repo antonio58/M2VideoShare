@@ -12,7 +12,6 @@ import javafx.scene.text.Text;
 
 import javafx.scene.control.Button;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,14 +22,10 @@ import static java.lang.Thread.sleep;
  * Created by rafael on 25-04-2017.
  */
 public class StreamController implements Initializable {
-    @FXML
-    private Button btnButton;
-    @FXML
-    private AnchorPane gridPane;
-    @FXML
-    Text author;
-    @FXML
-    Text title;
+    @FXML private Button btnButton;
+    @FXML private AnchorPane gridPane;
+    @FXML Text author;
+    @FXML Text title;
     @FXML
     TextArea description;
     @FXML
@@ -42,10 +37,10 @@ public class StreamController implements Initializable {
     String id;
     String title_;
 
-    public void setApp(Main application, ServerComm s, List<String> data) {
+    public void setApp(Main application, ServerComm s, List<String> data){
         this.application = application;
         this.sc = s;
-        System.out.println("Stream data: " + data.toString());
+        System.out.println("Stream data: "+data.toString());
         title.setText(data.get(1));
         author.setText(data.get(0));
         this.title_ = data.get(0);
@@ -70,7 +65,7 @@ public class StreamController implements Initializable {
     }
 
     @FXML
-    protected void handlePlay(ActionEvent event) {
+    protected void handlePlay(ActionEvent event){
 
         /*String aux = id;//String.valueOf(this.id);
         String[] aux2 = {aux};
@@ -94,14 +89,10 @@ public class StreamController implements Initializable {
             e.printStackTrace();
         }
         this.application.openPlayer(gridPane, this.id);
-//        while (DH.isAlive()) {
-//
-//        }
-//        sc = new ServerComm();
-//        try {
-//            sc.connectToServer("::1", 3333);
-//        } catch (IOException e) {}
-//
-//        application.setSC(sc);
+        try {
+            DH.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

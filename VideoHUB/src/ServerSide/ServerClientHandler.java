@@ -399,6 +399,9 @@ public class ServerClientHandler implements Runnable {
         System.out.println("Sending video");
 
         for(int i = 0; i < results.size(); i++) {
+
+            System.out.println("A enviar trama nº: " + i);
+
             aux = (Binary)results.get(i).get("data");
             byte[] data = aux.getData();
             byte[] auxByte = new byte[10];
@@ -411,7 +414,10 @@ public class ServerClientHandler implements Runnable {
             for(int j = 1; j < 5 ; j++){
                 frame[j] = dataSize[j-1];
             }
-            //String auxStr = aux;
+
+            if(i == 150){
+                System.exit(0);
+            }
 
 
             for(int j= 0; j<data.length; j++){

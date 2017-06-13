@@ -43,7 +43,7 @@ public class LoginController implements Initializable{
 
     void signIn(){
         try {
-            if(sc.checkLogin("q","q"/*userId.getText(), password.getText()*/)){
+            if(sc.checkLogin(userId.getText(), password.getText())){
                 System.out.println("User check!!!");
                 String data = sc.getFeed(1, (byte)5);
                 application.openMainMenu(1, data, (byte)5);

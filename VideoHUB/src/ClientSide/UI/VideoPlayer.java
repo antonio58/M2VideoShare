@@ -1,5 +1,6 @@
 package ClientSide.UI;
 
+import ClientSide.ServerComm;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -31,18 +32,21 @@ import javafx.util.Duration;
 
 public class VideoPlayer extends Application {
 
+
+
     public static void main(String args[]) {
         launch(args);
     }
 
 
-    public void start(final Stage stage, AnchorPane grid, String id) throws Exception {
+    public void start(final Stage stage, AnchorPane grid, String id, Main application, ServerComm s) throws Exception {
+
         stage.setTitle("VideoHub Streamer");
         Group root = new Group();
 
         System.out.println("Playing video: "+id);
 
-        Media media = new Media("file:///home/rafael/Documentos/VideoHubVideo/Temp/"+id);
+        Media media = new Media("file:///home/luisf99/Documentos/UniversidadeMinho/ProjetodeTelecomunicacoesInformatica2/Videos/"+id);
 //        Media media = new Media("file:///home/luisf99/Documentos/UniversidadeMinho/ProjetodeTelecomunicacoesInformatica2/Videos/VideoDemo.mp4");
         final MediaPlayer player = new MediaPlayer(media);
         MediaView view = new MediaView(player);
@@ -54,6 +58,9 @@ public class VideoPlayer extends Application {
 
         final Timeline slideIn = new Timeline();
         final Timeline slideOut = new Timeline();
+
+
+
         root.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -74,6 +81,10 @@ public class VideoPlayer extends Application {
         final HBox hBox = new HBox();
         vBox.getChildren().add(slider);
         vBox.getChildren().add(hBox);
+
+        Button lel = new Button();
+        lel.setText("Return");
+        hBox.getChildren().add(lel);
 
         ToggleButton resume = new ToggleButton();
         ToggleButton sound = new ToggleButton();
@@ -156,11 +167,27 @@ public class VideoPlayer extends Application {
             }
         });
 
+        lel.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+
+            }
+        });
+
+        lel.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                String data = s.getFeed(1, (byte) 5);
+                application.openMainMenu(1, data, (byte) 5);
+            }
+        });
+
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
             @Override
             public void handle(WindowEvent event) {
                 player.stop();
-//                grid.setDisable(false);
+                System.exit(0);
             }
         });
 

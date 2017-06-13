@@ -179,6 +179,10 @@ public class ServerComm {
         return info;
     }
 
+    public void closeSocket() throws IOException {
+        this.socket.close();
+    }
+
     public String getSearchResults(String query){
 
         System.out.println("query1: "+query);
