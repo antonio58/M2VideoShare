@@ -56,7 +56,7 @@ public class Main extends Application {
 
         boolean b = false;
         try {
-            b = sc.connectToServer("2001:690:2280:827:200:ff:feaa:e"/*"::1"*/, 3333);
+            b = sc.connectToServer(/*"2001:690:2280:827:200:ff:feaa:e"*/"::1", 3333);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,7 +74,7 @@ public class Main extends Application {
 
     public void openErrorScreen(String s){
         try {
-            ErrorScreenController errorScreen = (ErrorScreenController) replaceSceneContent("ErrorScreen.fxml");
+            ErrorScreenController errorScreen = (ErrorScreenController) replaceSceneContent("../UI/fxml/ErrorScreen.fxml");
             errorScreen.setApp(this, s);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,7 +83,7 @@ public class Main extends Application {
 
     public void openWelcome(){
         try {
-            WelcomeController welcome = (WelcomeController) replaceSceneContent("Welcome.fxml");
+            WelcomeController welcome = (WelcomeController) replaceSceneContent("../UI/fxml/Welcome.fxml");
             welcome.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,7 +92,7 @@ public class Main extends Application {
 
     public void openLogin(){
         try {
-            LoginController login = (LoginController) replaceSceneContent("Login.fxml");
+            LoginController login = (LoginController) replaceSceneContent("../UI/fxml/Login.fxml");
             login.setApp(this, this.sc);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,7 +101,7 @@ public class Main extends Application {
 
     public void openSignUp(){
         try {
-            SignUpController signUp = (SignUpController) replaceSceneContent("SignUp.fxml");
+            SignUpController signUp = (SignUpController) replaceSceneContent("../UI/fxml/SignUp.fxml");
             signUp.setApp(this, this.sc);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,7 +110,7 @@ public class Main extends Application {
 
     public void openMainMenu(int p, String data, byte b){
         try {
-            MainMenuController mainMenu = (MainMenuController) replaceSceneContent("MainMenu.fxml");
+            MainMenuController mainMenu = (MainMenuController) replaceSceneContent("../UI/fxml/MainMenu.fxml");
             mainMenu.setApp(this, this.sc, p, data, b);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,7 +119,7 @@ public class Main extends Application {
 
     public void openProfile(String str){
         try {
-            ProfileController profile = (ProfileController) replaceSceneContent("Profile.fxml");
+            ProfileController profile = (ProfileController) replaceSceneContent("../UI/fxml/Profile.fxml");
             profile.setApp(this, this.sc, str);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -136,7 +136,7 @@ public class Main extends Application {
 
     public void openStream(List<String> data){
         try {
-            StreamController stream = (StreamController) replaceSceneContent("Stream.fxml");
+            StreamController stream = (StreamController) replaceSceneContent("../UI/fxml/Stream.fxml");
             stream.setApp(this, this.sc, data);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,7 +157,7 @@ public class Main extends Application {
 
     public void openPlaylist(){
         try {
-            PlaylistController profile = (PlaylistController) replaceSceneContent("Playlist.fxml");
+            PlaylistController profile = (PlaylistController) replaceSceneContent("../UI/fxml/Playlist.fxml");
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
